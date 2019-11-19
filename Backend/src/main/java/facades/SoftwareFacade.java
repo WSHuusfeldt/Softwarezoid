@@ -40,5 +40,8 @@ public class SoftwareFacade {
         return getEntityManager().createQuery("SELECT new entities.dto.SoftwareDTO(software) FROM Software software", SoftwareDTO.class).getResultList();
     }
     
+    public SoftwareDTO getSoftwareById(int id){
+        return getEntityManager().find(SoftwareDTO.class, id);
+    }
     
 }

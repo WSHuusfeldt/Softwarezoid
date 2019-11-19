@@ -41,7 +41,7 @@ public class Software implements Serializable {
         this.description = description;
         this.thumbnail = thumbnail;
     }
-    }
+    
 
     public String getDescription() {
         return description;
@@ -59,10 +59,12 @@ public class Software implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-}
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+}
