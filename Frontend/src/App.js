@@ -4,6 +4,7 @@ import './style/App.css';
 import LoginForm from './login/LoginForm';
 import URLSettings from './settings'
 import Data from './Data';
+import ProductDetails from "./ProductDetails";
 
 import { fadeInLeft, bounce, fadeInUp } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
@@ -19,16 +20,17 @@ function App() {
       <Router>
         <Switch>
           <Route exact path={URLSettings.getURL("Home")}> <Welcome /> </Route>
+          <Route path={URLSettings.getURL("ProductId")}> <ProductDetails /> </Route>
           <Route path={URLSettings.getURL("NoMatch")}> <HeaderNav /> </Route>
         </Switch>
         <main>
-        <div class="container-fluid py-3 mt-5 pt-5 pb-5">
-          <Switch>
-            <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
-            <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
-            <Route path={URLSettings.getURL("About")}> <About /> </Route>
-            <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
-          </Switch>
+          <div class="container-fluid py-3 mt-5 pt-5 pb-5">
+            <Switch>
+              <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
+              <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
+              <Route path={URLSettings.getURL("About")}> <About /> </Route>
+              <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
+            </Switch>
           </div>
         </main>
         <Footer />
