@@ -24,20 +24,16 @@ public class Contact implements Serializable {
     private int phone;
     private String subject;
     private String message;
-    private String date; 
-    private String resolved;
 
     public Contact() {
     }
 
-    public Contact(String fullName, String email, int phone, String subject, String message, String date, String resolved) {
+    public Contact(String fullName, String email, int phone, String subject, String message) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.subject = subject;
         this.message = message;
-        this.date = date;
-        this.resolved = resolved;
     }
 
     public Long getId() {
@@ -88,21 +84,7 @@ public class Contact implements Serializable {
         this.message = message;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getResolved() {
-        return resolved;
-    }
-
-    public void setResolved(String resolved) {
-        this.resolved = resolved;
-    }
+    
     
     
 

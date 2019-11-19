@@ -41,7 +41,7 @@ public class ContactFacade {
      public void addContact(ContactDTO contactDTO){
          try{
              getEntityManager().getTransaction().begin();
-             getEntityManager().persist(contactDTO);
+             getEntityManager().persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage()));
              getEntityManager().getTransaction().commit();
          }finally{
              getEntityManager().close();

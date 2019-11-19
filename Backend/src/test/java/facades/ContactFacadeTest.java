@@ -57,9 +57,9 @@ public class ContactFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Contact.deleteAllRows").executeUpdate();
-            c1 = new Contact("William Housefield", "smokeweed@420.com", 12345678, "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv", "today", "nope");
-            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", 87654321, "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud", "i dag", "ikke endnu");
-            c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden", "i dag", "nej");
+            c1 = new Contact("William Housefield", "smokeweed@420.com", 12345678, "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv");
+            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", 87654321, "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud");
+            c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden");
             em.persist(c1);
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -77,6 +77,17 @@ public class ContactFacadeTest {
     @AfterEach
     public void tearDown() {
     }
+    
+    
+    /**
+     * Test of getAll method, of class ContactFacade.
+     */
+    @Test
+    public void testGetAll() {
+        List<ContactDTO> expected = contacts;
+        List<ContactDTO> result = facade.getAll();
+        assertEquals(expected, result);
+    }
 
     /**
      * Test of addContact method, of class ContactFacade.
@@ -87,27 +98,18 @@ public class ContactFacadeTest {
         int expectedRes;
         int res;
         try{
-        c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden", "i dag", "nej");
+        c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden");
         expectedRes = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();
         facade.addContact(new ContactDTO(c3));
         res = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();
         }finally{
             em.close();
         }
-        assertEquals(expectedRes + 1, res);
+        assertEquals(expectedRes, res);
         
         
     }
 
-    /**
-     * Test of getAll method, of class ContactFacade.
-     */
-    @Test
-    public void testGetAll() {
-        List<ContactDTO> expected = contacts;
-        List<ContactDTO> result = facade.getAll();
-        assertEquals(expected, result);
-    }
 
     /**
      * Test of getById method, of class ContactFacade.
