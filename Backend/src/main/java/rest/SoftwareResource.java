@@ -76,7 +76,7 @@ public class SoftwareResource {
             throw new WebApplicationException("Invalid Id supplied", 400);
         }
         SoftwareDTO software = FACADE.getSoftwareById(id);
-        if (FACADE.getSoftwareById(id) == null) {
+        if (software == null) {
             throw new WebApplicationException("Address not found", 404);
         }
         return software;
