@@ -4,6 +4,7 @@ import './style/App.css';
 import LoginForm from './login/LoginForm';
 import URLSettings from './settings'
 import Data from './Data';
+import ProductDetails from "./ProductDetails";
 
 import { fadeInLeft, bounce, fadeInUp } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
@@ -19,6 +20,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path={URLSettings.getURL("Home")}> <Welcome /> </Route>
+          <Route path={URLSettings.getURL("ProductId")}> <ProductDetails /> </Route>
           <Route path={URLSettings.getURL("NoMatch")}> <HeaderNav /> </Route>
         </Switch>
         <main>

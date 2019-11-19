@@ -2,7 +2,7 @@ const URLs = {
     "Home": "/",
     "Login": "/login",
     "Products": "/products",
-    "ProductId": "/poroduct/:id",
+    "ProductId": "/product/:id",
     "Data": "/data",
     "Contact": "/contact",
     "About": "/about",
