@@ -2,6 +2,7 @@ package facades;
 
 import entities.Software;
 import entities.dto.SoftwareDTO;
+import errorhandling.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -95,7 +96,7 @@ public class SoftwareFacadeTest {
     }
     
     @Test 
-    public void testGetSoftwareById() {
+    public void testGetSoftwareById() throws NotFoundException {
         SoftwareDTO expResult = softwares.get(1);
         assertEquals(expResult, facade.getSoftwareById(s2.getId()));
         
