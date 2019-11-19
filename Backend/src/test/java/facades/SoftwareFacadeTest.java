@@ -22,6 +22,7 @@ public class SoftwareFacadeTest {
     private static EntityManagerFactory emf;
     private static SoftwareFacade facade;
     private static List<SoftwareDTO> softwares;
+    private static List<Software> softwareSingle;
     private static Software s1, s2;
     
     public SoftwareFacadeTest() {
@@ -51,6 +52,7 @@ public class SoftwareFacadeTest {
     public void setUp() {
         EntityManager em = emf.createEntityManager();
         softwares = new ArrayList();
+        softwareSingle = new ArrayList();
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
@@ -63,6 +65,8 @@ public class SoftwareFacadeTest {
             em.getTransaction().commit();
             softwares.add(new SoftwareDTO(s1));
             softwares.add(new SoftwareDTO(s2));
+            softwareSingle.add(s1);
+            softwareSingle.add(s2);
         } finally {
             em.close();
         }
@@ -90,9 +94,11 @@ public class SoftwareFacadeTest {
         assertEquals(expResult, result);
     }
     
-//    @Test 
-//    public void testGetSoftwareById() {
-//        
-//    }
+    @Test 
+    public void testGetSoftwareById() {
+        SoftwareDTO expResult = softwares.get(1);
+        assertEquals(expResult, facade.getSoftwareById(s2.getId()));
+        
+    }
     
 }

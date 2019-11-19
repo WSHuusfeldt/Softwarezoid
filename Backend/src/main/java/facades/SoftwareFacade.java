@@ -1,5 +1,6 @@
 package facades;
 
+import entities.Software;
 import entities.dto.SoftwareDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -39,8 +40,9 @@ public class SoftwareFacade {
         return getEntityManager().createQuery("SELECT new entities.dto.SoftwareDTO(software) FROM Software software", SoftwareDTO.class).getResultList();
     }
     
-    public SoftwareDTO getSoftwareById(int id){
-        return getEntityManager().find(SoftwareDTO.class, id);
+    public SoftwareDTO getSoftwareById(long id){
+        Software sw = getEntityManager().find(Software.class, id);
+        return new SoftwareDTO(sw);
     }
     
 }
