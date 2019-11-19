@@ -1,6 +1,5 @@
 package facades;
 
-import entities.Software;
 import entities.dto.SoftwareDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
