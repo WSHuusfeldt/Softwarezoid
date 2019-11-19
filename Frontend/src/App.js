@@ -10,6 +10,7 @@ import LoginForm from './login/LoginForm';
 import Data from './pages/Data';
 import ProductDetails from "./pages/ProductDetails";
 import FAQ from './pages/FAQ';
+import Basket from './pages/Basket'
 
 // Animations
 import { FadeInLeft, FadeInUp, Bounce } from './style/animations'
@@ -20,16 +21,18 @@ function App() {
     <div className="App">
         <Switch>
           {/* NO MORE ROUTES HERE!!!!  */}
-          <Route exact path={URLSettings.getURL("Home")}> <Welcome /> </Route>
+          <Route exact path={URLSettings.getURL("Home")}> <HomeHeader /> </Route>
           <Route path={URLSettings.getURL("NoMatch")}> <Header /> </Route>
         </Switch>
         <main>
         <div className="container-fluid py-3 mt-5 pt-5 pb-5">
           <Switch>
             {/* NEW ROUTES GOES HERE!  */}
+            <Route exact path={URLSettings.getURL("Home")}> <Home /> </Route>
             <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
             <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
             <Route path={URLSettings.getURL("FAQ")}> <FAQ /> </Route>
+            <Route path={URLSettings.getURL("Basket")}> <Basket /> </Route>
             <Route path={URLSettings.getURL("ProductId")}> <ProductDetails /> </Route>
             <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
           </Switch>
@@ -43,7 +46,7 @@ function App() {
 const NoMatch = () => <div>No match!</div>
 
 //If Welcome function reaches about 10 lines of code place the function in separate file.
-function Welcome() {
+const HomeHeader = () => {
   return (
     <header id="home">
       <div className="overlay"></div>
@@ -70,6 +73,12 @@ function Welcome() {
       </div>
       <div className="sesgoabajo"></div>
     </header>
+  )
+}
+
+const Home = () => {
+  return (
+    <h1>Hello World!</h1>
   )
 }
 
