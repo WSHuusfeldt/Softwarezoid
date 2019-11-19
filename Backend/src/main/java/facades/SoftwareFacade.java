@@ -5,6 +5,7 @@ import entities.dto.SoftwareDTO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import utils.EMF_Creator;
 
 /**
  *
@@ -14,13 +15,13 @@ public class SoftwareFacade {
 
     private static SoftwareFacade instance;
     private static EntityManagerFactory emf;
-    
+
     //Private Constructor to ensure Singleton
-    private SoftwareFacade() {}
-    
-    
+    private SoftwareFacade() {
+    }
+
     /**
-     * 
+     *
      * @param _emf
      * @return an instance of this facade class.
      */
@@ -35,14 +36,12 @@ public class SoftwareFacade {
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-    
-    public List<SoftwareDTO> getSoftwareAll(){
+
+    public List<SoftwareDTO> getSoftwareAll() {
         return getEntityManager().createQuery("SELECT new entities.dto.SoftwareDTO(software) FROM Software software", SoftwareDTO.class).getResultList();
     }
-    
-    public SoftwareDTO getSoftwareById(long id){
-        Software sw = getEntityManager().find(Software.class, id);
-        return new SoftwareDTO(sw);
+
+    public SoftwareDTO getSoftwareById(long id) {
+        return new SoftwareDTO(getEntityManager().find(Software.class, id));
     }
-    
 }

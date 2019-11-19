@@ -13,6 +13,9 @@ public class SoftwareDTO {
     private int price;
     private String thumbnail;
 
+    public SoftwareDTO() {
+    }
+    
     public SoftwareDTO(Software software) {
         this.title = software.getTitle();
         this.description = software.getDescription();
