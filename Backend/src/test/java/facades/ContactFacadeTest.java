@@ -19,7 +19,7 @@ import utils.EMF_Creator;
  *
  * @author asgerhs
  */
-@Disabled
+//@Disabled
 public class ContactFacadeTest {
 
     private static EntityManagerFactory emf;
