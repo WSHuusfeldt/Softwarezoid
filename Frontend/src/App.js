@@ -11,6 +11,7 @@ import Data from './pages/Data';
 import ProductDetails from "./pages/ProductDetails";
 import FAQ from './pages/FAQ';
 import Basket from './pages/Basket'
+import Contact from "./pages/Contact";
 
 // Animations
 import { FadeInLeft, FadeInUp, Bounce } from './style/animations'
@@ -34,11 +35,12 @@ function App() {
             <Route path={URLSettings.getURL("FAQ")}> <FAQ /> </Route>
             <Route path={URLSettings.getURL("Basket")}> <Basket /> </Route>
             <Route path={URLSettings.getURL("ProductId")}> <ProductDetails /> </Route>
+            <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
             <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
           </Switch>
-          </div>
-        </main>
-        <Footer />
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
