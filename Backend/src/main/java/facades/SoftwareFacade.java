@@ -2,6 +2,7 @@ package facades;
 
 import entities.Software;
 import entities.dto.SoftwareDTO;
+import errorhandling.NotFoundException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -41,7 +42,11 @@ public class SoftwareFacade {
         return getEntityManager().createQuery("SELECT new entities.dto.SoftwareDTO(software) FROM Software software", SoftwareDTO.class).getResultList();
     }
 
-    public SoftwareDTO getSoftwareById(long id) {
-        return new SoftwareDTO(getEntityManager().find(Software.class, id));
+    public SoftwareDTO getSoftwareById(long id) throws NotFoundException {
+        Software software = getEntityManager().find(Software.class, id);
+        if(software == null) {
+            throw new NotFoundException("Software not found");
+        }
+        return new SoftwareDTO(software);
     }
 }
