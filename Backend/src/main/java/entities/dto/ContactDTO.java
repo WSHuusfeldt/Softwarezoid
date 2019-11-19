@@ -1,6 +1,7 @@
 package entities.dto;
 
 import entities.Contact;
+import java.util.Objects;
 
 /**
  *
@@ -63,6 +64,47 @@ public class ContactDTO {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.fullName);
+        hash = 17 * hash + Objects.hashCode(this.email);
+        hash = 17 * hash + this.phone;
+        hash = 17 * hash + Objects.hashCode(this.subject);
+        hash = 17 * hash + Objects.hashCode(this.message);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ContactDTO other = (ContactDTO) obj;
+        if (this.phone != other.phone) {
+            return false;
+        }
+        if (!Objects.equals(this.fullName, other.fullName)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.subject, other.subject)) {
+            return false;
+        }
+        if (!Objects.equals(this.message, other.message)) {
+            return false;
+        }
+        return true;
     }
 
 
