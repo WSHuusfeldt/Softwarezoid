@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Link, useRouteMatch } from "react-router-dom";
-import URLSettings from './settings';
+import URLSettings from '../settings';
 
 const HeaderNav = () => {
     let match = useRouteMatch();
