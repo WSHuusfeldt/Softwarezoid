@@ -22,14 +22,16 @@ public class Software implements Serializable {
     private Long id;
     private String title;
     private String description;
+    private int price;
     private String thumbnail;
 
     public Software() {
     }
 
-    public Software(String title, String description, String thumbnail) {
+    public Software(String title, String description, int price, String thumbnail) {
         this.title = title;
         this.description = description;
+        this.price = price;
         this.thumbnail = thumbnail;
     }
 
@@ -56,6 +58,14 @@ public class Software implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getThumbnail() {
         return thumbnail;
@@ -67,11 +77,12 @@ public class Software implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.title);
-        hash = 83 * hash + Objects.hashCode(this.description);
-        hash = 83 * hash + Objects.hashCode(this.thumbnail);
+        int hash = 7;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.title);
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + this.price;
+        hash = 71 * hash + Objects.hashCode(this.thumbnail);
         return hash;
     }
 
@@ -87,6 +98,9 @@ public class Software implements Serializable {
             return false;
         }
         final Software other = (Software) obj;
+        if (this.price != other.price) {
+            return false;
+        }
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }
@@ -104,6 +118,6 @@ public class Software implements Serializable {
 
     @Override
     public String toString() {
-        return "Software{" + "id=" + id + ", title=" + title + ", description=" + description + ", thumbnail=" + thumbnail + '}';
+        return "Software{" + "id=" + id + ", title=" + title + ", description=" + description + ", price=" + price + ", thumbnail=" + thumbnail + '}';
     }
 }

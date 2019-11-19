@@ -10,11 +10,13 @@ import java.util.Objects;
 public class SoftwareDTO {
     private String title;
     private String description;
+    private int price;
     private String thumbnail;
 
     public SoftwareDTO(Software software) {
         this.title = software.getTitle();
         this.description = software.getDescription();
+        this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
     }
 
@@ -33,6 +35,14 @@ public class SoftwareDTO {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
 
     public String getThumbnail() {
         return thumbnail;
@@ -45,9 +55,10 @@ public class SoftwareDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.title);
-        hash = 37 * hash + Objects.hashCode(this.description);
-        hash = 37 * hash + Objects.hashCode(this.thumbnail);
+        hash = 71 * hash + Objects.hashCode(this.title);
+        hash = 71 * hash + Objects.hashCode(this.description);
+        hash = 71 * hash + this.price;
+        hash = 71 * hash + Objects.hashCode(this.thumbnail);
         return hash;
     }
 
@@ -63,6 +74,9 @@ public class SoftwareDTO {
             return false;
         }
         final SoftwareDTO other = (SoftwareDTO) obj;
+        if (this.price != other.price) {
+            return false;
+        }
         if (!Objects.equals(this.title, other.title)) {
             return false;
         }

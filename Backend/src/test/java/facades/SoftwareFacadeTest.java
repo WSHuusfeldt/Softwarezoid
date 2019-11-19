@@ -54,8 +54,8 @@ public class SoftwareFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
-            s1 = new Software("Word", "Software for words", "Thumbnail to word logo");
-            s2 = new Software("Excel", "Software for numbers", "Thumbnail to excel logo");
+            s1 = new Software("Word", "Software for words", 3000, "Thumbnail to word logo");
+            s2 = new Software("Excel", "Software for numbers", 5000, "Thumbnail to excel logo");
             em.persist(s1);
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -85,8 +85,6 @@ public class SoftwareFacadeTest {
 
     @Test
     public void testGetSoftwareAll() {
-        System.out.println(s1.getId());
-        System.out.println(s2.getId());
         List<SoftwareDTO> expResult = softwares;
         List<SoftwareDTO> result = facade.getSoftwareAll();
         assertEquals(expResult, result);
