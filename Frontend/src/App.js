@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route, NavLink, Link, useRouteMatch } from "react-router-dom";
 import './style/App.css';
 import LoginForm from './login/LoginForm';
@@ -22,7 +22,7 @@ function App() {
           <Route path={URLSettings.getURL("NoMatch")}> <HeaderNav /> </Route>
         </Switch>
         <main>
-        <div class="container-fluid py-3 mt-5 pt-5 pb-5">
+        <div className="container-fluid py-3 mt-5 pt-5 pb-5">
           <Switch>
             <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
             <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
@@ -39,12 +39,12 @@ function App() {
 
 const HeaderNav = () => {
   let match = useRouteMatch();
-  let bg = match.url == "/" ? "" : "bg-dark";
+  let bg = match.url === "/" ? "" : "bg-dark";
 
   return (
     <nav className={`navbar fixed-top navbar-expand-lg navbar-dark ${bg}`}>
       <div className="container-fluid">
-        <Link className="navbar-brand" activeClassName="active" exact to={URLSettings.getURL("Home")}>
+        <Link className="navbar-brand" to={URLSettings.getURL("Home")}>
           <h3 className="my-heading text-uppercase">Software <span className="color1">Zoid</span></h3>
         </Link>
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
@@ -76,7 +76,7 @@ const Footer = () => {
   return (
     <div>
       <div id="footer">
-        <div classNameName="container">
+        <div className="container">
           <div className="row text-center  text-left">
             <div className="col-xs-12 col-sm-4 col-md-4 text-left">
               <FadeInLeft><h3>Software <span className="color1">Zoid</span></h3></FadeInLeft>
@@ -133,7 +133,7 @@ function Welcome() {
                             tellus hendrerit mi dapibus.</h3></FadeInUp>
 
               <a href="#bestSeller" className="arrowDown">
-                <Bounce><i class="fa fa-angle-down  slideInAnimate justify-content-center"></i></Bounce>
+                <Bounce><i className="fa fa-angle-down  slideInAnimate justify-content-center"></i></Bounce>
               </a>
             </div>
 
