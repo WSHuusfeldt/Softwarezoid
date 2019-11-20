@@ -34,6 +34,10 @@ public class Review implements Serializable {
     @JoinColumn(name="software_id")
     private Software associatedSoftware;
 
+    public Review() {
+        
+    }
+    
     public Review(Long id, String title, int rating, String description, Software associatedSoftware) {
         this.id = id;
         this.title = title;
@@ -50,5 +54,37 @@ public class Review implements Serializable {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Software getAssociatedSoftware() {
+        return associatedSoftware;
+    }
+
+    public void setAssociatedSoftware(Software associatedSoftware) {
+        this.associatedSoftware = associatedSoftware;
+    }
+    
     
 }
