@@ -64,9 +64,11 @@ const Basket = () => {
 
         switch (modi) {
             case "+":
+                // eslint-disable-next-line
                 changeValue(productId, ++products.find(p => p.product.id == productId).qty);
                 break;
             case "-":
+                // eslint-disable-next-line
                 changeValue(productId, --products.find(p => p.product.id == productId).qty);
                 break;
             default:
@@ -78,6 +80,7 @@ const Basket = () => {
     const changeValue = (id, value) => {
         var basket = []
         products.forEach(e => {
+            // eslint-disable-next-line
             if (e.product.id == id) {
                 e.qty = value;
             }
@@ -93,6 +96,7 @@ const Basket = () => {
 
         var basket = []
         products.forEach(e => {
+            // eslint-disable-next-line
             if (e.product.id != id) {
                 basket.push({ id: e.product.id, qty: e.qty })
             }
