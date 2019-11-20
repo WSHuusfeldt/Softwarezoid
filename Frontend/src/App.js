@@ -1,63 +1,48 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, NavLink } from "react-router-dom";
-import './style/App.css';
-import LoginForm from './login/LoginForm';
+import { Switch, Route } from "react-router-dom";
+
+// Managers
 import URLSettings from './settings'
-import Data from './Data';
+
+// Pages Import
+import Header, { HomeHeader, Footer } from './pages/HeaderFooter'
+import LoginForm from './login/LoginForm';
+import Data from './pages/Data';
+import ProductDetails from "./pages/ProductDetails";
+import FAQ from './pages/FAQ';
+import Basket from './pages/Basket'
+import Contact from "./pages/Contact";
+import Home from './pages/Home'
+
 
 function App() {
-
-
   return (
     <div className="App">
-      <Router>
-        <Header />
-        <Switch>
-          <Route exact path={URLSettings.getURL("Home")}> <Welcome /> </Route>
-          <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
-          <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
-          <Route path={URLSettings.getURL("About")}> <About /> </Route>
-          <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
-        </Switch>
-        <Footer />
-      </Router>
+      <Switch>
+        {/* NO MORE ROUTES HERE!!!!  */}
+        <Route exact path={URLSettings.getURL("Home")}> <HomeHeader /> </Route>
+        <Route path={URLSettings.getURL("NoMatch")}> <Header /> </Route>
+      </Switch>
+      <main>
+        <div className="container-fluid py-3 mt-5 pt-5 pb-5">
+          <Switch>
+            {/* NEW ROUTES GOES HERE!  */}
+            <Route exact path={URLSettings.getURL("Home")}> <Home /> </Route>
+            <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
+            <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
+            <Route path={URLSettings.getURL("FAQ")}> <FAQ /> </Route>
+            <Route path={URLSettings.getURL("Basket")}> <Basket /> </Route>
+            <Route path={URLSettings.getURL("ProductId", "id")}> <ProductDetails /> </Route>
+            <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
+            <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
+          </Switch>
+        </div>
+      </main>
+      <Footer />
     </div>
   )
 }
-
-const Header = () => {
-  return (
-    <ul className="header">
-      <li><NavLink activeClassName="active" exact to={URLSettings.getURL("Home")}>Home</NavLink></li>
-      <li><NavLink activeClassName="active" to={URLSettings.getURL("Login")}>Login</NavLink></li>
-      <li><NavLink activeClassName="active" to={URLSettings.getURL("Data")}>Data</NavLink></li>
-      <li><NavLink activeClassName="active" to={URLSettings.getURL("About")}>About</NavLink></li>
-      <li><NavLink activeClassName="active" to={URLSettings.getURL("FAQ")}>FAQ</NavLink></li>
-    </ul>
-  )
-}
-
-const Footer = () => {
-  return (
-    <footer>
-      <div className="d-flex justify-content-center align-items-center">
-        <span> © Copyright 2019 - Martin Frederiksen, Andreas Vikke, Emil Svensmark, Asger Sørensen, & William Huusfeldt. </span>
-      </div>
-    </footer>
-  )
-}
-
-const About = () => <div>About</div>
 
 const NoMatch = () => <div>No match!</div>
-
-//If Welcome function reaches about 10 lines of code place the function in separate file.
-function Welcome() {
-  return (
-    <div className="d-flex justify-content-center align-items-center link">
-      <a href="https://github.com/asgerhs/CA-3/blob/master/README.md">Press me for quick start guide!!</a>
-    </div>
-  )
-}
 
 export default App;
