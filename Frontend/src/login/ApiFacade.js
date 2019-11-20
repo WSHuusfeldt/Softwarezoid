@@ -58,12 +58,48 @@ function ApiFacade() {
     return fetch(URL + '/api/swapi/demo', makeOptions('GET')).then(handleHttpErrors);
   };
 
+  function fetchProducts(key) {
+    const products = [
+      {
+        id: 1,
+        thumbnail: 'http://placehold.it/120x80',
+        title: 'Netbeans',
+        description: 'Netbeans',
+        price: 25
+      }, {
+        id: 2,
+        thumbnail: 'http://placehold.it/120x80',
+        title: 'VS Code',
+        description: 'Visual Studio',
+        price: 35
+      }, {
+        id: 3,
+        thumbnail: 'http://placehold.it/120x80',
+        title: 'Product Name 3',
+        description: 'Product description',
+        price: 10
+      }, {
+        id: 4,
+        thumbnail: 'http://placehold.it/120x80',
+        title: 'Product Name 4',
+        description: 'Product description',
+        price: 5,
+      }];
+
+    return products.find(p => p.id == key);
+  }
+
   return {
     login,
     logout,
     fetchUser,
-    fetchData
+    fetchData,
+    fetchProducts
   };
+
+
 }
+
+
 
 export default ApiFacade();

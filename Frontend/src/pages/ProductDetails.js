@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useRouteMatch as match } from 'react-router-dom';
+import ApiFacade from '../login/ApiFacade';
 
-export default function productDetails() {
+
+
+export default function productDetails(match) {
+    console.log(match);
     return (
+
         < main className="mt-5 mb-5 pt-5" >
             <div className="container">
-                <div classNameName="col-sm-12 col-md-12 col-lg-12">
+                <div className="col-sm-12 col-md-12 col-lg-12">
                     <div className="product-content product-wrap clearfix product-deatil">
                         <div className="row">
                             <div className="col-md-6 col-sm-12 col-xs-12 ">
@@ -23,16 +29,14 @@ export default function productDetails() {
                             <div className="col-md-6 col-sm-12 col-xs-12">
 
                                 <h2 className="name pt-3">
-                                    NetBeans</h2>
+                                    {ApiFacade.fetchProducts(1).title}</h2>
                                 <hr />
                                 <p className="desc">
-                                    NetBeans is an integrated development environment (IDE) for Java. NetBeans allows applications to be developed from a set of modular software components called modules.
-                                     NetBeans runs on Windows, macOS, Linux and Solaris. In addition to Java development, it has extensions for other languages like PHP, C, C++, HTML5, and JavaScript.
-                                      Applications based on NetBeans, including the NetBeans IDE, can be extended by third party developers
+                                    {ApiFacade.fetchProducts(1).description}
                                 </p>
                                 <div className="row">
                                     <div className="col-md-6 price">
-                                        <h2 className="font-weight-bold">100,00 $</h2>
+                                        <h2 className="font-weight-bold">{ApiFacade.fetchProducts(1).price} $</h2>
                                     </div>
                                     <div className="col-md-6 text-right">
                                         <button className="btn btn-zoid">
@@ -80,7 +84,7 @@ export default function productDetails() {
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
-                                            <form method="post" className="well padding-bottom-10" onsubmit="return false;">
+                                            <form method="post" className="well padding-bottom-10" onSubmit="return false;">
                                                 <textarea rows="2" className="form-control" placeholder="Write a review"></textarea>
                                                 <div className="mt-2">
                                                     <button type="submit" className="btn btn-sm btn-primary pull-right">
