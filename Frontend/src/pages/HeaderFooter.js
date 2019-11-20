@@ -5,11 +5,14 @@ import { NavLink, Link, useRouteMatch } from "react-router-dom";
 import URLSettings from '../settings'
 
 // Animations
-import { FadeInLeft } from '../style/animations'
+import "animate.css/animate.min.css";
+import ScrollAnimation from 'react-animate-on-scroll';
+import { Bounce } from '../style/animations'
 
-export default () => {
+const Header = () => {
     let match = useRouteMatch();
     let bg = match.url === "/" ? "" : "bg-dark";
+    let basketSize = localStorage.getItem("basket") != null ? JSON.parse(localStorage.getItem("basket")).length : "";
 
     return (
         <nav className={`navbar fixed-top navbar-expand-lg navbar-dark ${bg}`}>
@@ -32,7 +35,7 @@ export default () => {
                         <li className="nav-item">
                             <Link className="nav-link" to={URLSettings.getURL("Basket")}>
                                 <i className="fa fa-shopping-basket" aria-hidden="true"></i>
-                                <span className="badge color2 bg-white badge-pill">1</span>
+                                <span className="badge color2 bg-white badge-pill">{basketSize}</span>
                             </Link>
                         </li>
                     </ul>
@@ -41,6 +44,36 @@ export default () => {
         </nav>
     )
 }
+export default Header;
+
+export const HomeHeader = () => {
+    return (
+      <header id="home">
+        <div className="overlay"></div>
+  
+        <Header />
+  
+        <div className="tophead">
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-md-12">
+                <ScrollAnimation animateIn="fadeInLeft"><h1 className="title-main">Software <span>Zoid</span></h1></ScrollAnimation>
+  
+                <ScrollAnimation animateIn="fadeInUp"><h3 className="subtitle-main">Lorem ipsum dolor sit amet
+                              consectetur adipiscing elit <br /> proin leo leo ornare nec vulputate tempus velit nam id purus
+                              tellus hendrerit mi dapibus.</h3></ScrollAnimation>
+  
+                <a href="#bestSeller" className="arrowDown">
+                  <Bounce><i className="fa fa-angle-down justify-content-center"></i></Bounce>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="sesgoabajo"></div>
+      </header>
+    )
+  }
 
 export const Footer = () => {
     return (
@@ -49,7 +82,7 @@ export const Footer = () => {
                 <div className="container">
                     <div className="row text-center  text-left">
                         <div className="col-xs-12 col-sm-4 col-md-4 text-left">
-                            <FadeInLeft><h3>Software <span className="color1">Zoid</span></h3></FadeInLeft>
+                            <ScrollAnimation animateIn="fadeInLeft"><h3>Software <span className="color1">Zoid</span></h3></ScrollAnimation>
                             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laboriosam ducimus quos magni, maiores odio,</p>
                         </div>
                         <div className="col-xs-12 col-sm-4 col-md-4 text-left">
@@ -71,7 +104,7 @@ export const Footer = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-xs-12 col-sm-12 col-md-12 mt-3 text-center">
-                            <FadeInLeft><Link to={URLSettings.getURL("Home")}><h3>Copyright 2019 <sup>&#9400;	</sup> Software <span className="color1">Zoid</span></h3></Link></FadeInLeft>
+                            <Link to={URLSettings.getURL("Home")}><h3>Copyright 2019 <sup>&#9400;	</sup> Software <span className="color1">Zoid</span></h3></Link>
                         </div>
                     </div>
                 </div>

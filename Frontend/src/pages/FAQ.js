@@ -133,6 +133,26 @@ export default function FAQ() {
                   </div>
                 </div>
               </div>
+              <div class="card">
+                <div class="card-header p-2" id="headingSeven">
+                  <h5 class="mb-0">
+                    <button
+                      class="btn btn-link collapsed"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapseSeven"
+                      aria-expanded="false"
+                      aria-controls="collapseSeven">
+                      Q. What payment methods are accepted?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqExample">
+                  <div class="card-body">
+                    We accept both Paypal and credit card. As of this moment we don't accept any cryptocurrency.
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
