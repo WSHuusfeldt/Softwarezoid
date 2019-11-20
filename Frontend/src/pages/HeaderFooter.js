@@ -13,7 +13,6 @@ const Header = () => {
     let match = useRouteMatch();
     let bg = match.url === "/" ? "" : "bg-dark";
     let basketSize = localStorage.getItem("basket") != null ? JSON.parse(localStorage.getItem("basket")).length : "";
-    console.log(localStorage.getItem("basket"));
 
     return (
         <nav className={`navbar fixed-top navbar-expand-lg navbar-dark ${bg}`}>
