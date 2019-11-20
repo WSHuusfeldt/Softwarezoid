@@ -1,10 +1,5 @@
 import React from 'react';
 
-
-
-
-
-
 export default function productDetails() {
     return (
         < main className="mt-5 mb-5 pt-5" >
@@ -53,7 +48,7 @@ export default function productDetails() {
                                 <div className="description description-tabs">
                                     <ul id="myTab" className="nav nav-tabs">
                                         <li className="nav-item">
-                                            <a className="nav-link active" href="#more-information" data-toggle="tab" className="no-margin">Description </a>
+                                            <a className="nav-link active" href="#more-information" data-toggle="tab">Description </a>
                                         </li>
                                         <li className="nav-item">
                                             <a className="nav-link" href="#specifications" data-toggle="tab">Specifications</a></li>
@@ -91,19 +86,19 @@ export default function productDetails() {
                                                     <button type="submit" className="btn btn-sm btn-primary pull-right">
                                                         Submit Review
                                                     </button>
-                                                    <a className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Location"><i className="fa fa-location-arrow"></i></a>
-                                                    <a className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Voice"><i className="fa fa-microphone"></i></a>
-                                                    <a className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Photo"><i className="fa fa-camera"></i></a>
-                                                    <a className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add File"><i className="fa fa-file"></i></a>
+                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Location"><i className="fa fa-location-arrow"></i></a>
+                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Voice"><i className="fa fa-microphone"></i></a>
+                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Photo"><i className="fa fa-camera"></i></a>
+                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add File"><i className="fa fa-file"></i></a>
                                                 </div>
                                             </form>
 
                                             <div className="chat-body no-padding profile-message">
                                                 <ul>
                                                     <li className="message mt-2">
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" />
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" alt="tt" />
                                                         <span className="message-text">
-                                                            <a className="username">
+                                                            <a className="username" href="xx">
                                                                 <span className="font-weight-bold">Andreas  </span>
                                                                 <span className="badge">Purchase Verified</span>
                                                                 <span className="pull-right">
@@ -119,9 +114,9 @@ export default function productDetails() {
 
                                                     </li>
                                                     <li className="message mt-2">
-                                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" className="online" />
+                                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" className="online" alt="tt" />
                                                         <span className="message-text">
-                                                            <a className="username">
+                                                            <a className="username" href="xx">
                                                                 <span className="font-weight-bold">Aragon Zarko </span>
                                                                 <span className="badge">Purchase Verified</span>
                                                                 <span className="pull-right">
