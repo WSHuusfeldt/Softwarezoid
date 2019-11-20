@@ -1,12 +1,15 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 /**
  *
@@ -19,11 +22,16 @@ public class Software implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="software_id")
     private Long id;
     private String title;
     private String description;
     private int price;
     private String thumbnail;
+    
+    @OneToMany(mappedBy="associatedSoftware")
+    private List<Review> reviews;
+    
 
     public Software() {
     }
@@ -33,6 +41,7 @@ public class Software implements Serializable {
         this.description = description;
         this.price = price;
         this.thumbnail = thumbnail;
+        this.reviews = new ArrayList<Review>();
     }
 
     public Long getId() {
@@ -75,49 +84,15 @@ public class Software implements Serializable {
         this.thumbnail = thumbnail;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.id);
-        hash = 71 * hash + Objects.hashCode(this.title);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + this.price;
-        hash = 71 * hash + Objects.hashCode(this.thumbnail);
-        return hash;
+    public List<Review> getReviews() {
+        return reviews;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Software other = (Software) obj;
-        if (this.price != other.price) {
-            return false;
-        }
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        if (!Objects.equals(this.thumbnail, other.thumbnail)) {
-            return false;
-        }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
-    @Override
-    public String toString() {
-        return "Software{" + "id=" + id + ", title=" + title + ", description=" + description + ", price=" + price + ", thumbnail=" + thumbnail + '}';
-    }
+    
+    
+    
 }
