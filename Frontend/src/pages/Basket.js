@@ -69,6 +69,9 @@ const Basket = () => {
             case "-":
                 changeValue(productId, --products.find(p => p.product.id == productId).qty);
                 break;
+            default:
+                console.log("Error: No Modi");
+                break;
         }
     }
 
