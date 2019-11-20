@@ -1,6 +1,8 @@
 package entities.dto;
 
+import entities.Review;
 import entities.Software;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,6 +14,8 @@ public class SoftwareDTO {
     private String description;
     private int price;
     private String thumbnail;
+    
+    private List<ReviewDTO> reviews;
 
     public SoftwareDTO() {
     }
@@ -53,6 +57,18 @@ public class SoftwareDTO {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public List<ReviewDTO> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDTO> reviews) {
+        this.reviews = reviews;
+    }
+    
+    public void addReview(ReviewDTO review) {
+        this.reviews.add(review);
     }
 
     @Override

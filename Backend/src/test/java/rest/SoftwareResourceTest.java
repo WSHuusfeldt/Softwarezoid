@@ -9,6 +9,7 @@ import entities.Software;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
+import java.net.MalformedURLException;
 import java.net.URI;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -64,7 +65,7 @@ public class SoftwareResourceTest {
     }
     
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         EntityManager em = emf.createEntityManager();
         s1 = new Software("Word", "Software for words", 3000, "Thumbnail to word logo");
         s2 = new Software("Excel", "Software for numbers", 5000, "Thumbnail to excel logo");

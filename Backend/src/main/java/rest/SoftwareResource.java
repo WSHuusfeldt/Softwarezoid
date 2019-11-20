@@ -50,9 +50,9 @@ public class SoftwareResource {
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Software> softwares = new ArrayList();
-        softwares.add(new Software("Netbeans", "Programmers dream", 280000, "NOT"));
-        softwares.add(new Software("Visual Studio Code", "Programmers dream", 280000, "TRUE"));
-        softwares.add(new Software("Notepad++", "Programmers real real dream", 1000, "Oh Buddy"));
+        softwares.add(new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png"));
+        softwares.add(new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png"));
+        softwares.add(new Software("Notepad++", "Programmers real real dream", 1000, "https://www.slashcoding.com/wp-content/uploads/2013/08/Notepad_plus_plus.png"));
         em.getTransaction().begin();
         for(Software s : softwares)
             em.persist(s);
