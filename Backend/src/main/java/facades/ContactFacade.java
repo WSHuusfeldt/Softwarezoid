@@ -39,10 +39,11 @@ public class ContactFacade {
      
     
      public void addContact(ContactDTO contactDTO){
+         EntityManager em = getEntityManager();
          try{
-             getEntityManager().getTransaction().begin();
-             getEntityManager().persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage()));
-             getEntityManager().getTransaction().commit();
+             em.getTransaction().begin();
+             em.persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage()));
+             em.getTransaction().commit();
          }finally{
              getEntityManager().close();
          }

@@ -19,7 +19,6 @@ import utils.EMF_Creator;
  *
  * @author asgerhs
  */
-@Disabled
 public class ContactFacadeTest {
 
     private static EntityManagerFactory emf;
@@ -105,7 +104,7 @@ public class ContactFacadeTest {
         }finally{
             em.close();
         }
-        assertEquals(expectedRes, res);
+        assertEquals(expectedRes + 1, res);
         
         
     }
@@ -116,14 +115,8 @@ public class ContactFacadeTest {
      */
     @Test
     public void testGetById() throws Exception {
-        System.out.println("getById");
-        long id = 0L;
-        ContactFacade instance = null;
-        ContactDTO expResult = null;
-        ContactDTO result = instance.getById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+     ContactDTO expected = contacts.get(1); 
+        assertEquals(expected, facade.getById(c2.getId()));
     }
 
 }
