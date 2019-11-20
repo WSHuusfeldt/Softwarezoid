@@ -91,6 +91,10 @@ public class Software implements Serializable {
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }
+    
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
 
     
     
