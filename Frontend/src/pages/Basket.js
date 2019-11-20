@@ -87,7 +87,6 @@ const Basket = () => {
 
     const onDelete = (evt) => {
         let id = evt.target.getAttribute("product");
-        console.log(id);
 
         var basket = []
         products.forEach(e => {
@@ -142,8 +141,8 @@ const Basket = () => {
                                             <i className="fa fa-trash" aria-hidden="true"></i>
                                         </button>
                                     </div>
-                                    <div class="col">
-                                        <h6><span class="text-muted">x</span><strong> {product.product.price.toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
+                                    <div className="col">
+                                        <h6><span className="text-muted">x</span><strong> {product.product.price.toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
                                     </div>
                                 </div>
                             </div>
@@ -152,20 +151,20 @@ const Basket = () => {
                     ))}
                 </div>
 
-                <div class="card-footer">
-                    <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="text" class="form-control" placeholder="Cupone code" />
+                <div className="card-footer">
+                    <div className="coupon col-md-5 col-sm-5 no-padding-left pull-left">
+                        <div className="row">
+                            <div className="col-6">
+                                <input type="text" className="form-control" placeholder="Cupone code" />
                             </div>
-                            <div class="col-6">
-                                <input type="submit" class="btn btn-default" value="Use cupone" />
+                            <div className="col-6">
+                                <input type="submit" className="btn btn-default" value="Use cupone" />
                             </div>
                         </div>
                     </div>
-                    <div class="pull-right" >
+                    <div className="pull-right" >
                         <Link className="btn btn-zoid pull-right" to={URLSettings.getURL("Checkout")}>Checkout</Link>
-                        <div class="pull-right p-2">
+                        <div className="pull-right p-2">
                             Total price: <b>{totalPrice.toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
                         </div>
                     </div>
