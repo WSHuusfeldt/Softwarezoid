@@ -55,7 +55,7 @@ function ApiFacade() {
   };
 
   const fetchData = () => {
-    return fetch(URL + '/api/swapi/demo', makeOptions('GET')).then(handleHttpErrors);
+    return fetch('http://localhost:8080/softwarezoid/api/software/all', makeOptions('GET')).then(handleHttpErrors);
   };
 
   return {

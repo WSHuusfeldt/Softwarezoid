@@ -10,7 +10,8 @@ import LoginForm from './login/LoginForm';
 import Data from './pages/Data';
 import ProductDetails from "./pages/ProductDetails";
 import FAQ from './pages/FAQ';
-import Basket from './pages/Basket'
+import Basket from './pages/Basket';
+import Products from './pages/Products';
 import Contact from "./pages/Contact";
 
 // Animations
@@ -34,6 +35,7 @@ function App() {
             <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
             <Route path={URLSettings.getURL("FAQ")}> <FAQ /> </Route>
             <Route path={URLSettings.getURL("Basket")}> <Basket /> </Route>
+            <Route path={URLSettings.getURL("Products")}> <Products /> </Route>
             <Route path={URLSettings.getURL("ProductId", "id")}> <ProductDetails /> </Route>
             <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
             <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
