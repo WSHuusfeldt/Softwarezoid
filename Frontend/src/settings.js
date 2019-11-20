@@ -2,7 +2,7 @@ const URLs = {
     "Home": "/",
     "Login": "/login",
     "Products": "/products",
-    "ProductId": "/product/:id",
+    "ProductId": "/product",
     "Data": "/data",
     "Contact": "/contact",
     "About": "/about",
@@ -13,7 +13,7 @@ const URLs = {
 }
 
 function URLSettings() {
-    const getURL = (key) => { return URLs[key] }
+    const getURL = (key, param = null) => { return URLs[key] + (param !== null ? "/:" + param : "") }
 
     return {
         getURL
