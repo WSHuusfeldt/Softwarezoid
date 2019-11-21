@@ -8,9 +8,10 @@ import Settings from '../settings';
 export default function ProductDetails() {
     let match = useRouteMatch();
     const [data, setData] = useState([]);
+    const [spec, setSpec] = useState([])
 
     useEffect(() => {
-        ApiFacade.fetchSingleProduct(match.params.id).then(res => setData(res));
+        ApiFacade.fetchSingleProduct(match.params.id).then(res => {setData(res); setSpec(res.specifications)});
     }, [])
 
     return (
@@ -79,7 +80,7 @@ export default function ProductDetails() {
                                             <br />
                                             <dl className="">
                                                 <dt>Titel</dt>
-                                                <dd>{data.specifications}</dd>
+                                                <dd>{spec.map(item => <dd>{item}</dd>)}</dd>
                                                 <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
                                                 <dd>Donec id elit non mi porta gravida at eget metus.</dd>
                                                 <dd>Eget lacinia odio sem nec elit.</dd>
