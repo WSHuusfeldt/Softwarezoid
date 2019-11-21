@@ -1,8 +1,27 @@
 package rest;
 
+import io.swagger.v3.jaxrs2.integration.resources.AcceptHeaderOpenApiResource;
+import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 import java.util.Set;
 import javax.ws.rs.core.Application;
 
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Software Zoid API",
+                version = "1.0",
+                description = "Software Zoid API documentation"),
+        servers = {
+                @Server(
+                        description = "LocalHost",
+                        url = "http://localhost:8080/softwarezoid"),
+                @Server(
+                        description = "Deployed",
+                        url = "https://williamhuusfeldt.dk/softwarezoid")
+        }
+)
 @javax.ws.rs.ApplicationPath("api")
 public class ApplicationConfig extends Application {
 
@@ -10,6 +29,10 @@ public class ApplicationConfig extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
+        
+        resources.add(OpenApiResource.class);
+        resources.add(AcceptHeaderOpenApiResource.class);
+        
         return resources;
     }
 

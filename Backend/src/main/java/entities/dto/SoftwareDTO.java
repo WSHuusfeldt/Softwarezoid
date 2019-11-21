@@ -1,7 +1,7 @@
 package entities.dto;
 
-import entities.Review;
 import entities.Software;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +9,9 @@ import java.util.Objects;
  *
  * @author Martin Frederiksen
  */
+@Schema(name ="Software")
 public class SoftwareDTO {
+    @Schema(required=true, example="Netbeans")
     private String title;
     private String description;
     private int price;
