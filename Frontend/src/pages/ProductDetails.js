@@ -2,16 +2,46 @@ import React, { useState, useEffect } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import ApiFacade from '../login/ApiFacade';
 
-
+var baseurl = "http://localhost:8080/softwarezoid/api/review/add"
 
 export default function ProductDetails() {
     let match = useRouteMatch();
-    console.log(match.params.id);
     const [data, setData] = useState([]);
 
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => setData(res));
     }, [])
+
+
+    const initialValue = {
+        description: "",
+        name: "",
+        url: "",
+        rating: 0
+    };
+
+    const [review, setReview] = useState(initialValue);
+
+    const handleSubmit = event => {
+        createReview();
+        window.alert(JSON.stringify(review));
+    }
+
+    const handleChange = event => {
+        setReview({ ...review, [event.target.name]: event.target.value });
+    };
+
+    function createReview() {
+        fetch(baseurl, makeOptions("POST", {
+            name: review.name,
+            imgUrl: review.url,
+            date: "2019-11-21T18:39:08.608Z",
+            rating: review.rating,
+            description: review.description,
+            softwareId: match.params.id
+        }));
+    }
+
 
     return (
 
@@ -91,23 +121,22 @@ export default function ProductDetails() {
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
-                                            <form method="post" className="well padding-bottom-10" onSubmit="return false;">
 
-                                                <textarea rows="2" className="form-control" placeholder="Write a review" id="description" />
-
+                                            <form onSubmit={handleSubmit} className="well padding-bottom-10">
+                                                <textarea rows="2" className="form-control" placeholder="Write a review" name="description" value={review.description} onChange={handleChange} />
                                                 <div className="container mt-2 row">
                                                     <div className="col">
 
                                                         <div className="mt-2 row fluid">
-                                                            <input type="text" name="fname" placeholder="Name" id="name" />
+                                                            <input type="text" name="fname" placeholder="Name" name="name" value={review.name} onChange={handleChange}/>
                                                         </div>
 
                                                         <div className="mt-2 row" >
-                                                            <input type="text" name="fname" placeholder="Image URL" id="imageUrl" />
+                                                            <input type="text" name="fname" placeholder="Image URL" name="url" value={review.url} onChange={handleChange}/>
                                                         </div>
 
                                                         <div className="mt-2 row">
-                                                            <select id="rating">
+                                                            <select name="rating" value={review.rating} onChange={handleChange}>
                                                                 <option default selected disabled>Rating</option>
                                                                 <option value="0">0</option>
                                                                 <option value="1">1</option>
@@ -122,12 +151,12 @@ export default function ProductDetails() {
                                                     <div className="col">
                                                         <button type="submit" className="btn btn-sm btn-primary pull-right">
                                                             Submit Review
-                                                    </button>
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
-                                            <hr/>
 
+                                            <hr />
                                             <div className="chat-body no-padding profile-message">
                                                 <ul>
                                                     <li className="message mt-2">
@@ -178,4 +207,18 @@ export default function ProductDetails() {
             </div>
         </main >
     )
+}
+
+function makeOptions(method, body) {
+    var opts =  {
+        method: method,
+        headers: {
+        'Accept': 'application/json',
+        "Content-type": "application/json"
+        }
+    }
+    if(body){
+        opts.body = JSON.stringify(body);
+    }
+    return opts;
 }
