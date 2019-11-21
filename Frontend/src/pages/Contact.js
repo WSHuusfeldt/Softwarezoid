@@ -22,6 +22,8 @@ export default function Contact() {
     const handleSubmit = event => {
         event.preventDefault();
         ApiFacade.addContact(addContact.fullName, addContact.email, addContact.phone, addContact.subject, addContact.message);
+        setAddContact(initialValue);
+        window.alert("Submitted succesfully! We'll contact you as soon as possible.")
     };
 
     return (
@@ -31,16 +33,17 @@ export default function Contact() {
                     <div className="row">
                         <div className="col-xl-12 text-center">
                             <h1 className="font-weight-bold h2 color1 text-uppercase">
-                                Site description
+                                Got a problem? Contact us!
                             </h1>
-                            <p className="h4 ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius temporibus alias ut ducimus itaque sint eveniet totam tenetur recusandae
-                                     quasi sapiente voluptatibus molestias facilis impedit atque, magni excepturi provident non?</p>
+                            <p className="h4 ">We take great pride in our products, if you are having any trouble purchasing a product,
+                            accessing a product or having trouble setting it up, please don't hesitate to contact us!</p>
+                            <br />
+                            <p className="h4 ">In the form below, you can write in your contact info, subject of matter and a message to us so we can get in touch with you
+                                We'll try and reach out to you as quickly as possible!</p>
+                            <br />
+                            <p className="h4 ">Alternitavely, you can call or mail us on the information below, or visit us at our address!</p>
 
-                            <h2 className="font-weight-bold color1 text-uppercase mt-3">
-                                who we are
-                        </h2>
-                            <p className="h4 mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius temporibus alias ut ducimus itaque sint eveniet totam tenetur recusandae
-                             quasi sapiente voluptatibus molestias facilis impedit atque, magni excepturi provident non?</p>
+
                         </div>
 
                     </div>
