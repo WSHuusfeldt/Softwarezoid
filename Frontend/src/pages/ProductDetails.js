@@ -9,6 +9,19 @@ export default function ProductDetails() {
     let match = useRouteMatch();
     const [data, setData] = useState([]);
     const [spec, setSpec] = useState([])
+    const [reviews,setReviews] = useState();
+
+    const fetchReviews = () => {
+        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data)
+                setReviews(setupReviews(data));
+            })
+    }
+
 
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
@@ -165,11 +178,12 @@ export default function ProductDetails() {
                                             <hr />
                                             <div className="chat-body no-padding profile-message">
                                                 <ul>
+                                                    {reviews}
                                                     <li className="message mt-2">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" alt="tt" />
                                                         <span className="message-text">
                                                             <a className="username" href="xx">
-                                                                <span className="font-weight-bold">Andreas  </span>
+                                                                <span className="font-weight-bold">Andreas</span>
                                                                 <span className="badge">Purchase Verified</span>
                                                                 <span className="pull-right">
                                                                     <i className="fa fa-star fa-1x text-primary"></i>
@@ -199,7 +213,6 @@ export default function ProductDetails() {
                                                             </a>
                                                             Excellent product, love it!
                                                         </span>
-
                                                     </li>
                                                 </ul>
                                             </div>
@@ -228,3 +241,33 @@ function makeOptions(method, body) {
     }
     return opts;
 }
+
+function setupReviews(data) {
+    data.map(review =>
+        <li className="message mt-2">
+            <img src={review.url} className="online" alt="tt" />
+            <span className="message-text">
+                <a className="username" href="xx">
+                    <span className="font-weight-bold">{data.name}</span>
+                    <span className="pull-right">
+                        <i className="fa fa-star fa-1x text-primary"></i>
+                        <i className="fa fa-star fa-1x text-primary"></i>
+                        <i className="fa fa-star fa-1x text-primary"></i>
+                        <i className="fa fa-star fa-1x text-primary"></i>
+                        <i className="fa fa-star fa-1x text-muted"></i>
+                    </span>
+                </a>
+                {review.description}
+            </span>
+
+        </li>
+    );
+
+
+    return (
+        <div>
+            {data}
+        </div>
+    )
+}
+
