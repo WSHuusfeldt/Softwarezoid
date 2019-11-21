@@ -69,7 +69,6 @@ function ApiFacade() {
     logout,
     fetchUser,
     fetchData,
-    fetchProducts,
     fetchSingleProduct
   };
 
