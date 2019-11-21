@@ -4,8 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Contact;
 import entities.dto.ContactDTO;
-import errorhandling.NotFoundException;
+import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -61,6 +65,13 @@ public class ContactResource {
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary="Get all contacts", 
+            tags={"Contact"},
+            responses={
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "200", description = "Succesful operation")})
     public List<ContactDTO> getAllContacts(){
         return FACADE.getAll();
     }
@@ -68,6 +79,19 @@ public class ContactResource {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get contact by id",
+            tags = {"Contact"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        responseCode = "400", description = "Invalid Id supplied"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        responseCode = "404", description = "Contact not found")})
     public ContactDTO getContactById(@PathParam("id") long id){
         if(id <= 0){
             throw new WebApplicationException("Invalid Id", 404);

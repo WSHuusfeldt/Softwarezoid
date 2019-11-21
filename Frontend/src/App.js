@@ -7,7 +7,6 @@ import URLSettings from './settings'
 // Pages Import
 import Header, { HomeHeader, Footer } from './pages/HeaderFooter'
 import LoginForm from './login/LoginForm';
-import Data from './pages/Data';
 import ProductDetails from "./pages/ProductDetails";
 import FAQ from './pages/FAQ';
 import Basket from './pages/Basket';
@@ -30,7 +29,6 @@ function App() {
             {/* NEW ROUTES GOES HERE!  */}
             <Route exact path={URLSettings.getURL("Home")}> <Home /> </Route>
             <Route path={URLSettings.getURL("Login")}> <LoginForm /> </Route>
-            <Route path={URLSettings.getURL("Data")}> <Data /> </Route>
             <Route path={URLSettings.getURL("FAQ")}> <FAQ /> </Route>
             <Route path={URLSettings.getURL("Basket")}> <Basket /> </Route>
             <Route path={URLSettings.getURL("Products")}> <Products /> </Route>
