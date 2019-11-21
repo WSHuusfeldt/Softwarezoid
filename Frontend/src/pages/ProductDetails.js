@@ -19,7 +19,7 @@ export default function ProductDetails() {
         })
         .then(data => {
             console.log(data)
-            setReviews(setupReviews(data));
+            //setReviews(setupReviews(data));
         })
     }, [match])
 
