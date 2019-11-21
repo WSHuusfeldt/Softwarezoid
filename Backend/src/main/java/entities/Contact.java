@@ -22,14 +22,14 @@ public class Contact implements Serializable {
     private Long id;
     private String fullName;
     private String email;
-    private int phone;
+    private String phone;
     private String subject;
     private String message;
 
     public Contact() {
     }
 
-    public Contact(String fullName, String email, int phone, String subject, String message) {
+    public Contact(String fullName, String email, String phone, String subject, String message) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
@@ -61,11 +61,11 @@ public class Contact implements Serializable {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

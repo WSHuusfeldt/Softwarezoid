@@ -56,9 +56,9 @@ public class ContactFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Contact.deleteAllRows").executeUpdate();
-            c1 = new Contact("William Housefield", "smokeweed@420.com", 12345678, "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv");
-            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", 87654321, "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud");
-            c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden");
+            c1 = new Contact("William Housefield", "smokeweed@420.com", "12345678", "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv");
+            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud");
+            c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden");
             em.persist(c1);
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -97,7 +97,7 @@ public class ContactFacadeTest {
         int expectedRes;
         int res;
         try{
-        c3 = new Contact("Asger Sørensen", "billig@bajere.com", 12312312, "Billi baj?", "Jeg pisse fuld hele tiden");
+        c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden");
         expectedRes = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();
         facade.addContact(new ContactDTO(c3));
         res = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();

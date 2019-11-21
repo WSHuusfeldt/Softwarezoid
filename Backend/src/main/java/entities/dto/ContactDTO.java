@@ -1,18 +1,24 @@
 package entities.dto;
 
 import entities.Contact;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 
 /**
  *
  * @author asgerhs
  */
+@Schema(name="Contact")
 public class ContactDTO {
-
+    @Schema(required=true, example="Viktor Alfredsen")
     private String fullName;
+    @Schema(required=true, example="viktorErCool420@gmail.com")
     private String email;
-    private int phone;
+    @Schema(required=true, example="22334455")
+    private String phone;
+    @Schema(required=true, example="Not recived my product")
     private String subject;
+    @Schema(required=true, example="I need help. I have not recived my product.")
     private String message;
 
     public ContactDTO() {
@@ -42,13 +48,15 @@ public class ContactDTO {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 
     public String getSubject() {
         return subject;
@@ -68,10 +76,10 @@ public class ContactDTO {
 
     @Override
     public int hashCode() {
-        int hash = 3;
+        int hash = 7;
         hash = 17 * hash + Objects.hashCode(this.fullName);
         hash = 17 * hash + Objects.hashCode(this.email);
-        hash = 17 * hash + this.phone;
+        hash = 17 * hash + Objects.hashCode(this.phone);
         hash = 17 * hash + Objects.hashCode(this.subject);
         hash = 17 * hash + Objects.hashCode(this.message);
         return hash;
@@ -89,13 +97,13 @@ public class ContactDTO {
             return false;
         }
         final ContactDTO other = (ContactDTO) obj;
-        if (this.phone != other.phone) {
-            return false;
-        }
         if (!Objects.equals(this.fullName, other.fullName)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.phone, other.phone)) {
             return false;
         }
         if (!Objects.equals(this.subject, other.subject)) {
@@ -107,6 +115,7 @@ public class ContactDTO {
         return true;
     }
 
+   
 
     
     

@@ -41,13 +41,18 @@ function ApiFacade() {
   };
 
   const login = (user, pass) => {
-    const options = makeOptions('POST', true, { username: user, password: pass });
+    const options = makeOptions('POST', { username: user, password: pass });
     return fetch(URL + '/api/login', options)
       .then(handleHttpErrors)
       .then(res => {
         setToken(res.token);
       });
   };
+
+  const addContact = (fullName, email, phone, subject, message) => {
+    const options = makeOptions('POST', true, { fullName: fullName, email: email, phone: phone, subject: subject, message: message });
+    return fetch('http://localhost:8080/softwarezoid/api/contacts/add', options).then(handleHttpErrors);
+  }
 
   const fetchUser = () => {
     const options = makeOptions('GET', true); //True add's the token
@@ -69,7 +74,8 @@ function ApiFacade() {
     logout,
     fetchUser,
     fetchData,
-    fetchSingleProduct
+    fetchSingleProduct,
+    addContact
   };
 
 

@@ -6,17 +6,20 @@
 package entities.dto;
 
 import java.util.Date;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  *
  * @author emilt
  */
+@Schema(name="Review")
 public class ReviewDTO {
     
     private String name;
     private String imgUrl;
     private Date date;
     private int rating;
+    @Schema(required=true, example="I have used this software for developing my own software")
     private String description;
     private Long softwareId;
     

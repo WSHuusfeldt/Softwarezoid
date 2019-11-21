@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import ApiFacade from '../login/ApiFacade';
+import Settings from '../settings';
 
 var baseurl = "http://localhost:8080/softwarezoid/api/review/add"
 
 export default function ProductDetails() {
     let match = useRouteMatch();
     const [data, setData] = useState([]);
+    const [spec, setSpec] = useState([])
 
     useEffect(() => {
-        ApiFacade.fetchSingleProduct(match.params.id).then(res => setData(res));
+        ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
     }, [])
 
 
@@ -79,6 +81,9 @@ export default function ProductDetails() {
                                         <button className="btn btn-zoid">
                                             Add to Cart
                                 </button>
+                                        <button className="btn btn-outline-danger mt-3">
+                                            <Link to={Settings.getURL("Products")}> Back to products </Link>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -99,24 +104,14 @@ export default function ProductDetails() {
                                     <div id="myTabContent" className="tab-content">
                                         <div className="tab-pane container active in" id="more-information">
                                             <br />
-                                            <strong>Description Title</strong>
-                                            <p>Integer egestas, orci id condimentum eleifend, nibh nisi pulvinar eros, vitae ornare massa neque ut orci. Nam aliquet lectus sed odio eleifend, at iaculis dolor egestas. Nunc elementum pellentesque augue sodales porta. Etiam aliquet rutrum turpis, feugiat sodales ipsum consectetur nec. </p>
+                                            <strong>{data.title}</strong>
+                                            <p>{data.description} </p>
                                         </div>
                                         <div className="tab-pane container fade" id="specifications">
                                             <br />
                                             <dl className="">
-                                                <dt>Gravina</dt>
-                                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                                                <dd>Eget lacinia odio sem nec elit.</dd>
-                                                <br />
+                                                <dd>{spec.map(item => <dd>{item}</dd>)}</dd>
 
-                                                <dt>Test lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                                <br />
-
-                                                <dt>Altra porta</dt>
-                                                <dd>Vestibulum id ligula porta felis euismod semper</dd>
                                             </dl>
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
