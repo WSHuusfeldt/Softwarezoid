@@ -12,7 +12,7 @@ import { Bounce } from '../style/animations'
 const Header = () => {
     let match = useRouteMatch();
     let bg = match.url === "/" ? "" : "bg-dark";
-    let basketSize = localStorage.getItem("basket") != null ? JSON.parse(localStorage.getItem("basket")).length : "";
+    let basketSize = localStorage.getItem("basket") !== null ? JSON.parse(localStorage.getItem("basket")).length : "";
 
     return (
         <nav className={`navbar fixed-top navbar-expand-lg navbar-dark ${bg}`}>

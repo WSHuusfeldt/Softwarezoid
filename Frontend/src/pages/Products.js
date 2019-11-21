@@ -14,16 +14,16 @@ export default function Products() {
   return (
     <div className="container products">
       <div className="row">
-        {data.map((software, index) =>
-          <div key={index} className="col-md-3">
+        {data.map(software =>
+          <div key={software.id} className="col-md-3">
             <div className="card">
               <figure className="text-center">
                 <img src={software.thumbnail} className="img-fluid" alt={software.title} />
               </figure>
               <div className="card-body">
                 <h5 className="card-title">{software.title}</h5>
-                <Link to={settings.getURL("ProductId") + "/" + (index + 1)} className="btn-zoid">Show details</Link>
-                <span className="price"><b>{software.price / 100},-</b></span>
+                <Link to={settings.getURL("ProductId") + "/" + (software.id)} className="btn-zoid">Show details</Link>
+                <span className="price"><b>{(software.price / 100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b></span>
               </div>
             </div>
           </div>

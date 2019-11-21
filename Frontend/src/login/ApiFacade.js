@@ -1,4 +1,5 @@
-const URL = 'https://williamhuusfeldt/softwarezoid';
+//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
+const URL = 'http://localhost:8080/softwarezoid/api/';
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -68,7 +69,7 @@ function ApiFacade() {
   };
 
   const fetchData = () => {
-    return fetch('http://localhost:8080/softwarezoid/api/software/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'software/all', makeOptions('GET')).then(handleHttpErrors);
   };
 
   const fetchReviews = (key) => {
@@ -77,7 +78,7 @@ function ApiFacade() {
   };
 
   const fetchSingleProduct = (key) => {
-    return fetch('http://localhost:8080/softwarezoid/api/software/' + key, makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'software/' + key, makeOptions('GET')).then(handleHttpErrors);
   };
 
 
