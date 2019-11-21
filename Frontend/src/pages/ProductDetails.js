@@ -12,7 +12,6 @@ export default function ProductDetails() {
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => setData(res));
     }, [])
-
     return (
 
         < main className="mt-5 mb-5 pt-5" >
