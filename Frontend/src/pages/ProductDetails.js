@@ -11,21 +11,17 @@ export default function ProductDetails() {
     const [spec, setSpec] = useState([])
     const [reviews,setReviews] = useState();
 
-    const fetchReviews = () => {
-        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                console.log(data)
-                setReviews(setupReviews(data));
-            })
-    }
-
-
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
-    }, [])
+        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+            setReviews(setupReviews(data));
+        })
+    }, [match])
 
 
     const initialValue = {
@@ -59,6 +55,7 @@ export default function ProductDetails() {
     const addToCart = () => {
         var basket = JSON.parse(localStorage.getItem("basket"));
         if(basket !== null) {
+            // eslint-disable-next-line
             let found = basket.find(i => i.id == match.params.id);
             if(found !== undefined) {
                 found.qty++;
@@ -147,11 +144,11 @@ export default function ProductDetails() {
                                                     <div className="col">
 
                                                         <div className="mt-2 row fluid">
-                                                            <input type="text" name="fname" placeholder="Name" name="name" value={review.name} onChange={handleChange} />
+                                                            <input type="text" placeholder="Name" name="name" value={review.name} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row" >
-                                                            <input type="text" name="fname" placeholder="Image URL" name="url" value={review.url} onChange={handleChange} />
+                                                            <input type="text" placeholder="Image URL" name="url" value={review.url} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row">

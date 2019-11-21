@@ -19,6 +19,7 @@ const Basket = () => {
             var items = [];
             var tprice = 0;
             basket.forEach(e => {
+                // eslint-disable-next-line
                 let product = data.find(p => p.id == e.id);
                 if(product !== undefined) {
                     items.push({ product: product, qty: e.qty });
