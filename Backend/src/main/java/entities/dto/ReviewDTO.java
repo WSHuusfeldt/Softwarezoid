@@ -5,34 +5,32 @@
  */
 package entities.dto;
 
+import java.util.Date;
+
 /**
  *
  * @author emilt
  */
 public class ReviewDTO {
     
-    private String title;
+    private String name;
+    private String imgUrl;
+    private Date date;
     private int rating;
     private String description;
-    private SoftwareDTO associatedSoftware;
+    private Long softwareId;
     
     public ReviewDTO() {
         
     }
 
-    public ReviewDTO(String title, int rating, String description, SoftwareDTO associatedSoftware) {
-        this.title = title;
+    public ReviewDTO(String name, String imgUrl, Date date, int rating, String description, Long softwareId) {
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.date = date;
         this.rating = rating;
         this.description = description;
-        this.associatedSoftware = associatedSoftware;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        this.softwareId = softwareId;
     }
 
     public int getRating() {
@@ -51,12 +49,36 @@ public class ReviewDTO {
         this.description = description;
     }
 
-    public SoftwareDTO getAssociatedSoftware() {
-        return associatedSoftware;
+    public String getName() {
+        return name;
     }
 
-    public void setAssociatedSoftware(SoftwareDTO associatedSoftware) {
-        this.associatedSoftware = associatedSoftware;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Long getSoftwareId() {
+        return softwareId;
+    }
+
+    public void setSoftwareId(Long softwareId) {
+        this.softwareId = softwareId;
     }
     
     
