@@ -44,13 +44,13 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(errorhandling.GenericExceptionMapper.class);
-        resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.ContactResource.class);
-        resources.add(rest.SoftwareResource.class);
+        resources.add(rest.ReviewResource.class);
+        resources.add(rest.SoftwareResource.class
         resources.add(rest.UserInfoRessource.class);
         resources.add(rest.cors.CorsRequestFilter.class);
-        resources.add(rest.cors.CorsResponseFilter.class);
+        resources.add(rest.cors.CorsResponseFilter.class)
         resources.add(security.JWTAuthenticationFilter.class);
         resources.add(security.LoginEndpoint.class);
         resources.add(security.RolesAllowedFilter.class);

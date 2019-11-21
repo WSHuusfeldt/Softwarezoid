@@ -5,14 +5,16 @@
  */
 package entities;
 
+import static entities.Software_.title;
 import java.io.Serializable;
-import javax.persistence.Column;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -25,7 +27,10 @@ public class Review implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private String name;
+    private String imgUrl;
+    @Temporal(TemporalType.DATE)
+    private Date date;
     private int rating;
     private String description;
     
@@ -35,29 +40,24 @@ public class Review implements Serializable {
     public Review() {
         
     }
-    
-    public Review(Long id, String title, int rating, String description, Software associatedSoftware) {
+
+    public Review(Long id, String name, String imgUrl, Date date, int rating, String description, Software associatedSoftware) {
         this.id = id;
-        this.title = title;
+        this.name = name;
+        this.imgUrl = imgUrl;
+        this.date = date;
         this.rating = rating;
         this.description = description;
         this.associatedSoftware = associatedSoftware;
     }
     
+       
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public int getRating() {
@@ -83,6 +83,31 @@ public class Review implements Serializable {
     public void setAssociatedSoftware(Software associatedSoftware) {
         this.associatedSoftware = associatedSoftware;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
     
     
 }
