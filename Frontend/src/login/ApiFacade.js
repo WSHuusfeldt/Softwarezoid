@@ -55,6 +55,14 @@ function ApiFacade() {
     return fetch('http://localhost:8080/softwarezoid/api/contacts/add', options).then(handleHttpErrors);
   }
 
+  const createReview = (name, imgUrl, date, rating, description, softwareId) => {
+    const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: date, rating: rating, description: description, softwareId: softwareId });
+    return fetch('http://localhost:8080/softwarezoid/api/review/add', options).then(handleHttpErrors);
+  }
+
+
+
+
   const fetchUser = () => {
     const options = makeOptions('GET', true); //True add's the token
     return fetch(URL + '/api/info/user', options).then(handleHttpErrors);
@@ -62,6 +70,11 @@ function ApiFacade() {
 
   const fetchData = () => {
     return fetch(URL + 'software/all', makeOptions('GET')).then(handleHttpErrors);
+  };
+
+  const fetchReviews = (key) => {
+    return fetch('http://localhost:8080/softwarezoid/api/review/get/' + key, makeOptions('GET')).then(handleHttpErrors);
+
   };
 
   const fetchSingleProduct = (key) => {
@@ -76,7 +89,9 @@ function ApiFacade() {
     fetchUser,
     fetchData,
     fetchSingleProduct,
-    addContact
+    fetchReviews,
+    addContact,
+    createReview
   };
 
 

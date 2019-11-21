@@ -6,24 +6,6 @@ import Settings from '../settings';
 var baseurl = "http://localhost:8080/softwarezoid/api/review/add"
 
 export default function ProductDetails() {
-    let match = useRouteMatch();
-    const [data, setData] = useState([]);
-    const [spec, setSpec] = useState([])
-    const [reviews,setReviews] = useState();
-
-    useEffect(() => {
-        ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
-        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
-        .then(response => {
-            return response.json()
-        })
-        .then(data => {
-            console.log(data)
-            //setReviews(setupReviews(data));
-        })
-    }, [match])
-
-
     const initialValue = {
         description: "",
         name: "",
@@ -31,26 +13,38 @@ export default function ProductDetails() {
         rating: 0
     };
 
+    let match = useRouteMatch();
+    const [data, setData] = useState([]);
+    const [spec, setSpec] = useState([])
+    const [reviews, setReviews] = useState([]);
     const [review, setReview] = useState(initialValue);
 
+
+
+
+    useEffect(() => {
+        ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
+        ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
+    }, [])
+
+    console.log(reviews);
+
+
+
+
+
     const handleSubmit = event => {
-        createReview();
+        ApiFacade.createReview(review.name, review.imgUrl, review.date, review.rating, review.description, review.softwareId);
+
     }
+
 
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
     };
 
-    const createReview = () => {
-        fetch(baseurl, makeOptions("POST", {
-            name: review.name,
-            imgUrl: review.url,
-            date: "2019-11-21T18:39:08.608Z",
-            rating: review.rating,
-            description: review.description,
-            softwareId: match.params.id
-        }));
-    }
+
+
 
     const addToCart = () => {
         var basket = JSON.parse(localStorage.getItem("basket"));
@@ -130,15 +124,15 @@ export default function ProductDetails() {
                                         </div>
                                         <div className="tab-pane container fade" id="specifications">
                                             <br />
-                                            <dl className="">
-                                                <dd>{spec.map(item => <dd>{item}</dd>)}</dd>
 
-                                            </dl>
+                                            {spec.map((item, index) => <dl key={index}><dd>{item}</dd></dl>)}
+
+
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
 
-                                            <form onSubmit={handleSubmit} className="well padding-bottom-10">
+                                            <form className="well padding-bottom-10">
                                                 <textarea rows="2" className="form-control" placeholder="Write a review" name="description" value={review.description} onChange={handleChange} />
                                                 <div className="container mt-2 row">
                                                     <div className="col">
@@ -152,8 +146,7 @@ export default function ProductDetails() {
                                                         </div>
 
                                                         <div className="mt-2 row">
-                                                            <select name="rating" defaultValue="" value={review.rating} onChange={handleChange}>
-                                                                <option disabled>Rating</option>
+                                                            <select>
                                                                 <option value="0">0</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
@@ -165,7 +158,7 @@ export default function ProductDetails() {
 
                                                     </div>
                                                     <div className="col">
-                                                        <button type="submit" className="btn btn-sm btn-primary pull-right">
+                                                        <button type="submit" onClick={handleSubmit} className="btn btn-sm btn-primary pull-right">
                                                             Submit Review
                                                         </button>
                                                     </div>
@@ -174,8 +167,18 @@ export default function ProductDetails() {
 
                                             <hr />
                                             <div className="chat-body no-padding profile-message">
+
+                                                {reviews.map((rev, index) => <ul key={index}><li>
+                                                    <img src={rev.url} />
+                                                    <span className="message-text">
+                                                        <a className="username" href="xx">
+                                                            <span className="font-wight-bold">{rev.name}</span>
+                                                            <span className="bagde">Purchase Verified</span>
+                                                            <span className="pull-right">{rev.rating}</span>
+                                                        </a>
+                                                        {rev.description}
+                                                    </span></li></ul>)};
                                                 <ul>
-                                                    {reviews}
                                                     <li className="message mt-2">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" alt="tt" />
                                                         <span className="message-text">
@@ -266,3 +269,5 @@ function setupReviews(data) {
     )
 }
 
+                                                           // <select name="rating" value={review.rating} onChange={handleChange}>
+                                                              //  <option default disabled>Rating</option>
