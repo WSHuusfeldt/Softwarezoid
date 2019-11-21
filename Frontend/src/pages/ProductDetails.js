@@ -26,7 +26,6 @@ export default function ProductDetails() {
 
     const handleSubmit = event => {
         createReview();
-        window.alert(JSON.stringify(review));
     }
 
     const handleChange = event => {
