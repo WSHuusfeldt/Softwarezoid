@@ -24,10 +24,10 @@ export default function FAQ() {
 
                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
                   <div class="card-body">
-                    <b>Answer:</b> Softwarezoid is a platform, which sells software at a fair price to buyers from all
-                    over the world. We cut all the hassle of searching through different websites and sellers to get the
-                    best price - we did it for you! Through this innovative platform you'll never have to use any other
-                    site to get exactly what you need.
+                    Softwarezoid is a platform, which sells software at a fair price to buyers from all over the world.
+                    We cut all the hassle of searching through different websites and sellers to get the best price - we
+                    did it for you! Through this innovative platform you'll never have to use any other site to get
+                    exactly what you need.
                   </div>
                 </div>
               </div>
@@ -148,6 +148,26 @@ export default function FAQ() {
                   </h5>
                 </div>
                 <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#faqExample">
+                  <div class="card-body">
+                    We accept both Paypal and credit card. As of this moment we don't accept any cryptocurrency.
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header p-2" id="headingEight">
+                  <h5 class="mb-0">
+                    <button
+                      class="btn btn-link collapsed"
+                      type="button"
+                      data-toggle="collapse"
+                      data-target="#collapseEight"
+                      aria-expanded="false"
+                      aria-controls="collapseEight">
+                      Q. What payment methods are accepted?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#faqExample">
                   <div class="card-body">
                     We accept both Paypal and credit card. As of this moment we don't accept any cryptocurrency.
                   </div>
