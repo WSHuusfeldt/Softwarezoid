@@ -75,7 +75,7 @@ export default function ProductDetails() {
                                 </p>
                                 <div className="row">
                                     <div className="col-md-6 price">
-                                        <h2 className="font-weight-bold">{data.price} $</h2>
+                                        <h2 className="font-weight-bold">{(data.price / 100)} ,-</h2>
                                     </div>
                                     <div className="col-md-6 text-right">
                                         <button className="btn btn-zoid">
@@ -123,11 +123,11 @@ export default function ProductDetails() {
                                                     <div className="col">
 
                                                         <div className="mt-2 row fluid">
-                                                            <input type="text" name="fname" placeholder="Name" name="name" value={review.name} onChange={handleChange}/>
+                                                            <input type="text" name="fname" placeholder="Name" name="name" value={review.name} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row" >
-                                                            <input type="text" name="fname" placeholder="Image URL" name="url" value={review.url} onChange={handleChange}/>
+                                                            <input type="text" name="fname" placeholder="Image URL" name="url" value={review.url} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row">
@@ -205,14 +205,14 @@ export default function ProductDetails() {
 }
 
 function makeOptions(method, body) {
-    var opts =  {
+    var opts = {
         method: method,
         headers: {
-        'Accept': 'application/json',
-        "Content-type": "application/json"
+            'Accept': 'application/json',
+            "Content-type": "application/json"
         }
     }
-    if(body){
+    if (body) {
         opts.body = JSON.stringify(body);
     }
     return opts;
