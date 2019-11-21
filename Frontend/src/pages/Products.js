@@ -19,7 +19,6 @@ export default function Products() {
               </figure>
               <div className="card-body">
                 <h5 className="card-title">{software.title}</h5>
-                <p className="card-text">{software.description}</p>
                 <a href="product-details.html" className="btn-zoid">Show Details</a>
                 <span className="price"><b>{software.price/100},-</b></span>
               </div>

@@ -78,8 +78,6 @@ public class SoftwareResource {
         softwares.add(new Software("WinRar", "WinRAR is a trialware file archiver utility for Windows, developed by Eugene Roshal of win.rar GmbH. It can create and view archives in RAR or ZIP file formats, and unpack numerous archive file formats. To enable the user to test the integrity of archives, WinRAR embeds CRC32 or BLAKE2 checksums for each file in each archive. WinRAR supports creating encrypted, multi-part and self-extracting archives. WinRAR is a Windows-only program. ", 0, "https://cdn.worldvectorlogo.com/logos/winrar-1.svg", 
                 (Arrays.asList("Version: 14.0.4", "Compatability: Windows"))));
         //softwares.add(new Software("Not real program", "Test program for very very very very very very very very very very very very very very very very very very very very very very very very long description", 0, "https://cdn3.vectorstock.com/i/1000x1000/19/77/isolated-abstract-blue-color-thumb-up-contour-logo-vector-10861977.jpg"));
-        
-        
         em.getTransaction().begin();
         for(Software s : softwares)
             em.persist(s);
@@ -92,7 +90,7 @@ public class SoftwareResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary="Get all softwares", 
-            tags={"software"},
+            tags={"Software"},
             responses={
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
@@ -106,7 +104,7 @@ public class SoftwareResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "Get software by id",
-            tags = {"software"},
+            tags = {"Software"},
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",

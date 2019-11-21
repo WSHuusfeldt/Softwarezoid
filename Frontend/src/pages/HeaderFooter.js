@@ -28,7 +28,6 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" exact to={URLSettings.getURL("Home")}>Home</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Data")}>Data</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Products")}>Products</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Contact")}>Contact</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("FAQ")}>FAQ</NavLink></li>
