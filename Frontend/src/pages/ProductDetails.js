@@ -92,17 +92,41 @@ export default function ProductDetails() {
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
                                             <form method="post" className="well padding-bottom-10" onSubmit="return false;">
-                                                <textarea rows="2" className="form-control" placeholder="Write a review"></textarea>
-                                                <div className="mt-2">
-                                                    <button type="submit" className="btn btn-sm btn-primary pull-right">
-                                                        Submit Review
+
+                                                <textarea rows="2" className="form-control" placeholder="Write a review" id="description" />
+
+                                                <div className="container mt-2 row">
+                                                    <div className="col">
+
+                                                        <div className="mt-2 row fluid">
+                                                            <input type="text" name="fname" placeholder="Name" id="name" />
+                                                        </div>
+
+                                                        <div className="mt-2 row" >
+                                                            <input type="text" name="fname" placeholder="Image URL" id="imageUrl" />
+                                                        </div>
+
+                                                        <div className="mt-2 row">
+                                                            <select id="rating">
+                                                                <option default selected disabled>Rating</option>
+                                                                <option value="0">0</option>
+                                                                <option value="1">1</option>
+                                                                <option value="2">2</option>
+                                                                <option value="3">3</option>
+                                                                <option value="4">4</option>
+                                                                <option value="5">5</option>
+                                                            </select>
+                                                        </div>
+
+                                                    </div>
+                                                    <div className="col">
+                                                        <button type="submit" className="btn btn-sm btn-primary pull-right">
+                                                            Submit Review
                                                     </button>
-                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Location"><i className="fa fa-location-arrow"></i></a>
-                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Voice"><i className="fa fa-microphone"></i></a>
-                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add Photo"><i className="fa fa-camera"></i></a>
-                                                    <a href="xx" className="btn btn-link profile-link-btn" rel="tooltip" data-placement="bottom" title="" data-original-title="Add File"><i className="fa fa-file"></i></a>
+                                                    </div>
                                                 </div>
                                             </form>
+                                            <hr/>
 
                                             <div className="chat-body no-padding profile-message">
                                                 <ul>
