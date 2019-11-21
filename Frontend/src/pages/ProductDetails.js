@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch as match } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import ApiFacade from '../login/ApiFacade';
 
 
 
-export default function productDetails(match) {
-    console.log(match);
+export default function ProductDetails() {
+    let match = useRouteMatch();
+    console.log(match.params.id);
+
     return (
 
         < main className="mt-5 mb-5 pt-5" >
@@ -29,14 +31,14 @@ export default function productDetails(match) {
                             <div className="col-md-6 col-sm-12 col-xs-12">
 
                                 <h2 className="name pt-3">
-                                    {ApiFacade.fetchProducts(1).title}</h2>
+                                    {ApiFacade.fetchSingleProduct(match.params.id)}</h2>
                                 <hr />
                                 <p className="desc">
-                                    {ApiFacade.fetchProducts(1).description}
+                                    {ApiFacade.fetchProducts(match.params.id).description}
                                 </p>
                                 <div className="row">
                                     <div className="col-md-6 price">
-                                        <h2 className="font-weight-bold">{ApiFacade.fetchProducts(1).price} $</h2>
+                                        <h2 className="font-weight-bold">{ApiFacade.fetchProducts(match.params.id).price} $</h2>
                                     </div>
                                     <div className="col-md-6 text-right">
                                         <button className="btn btn-zoid">

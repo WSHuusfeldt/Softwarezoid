@@ -58,6 +58,10 @@ function ApiFacade() {
     return fetch('http://localhost:8080/softwarezoid/api/software/all', makeOptions('GET')).then(handleHttpErrors);
   };
 
+  const fetchSingleProduct = (key) => {
+    return fetch('http://localhost:8080/softwarezoid/api/software/' + key, makeOptions('GET')).then(handleHttpErrors);
+  };
+
   function fetchProducts(key) {
     const products = [
       {
@@ -94,7 +98,8 @@ function ApiFacade() {
     logout,
     fetchUser,
     fetchData,
-    fetchProducts
+    fetchProducts,
+    fetchSingleProduct
   };
 
 
