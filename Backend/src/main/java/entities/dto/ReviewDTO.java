@@ -19,7 +19,7 @@ public class ReviewDTO {
     private String name;
     private String imgUrl;
     private Date date;
-    private int rating;
+    private String rating;
     @Schema(required=true, example="I have used this software for developing my own software")
     private String description;
     private Long softwareId;
@@ -28,14 +28,7 @@ public class ReviewDTO {
         
     }
 
-    public ReviewDTO(String name, String imgUrl, Date date, int rating, String description, Long softwareId) {
-        this.name = name;
-        this.imgUrl = imgUrl;
-        this.date = date;
-        this.rating = rating;
-        this.description = description;
-        this.softwareId = softwareId;
-    }
+   
     
     public ReviewDTO(Review review) {
         this.name = review.getName();
@@ -45,13 +38,15 @@ public class ReviewDTO {
         this.softwareId = review.getId();
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
+
+    
 
     public String getDescription() {
         return description;

@@ -34,7 +34,7 @@ public class ReviewFacade {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         Software software = em.find(Software.class, review.getSoftwareId());
-        Review rev = new Review(0L, review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
+        Review rev = new Review(review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
         em.persist(rev);
         software.addReview(rev);
         em.merge(software);
