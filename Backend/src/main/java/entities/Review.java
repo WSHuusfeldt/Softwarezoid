@@ -23,15 +23,13 @@ public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="review_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private int rating;
     private String description;
     
     @ManyToOne
-    @JoinColumn(name="software_id")
     private Software associatedSoftware;
 
     public Review() {
