@@ -12,6 +12,7 @@ import java.util.Objects;
  */
 @Schema(name="Software")
 public class SoftwareDTO {
+    private long id;
     @Schema(required=true, example="Netbeans")
     private String title;
     @Schema(required=true, example="This is a program used to develop software")
@@ -27,6 +28,7 @@ public class SoftwareDTO {
     }
     
     public SoftwareDTO(Software software) {
+        this.id = software.getId();
         this.title = software.getTitle();
         this.description = software.getDescription();
         this.price = software.getPrice();
@@ -78,8 +80,13 @@ public class SoftwareDTO {
         this.specifications = specifications;
     }
 
-  
+    public long getId() {
+        return id;
+    }
 
+    public void setId(long id) {
+        this.id = id;
+    }
 
     
     public List<ReviewDTO> getReviews() {

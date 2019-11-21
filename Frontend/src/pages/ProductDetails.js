@@ -11,21 +11,17 @@ export default function ProductDetails() {
     const [spec, setSpec] = useState([])
     const [reviews,setReviews] = useState();
 
-    const fetchReviews = () => {
-        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
-            .then(response => {
-                return response.json()
-            })
-            .then(data => {
-                console.log(data)
-                setReviews(setupReviews(data));
-            })
-    }
-
-
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
-    }, [])
+        fetch('http://localhost:8080/softwarezoid/api/review/get/' + match.params.id)
+        .then(response => {
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+            setReviews(setupReviews(data));
+        })
+    }, [match])
 
 
     const initialValue = {
@@ -45,8 +41,7 @@ export default function ProductDetails() {
         setReview({ ...review, [event.target.name]: event.target.value });
     };
 
-
-    function createReview() {
+    const createReview = () => {
         fetch(baseurl, makeOptions("POST", {
             name: review.name,
             imgUrl: review.url,
@@ -57,9 +52,25 @@ export default function ProductDetails() {
         }));
     }
 
+    const addToCart = () => {
+        var basket = JSON.parse(localStorage.getItem("basket"));
+        if(basket !== null) {
+            // eslint-disable-next-line
+            let found = basket.find(i => i.id == match.params.id);
+            if(found !== undefined) {
+                found.qty++;
+            } else {
+                basket.push({id: match.params.id, qty: 1});
+            }
+        } else {
+            basket = [{id: match.params.id, qty: 1}];
+        }
+        
+        localStorage.setItem("basket", JSON.stringify(basket));
+    }
 
     return (
-        < main className="mt-5 mb-5 pt-5" >
+        <main className="mt-5 mb-5 pt-5">
             <div className="container">
                 <div className="col-sm-12 col-md-12 col-lg-12">
                     <div className="product-content product-wrap clearfix product-deatil">
@@ -87,15 +98,13 @@ export default function ProductDetails() {
                                 </p>
                                 <div className="row">
                                     <div className="col-md-6 price">
-                                        <h2 className="font-weight-bold">{(data.price / 100)} ,-</h2>
+                                        <h2 className="font-weight-bold">{(data.price / 100)},-</h2>
                                     </div>
                                     <div className="col-md-6 text-right">
-                                        <button className="btn btn-zoid">
+                                        <button className="btn btn-zoid" onClick={addToCart}>
                                             Add to Cart
-                                </button>
-                                        <button className="btn btn-outline-danger mt-3">
-                                            <Link to={Settings.getURL("Products")}> Back to products </Link>
                                         </button>
+                                        <Link className="btn btn-outline-danger mt-3" to={Settings.getURL("Products")}>Back to products</Link>
                                     </div>
                                 </div>
 
@@ -135,16 +144,16 @@ export default function ProductDetails() {
                                                     <div className="col">
 
                                                         <div className="mt-2 row fluid">
-                                                            <input type="text" name="fname" placeholder="Name" name="name" value={review.name} onChange={handleChange} />
+                                                            <input type="text" placeholder="Name" name="name" value={review.name} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row" >
-                                                            <input type="text" name="fname" placeholder="Image URL" name="url" value={review.url} onChange={handleChange} />
+                                                            <input type="text" placeholder="Image URL" name="url" value={review.url} onChange={handleChange} />
                                                         </div>
 
                                                         <div className="mt-2 row">
-                                                            <select name="rating" value={review.rating} onChange={handleChange}>
-                                                                <option default selected disabled>Rating</option>
+                                                            <select name="rating" defaultValue="" value={review.rating} onChange={handleChange}>
+                                                                <option disabled>Rating</option>
                                                                 <option value="0">0</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>

@@ -1,38 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import URLSettings from '../settings';
-
-var products2 = [
-    {
-        id: 1,
-        thumbnail: 'http://placehold.it/120x80',
-        title: 'Product Name 1',
-        description: 'Product description',
-        price: 25
-    }, {
-        id: 2,
-        thumbnail: 'http://placehold.it/120x80',
-        title: 'Product Name 2',
-        description: 'Product description',
-        price: 35
-    }, {
-        id: 3,
-        thumbnail: 'http://placehold.it/120x80',
-        title: 'Product Name 3',
-        description: 'Product description',
-        price: 10
-    }, {
-        id: 4,
-        thumbnail: 'http://placehold.it/120x80',
-        title: 'Product Name 4',
-        description: 'Product description',
-        price: 5,
-    }];
+import ApiFacade from '../login/ApiFacade';
 
 const Basket = () => {
     const [update, setUpdate] = useState(false);
+    const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
+
+    useEffect(() => {
+        ApiFacade.fetchData().then(res => setData(res));
+    }, [])
 
     useEffect(() => {
         if (localStorage.getItem("basket") != null) {
@@ -40,16 +19,19 @@ const Basket = () => {
             var items = [];
             var tprice = 0;
             basket.forEach(e => {
-                let product = products2.find(p => p.id === e.id);
-                items.push({ product: product, qty: e.qty });
-                tprice = tprice + (product.price * e.qty);
+                // eslint-disable-next-line
+                let product = data.find(p => p.id == e.id);
+                if(product !== undefined) {
+                    items.push({ product: product, qty: e.qty });
+                    tprice = tprice + (product.price * e.qty);
+                }
             });
             setTotalPrice(tprice);
             setProducts(items);
         }
 
         //localStorage.setItem("basket", JSON.stringify([{id: 1, qty: 4}, {id: 3, qty: 2}, {id: 4, qty: 7}]));
-    }, [update])
+    }, [data, update])
 
     const onQuantityChange = (evt) => {
         let id = evt.target.getAttribute("product");
@@ -149,7 +131,7 @@ const Basket = () => {
                                         </button>
                                     </div>
                                     <div className="col">
-                                        <h6><span className="text-muted">x</span><strong> {product.product.price.toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
+                                        <h6><span className="text-muted">x</span><strong> {(product.product.price/100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +154,7 @@ const Basket = () => {
                     <div className="pull-right" >
                         <Link className="btn btn-zoid pull-right" to={URLSettings.getURL("Checkout")}>Checkout</Link>
                         <div className="pull-right p-2">
-                            Total price: <b>{totalPrice.toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
+                            Total price: <b>{(totalPrice/100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
                         </div>
                     </div>
                 </div>
