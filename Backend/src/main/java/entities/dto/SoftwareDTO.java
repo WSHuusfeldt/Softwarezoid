@@ -2,6 +2,7 @@ package entities.dto;
 
 import entities.Software;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -31,7 +32,10 @@ public class SoftwareDTO {
         this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
         this.specifications = software.getSpecifications();
-        
+        this.reviews = new ArrayList();
+        for (int i = 0; i < software.getReviews().size(); ++i) {
+            this.reviews.add(new ReviewDTO(software.getReviews().get(i)));
+        }
     }
 
     public String getTitle() {

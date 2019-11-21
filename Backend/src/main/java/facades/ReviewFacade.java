@@ -43,15 +43,11 @@ public class ReviewFacade {
     }
     
     public List<ReviewDTO> getReviews(long id) throws NotFoundException {
-        EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Software software = em.find(Software.class, id);
-        em.close();
-        SoftwareDTO soft = new SoftwareDTO(software);
-        if (soft.getReviews().isEmpty()) {
-            return null;
-        }
-        return soft.getReviews();
+        Software software = getEntityManager().find(Software.class, id);
+        System.out.println(software.getDescription());
+        SoftwareDTO softwareDTO = new SoftwareDTO(software);
+        System.out.println(softwareDTO.getReviews().get(0).getDescription());
+        return softwareDTO.getReviews();
     }
 
 

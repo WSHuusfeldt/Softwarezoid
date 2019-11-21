@@ -5,6 +5,7 @@
  */
 package entities.dto;
 
+import entities.Review;
 import java.util.Date;
 import io.swagger.v3.oas.annotations.media.Schema;
 
@@ -34,6 +35,14 @@ public class ReviewDTO {
         this.rating = rating;
         this.description = description;
         this.softwareId = softwareId;
+    }
+    
+    public ReviewDTO(Review review) {
+        this.name = review.getName();
+        this.imgUrl = review.getImgUrl();
+        this.date = review.getDate();
+        this.rating = review.getRating();
+        this.softwareId = review.getId();
     }
 
     public int getRating() {
