@@ -11,7 +11,7 @@ export default function ProductDetails() {
     const [spec, setSpec] = useState([])
 
     useEffect(() => {
-        ApiFacade.fetchSingleProduct(match.params.id).then(res => {setData(res); setSpec(res.specifications)});
+        ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
     }, [])
     return (
 
@@ -78,19 +78,8 @@ export default function ProductDetails() {
                                         <div className="tab-pane container fade" id="specifications">
                                             <br />
                                             <dl className="">
-                                                <dt>Titel</dt>
                                                 <dd>{spec.map(item => <dd>{item}</dd>)}</dd>
-                                                <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-                                                <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-                                                <dd>Eget lacinia odio sem nec elit.</dd>
-                                                <br />
 
-                                                <dt>Test lists</dt>
-                                                <dd>A description list is perfect for defining terms.</dd>
-                                                <br />
-
-                                                <dt>Altra porta</dt>
-                                                <dd>Vestibulum id ligula porta felis euismod semper</dd>
                                             </dl>
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">

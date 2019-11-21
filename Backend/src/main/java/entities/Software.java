@@ -28,6 +28,7 @@ public class Software implements Serializable {
     @Column(name = "software_id")
     private Long id;
     private String title;
+    @Column(length=3000)
     private String description;
     private int price;
     private String thumbnail;
