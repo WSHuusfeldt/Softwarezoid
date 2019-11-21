@@ -1,18 +1,24 @@
 package entities.dto;
 
 import entities.Contact;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
 
 /**
  *
  * @author asgerhs
  */
+@Schema(name="Contact")
 public class ContactDTO {
-
+    @Schema(required=true, example="Viktor Alfredsen")
     private String fullName;
+    @Schema(required=true, example="viktorErCool420@gmail.com")
     private String email;
+    @Schema(required=true, example="22334455")
     private int phone;
+    @Schema(required=true, example="Not recived my product")
     private String subject;
+    @Schema(required=true, example="I need help. I have not recived my product.")
     private String message;
 
     public ContactDTO() {

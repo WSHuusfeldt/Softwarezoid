@@ -1,6 +1,6 @@
 package entities.dto;
 
-import entities.Role;
+import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +8,11 @@ import java.util.List;
  *
  * @author andreas
  */
+@Schema(name="User")
 public class UserDTO {
+    @Schema(required=true, example="Viktor")
     private String userName;
+    @Schema(required=true)
     private List<String> roleList = new ArrayList();
     
     public UserDTO(String userName, List<String> roleList) {

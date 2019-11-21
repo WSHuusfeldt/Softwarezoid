@@ -9,12 +9,15 @@ import java.util.Objects;
  *
  * @author Martin Frederiksen
  */
-@Schema(name ="Software")
+@Schema(name="Software")
 public class SoftwareDTO {
     @Schema(required=true, example="Netbeans")
     private String title;
+    @Schema(required=true, example="This is a program used to develop software")
     private String description;
+    @Schema(required=true, example="0")
     private int price;
+    @Schema(required=true, example="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
     private List<String> specifications;
     private List<ReviewDTO> reviews;
