@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, Link } from 'react-router-dom';
 import ApiFacade from '../login/ApiFacade';
+import Settings from '../settings';
 
 
 
 export default function ProductDetails() {
     let match = useRouteMatch();
-    console.log(match.params.id);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -49,6 +49,9 @@ export default function ProductDetails() {
                                         <button className="btn btn-zoid">
                                             Add to Cart
                                 </button>
+                                        <button className="btn btn-outline-danger mt-3">
+                                            <Link to={Settings.getURL("Products")}> Back to products </Link>
+                                        </button>
                                     </div>
                                 </div>
 
@@ -69,13 +72,14 @@ export default function ProductDetails() {
                                     <div id="myTabContent" className="tab-content">
                                         <div className="tab-pane container active in" id="more-information">
                                             <br />
-                                            <strong>Description Title</strong>
-                                            <p>Integer egestas, orci id condimentum eleifend, nibh nisi pulvinar eros, vitae ornare massa neque ut orci. Nam aliquet lectus sed odio eleifend, at iaculis dolor egestas. Nunc elementum pellentesque augue sodales porta. Etiam aliquet rutrum turpis, feugiat sodales ipsum consectetur nec. </p>
+                                            <strong>{data.title}</strong>
+                                            <p>{data.description} </p>
                                         </div>
                                         <div className="tab-pane container fade" id="specifications">
                                             <br />
                                             <dl className="">
-                                                <dt>Gravina</dt>
+                                                <dt>Titel</dt>
+                                                <dd>{data.specifications}</dd>
                                                 <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
                                                 <dd>Donec id elit non mi porta gravida at eget metus.</dd>
                                                 <dd>Eget lacinia odio sem nec elit.</dd>
@@ -91,7 +95,7 @@ export default function ProductDetails() {
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
-                                            <form method="post" className="well padding-bottom-10" onSubmit="return false;">
+                                            <form method="post" className="well padding-bottom-10">
                                                 <textarea rows="2" className="form-control" placeholder="Write a review"></textarea>
                                                 <div className="mt-2">
                                                     <button type="submit" className="btn btn-sm btn-primary pull-right">

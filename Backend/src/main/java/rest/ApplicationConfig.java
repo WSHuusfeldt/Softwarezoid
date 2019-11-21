@@ -44,6 +44,7 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(errorhandling.GenericExceptionMapper.class);
+        resources.add(org.glassfish.jersey.jsonb.internal.JsonBindingProvider.class);
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.ContactResource.class);
         resources.add(rest.RenameMeResource.class);

@@ -19,6 +19,7 @@ public class SoftwareDTO {
     private int price;
     @Schema(required=true, example="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
+    private List<String> specifications;
     private List<ReviewDTO> reviews;
 
     public SoftwareDTO() {
@@ -29,6 +30,8 @@ public class SoftwareDTO {
         this.description = software.getDescription();
         this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
+        this.specifications = software.getSpecifications();
+        
     }
 
     public String getTitle() {
@@ -63,6 +66,18 @@ public class SoftwareDTO {
         this.thumbnail = thumbnail;
     }
 
+    public List<String> getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(List<String> specifications) {
+        this.specifications = specifications;
+    }
+
+  
+
+
+    
     public List<ReviewDTO> getReviews() {
         return reviews;
     }
@@ -74,6 +89,7 @@ public class SoftwareDTO {
     public void addReview(ReviewDTO review) {
         this.reviews.add(review);
     }
+    
 
     @Override
     public int hashCode() {
