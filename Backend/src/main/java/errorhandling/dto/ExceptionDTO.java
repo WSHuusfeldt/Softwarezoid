@@ -1,5 +1,8 @@
-package errorhandling;
+package errorhandling.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(name = "ApiResponse")
 public class ExceptionDTO{
 
   public ExceptionDTO(int code, String description){

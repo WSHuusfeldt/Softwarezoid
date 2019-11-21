@@ -5,15 +5,21 @@
  */
 package entities.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 /**
  *
  * @author emilt
  */
+@Schema(name="Review")
 public class ReviewDTO {
-    
+    @Schema(required=true, example="Very good")
     private String title;
+    @Schema(required=true, type="integer", minimum="0", maximum="5")
     private int rating;
+    @Schema(required=true, example="I have used this software for developing my own software")
     private String description;
+    @Schema(required=true)
     private SoftwareDTO associatedSoftware;
     
     public ReviewDTO() {

@@ -48,7 +48,6 @@ public class ApplicationConfig extends Application {
         resources.add(rest.ContactResource.class);
         resources.add(rest.RenameMeResource.class);
         resources.add(rest.SoftwareResource.class);
-        resources.add(rest.SwapiResource.class);
         resources.add(rest.UserInfoRessource.class);
         resources.add(rest.cors.CorsRequestFilter.class);
         resources.add(rest.cors.CorsResponseFilter.class);

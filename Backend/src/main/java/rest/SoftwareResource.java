@@ -9,7 +9,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Software;
 import entities.dto.SoftwareDTO;
+import errorhandling.dto.ExceptionDTO;
 import facades.SoftwareFacade;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -70,6 +75,13 @@ public class SoftwareResource {
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary="Get all softwares", 
+            tags={"software"},
+            responses={
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = SoftwareDTO.class)),
+                        responseCode = "200", description = "Succesful operation")})
     public List<SoftwareDTO> getJson() {
         return FACADE.getSoftwareAll();
     }
@@ -77,6 +89,19 @@ public class SoftwareResource {
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get software by id",
+            tags = {"software"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = SoftwareDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        responseCode = "400", description = "Invalid Id supplied"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        responseCode = "404", description = "Software not found")})
     public SoftwareDTO getById(@PathParam("id") long id) {
         if (id <= 0) {
             throw new WebApplicationException("Invalid Id supplied", 400);
