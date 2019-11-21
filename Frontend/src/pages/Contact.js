@@ -1,6 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
+import ApiFacade from '../login/ApiFacade';
 
 export default function Contact() {
+    const initialValue = {
+        fullName: "",
+        email: "",
+        phone: "",
+        subject: "",
+        message: ""
+    };
+
+    const [addContact, setAddContact] = useState(initialValue);
+    console.log({ addContact });
+    const handleChange = event => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        setAddContact({ ...addContact, [name]: value });
+    };
+
+    const handleSubmit = event => {
+        event.preventDefault();
+        ApiFacade.addContact(addContact.fullName, addContact.email, addContact.phone, addContact.subject, addContact.message);
+    };
+
     return (
         <main className="mt-5  pt-5">
             <div className="whoweare">
@@ -70,34 +93,64 @@ export default function Contact() {
                                 <div className="contactForm contactPage">
                                     <form className="row">
                                         <label for="inp" className="inp col-md-6">
-                                            <input type="text" id="inp" placeholder="&nbsp;" />
+                                            <input
+                                                type="text"
+                                                name="fullName"
+                                                value={addContact.fullName}
+                                                onChange={handleChange}
+                                                placeholder="&nbsp;" />
                                             <span className="label">Full Name</span>
                                             <span className="border"></span>
                                         </label>
                                         <label for="inp" className="inp col-md-6">
-                                            <input type="email" id="inp" placeholder="&nbsp;" />
+                                            <input
+                                                type="text"
+                                                name="email"
+                                                value={addContact.email}
+                                                onChange={handleChange}
+                                                id="inp"
+                                                placeholder="&nbsp;" />
                                             <span className="label">Email</span>
                                             <span className="border"></span>
                                         </label>
                                         <label for="inp" className="inp col-md-6">
-                                            <input type="tel" id="inp" placeholder="&nbsp;" />
+                                            <input
+                                                type="text"
+                                                name="phone"
+                                                id="inp"
+                                                value={addContact.phone}
+                                                onChange={handleChange}
+                                                placeholder="&nbsp;" />
                                             <span className="label">Phone</span>
                                             <span className="border"></span>
                                         </label>
                                         <label for="inp" className="inp col-md-6">
-                                            <input type="text" id="inp" placeholder="&nbsp;" />
+                                            <input
+                                                type="text"
+                                                name="subject"
+                                                id="inp"
+                                                value={addContact.subject}
+                                                onChange={handleChange}
+                                                placeholder="&nbsp;" />
                                             <span className="label">Subject</span>
                                             <span className="border"></span>
                                         </label>
 
                                         <label for="inp" className="inp col-md-12">
-                                            <textarea type="text" id="inp" placeholder="&nbsp;" rows="4"></textarea>
+                                            <textarea
+                                                type="text"
+                                                name="message"
+                                                id="inp"
+                                                value={addContact.message}
+                                                onChange={handleChange}
+                                                placeholder="&nbsp;"
+                                                rows="4"></textarea>
                                             <span className="label">Message</span>
                                             <span className="border"></span>
                                         </label>
                                         <div className="form-group">
                                             <div className="col-md-12">
-                                                <input type="submit" name="submit" value="Send" className="btn-zoid btn " />
+                                                <input type="submit" name="submit" value="Send" onClick={handleSubmit} className="btn-zoid btn " />
                                             </div>
                                         </div>
                                     </form>
