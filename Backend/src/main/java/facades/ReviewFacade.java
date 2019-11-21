@@ -3,8 +3,10 @@ package facades;
 import entities.Review;
 import entities.Software;
 import entities.dto.ReviewDTO;
+import entities.dto.SoftwareDTO;
 import errorhandling.NotFoundException;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
@@ -29,7 +31,7 @@ public class ReviewFacade {
     }
 
     public void addReview(ReviewDTO review) throws NotFoundException {        
-        EntityManager em = emf.createEntityManager();
+        EntityManager em = getEntityManager();
         em.getTransaction().begin();
         Software software = em.find(Software.class, review.getSoftwareId());
         Review rev = new Review(0L, review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
@@ -39,13 +41,18 @@ public class ReviewFacade {
         em.getTransaction().commit();
         em.close();
     }
-
-    private Software getSoftwareById(long id) throws NotFoundException {
-        Software software = getEntityManager().find(Software.class, id);
-        if (software == null) {
-            throw new NotFoundException("Software not found");
+    
+    public List<ReviewDTO> getReviews(long id) throws NotFoundException {
+        EntityManager em = getEntityManager();
+        em.getTransaction().begin();
+        Software software = em.find(Software.class, id);
+        em.close();
+        SoftwareDTO soft = new SoftwareDTO(software);
+        if (soft.getReviews().isEmpty()) {
+            return null;
         }
-        return software;
+        return soft.getReviews();
     }
+
 
 }
