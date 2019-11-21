@@ -4,6 +4,7 @@ import entities.Software;
 import entities.dto.SoftwareDTO;
 import errorhandling.NotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 import utils.EMF_Creator;
 
 /**
@@ -57,8 +59,10 @@ public class SoftwareFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
-            s1 = new Software("Word", "Software for words", 3000, "Thumbnail to word logo");
-            s2 = new Software("Excel", "Software for numbers", 5000, "Thumbnail to excel logo");
+            s1 = new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")));
+            s2 = new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")));
             em.persist(s1);
             em.getTransaction().commit();
             em.getTransaction().begin();

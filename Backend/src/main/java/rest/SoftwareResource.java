@@ -11,6 +11,7 @@ import entities.Software;
 import entities.dto.SoftwareDTO;
 import facades.SoftwareFacade;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,6 +28,7 @@ import utils.EMF_Creator;
  *
  * @author Martin Frederiksen
  */
+
 @Path("software")
 public class SoftwareResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
@@ -43,16 +45,19 @@ public class SoftwareResource {
     public String welcome() {
         return "{\"msg\":\"Welcome to softwarezoid\"}";
     }
-    
+    //"Version: 14.0.4", "Compatability: Windows, MacOS, Linux"
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Software> softwares = new ArrayList();
-        softwares.add(new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png"));
-        softwares.add(new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png"));
-        softwares.add(new Software("Notepad++", "Programmers real real dream", 1000, "https://www.slashcoding.com/wp-content/uploads/2013/08/Notepad_plus_plus.png"));
+        softwares.add(new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux"))));
+        softwares.add(new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux"))));
+        softwares.add(new Software("Notepad++", "Programmers real real dream", 1000, "https://www.slashcoding.com/wp-content/uploads/2013/08/Notepad_plus_plus.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux"))));
         em.getTransaction().begin();
         for(Software s : softwares)
             em.persist(s);

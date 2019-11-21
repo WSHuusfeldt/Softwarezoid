@@ -11,6 +11,7 @@ import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.util.Arrays;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.core.UriBuilder;
@@ -67,8 +68,10 @@ public class SoftwareResourceTest {
     @BeforeEach
     public void setUp() throws MalformedURLException {
         EntityManager em = emf.createEntityManager();
-        s1 = new Software("Word", "Software for words", 3000, "Thumbnail to word logo");
-        s2 = new Software("Excel", "Software for numbers", 5000, "Thumbnail to excel logo");
+        s1 = new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png",
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")));
+        s2 = new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")));
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
