@@ -56,7 +56,7 @@ function ApiFacade() {
   }
 
   const createReview = (name, imgUrl, date, rating, description, softwareId) => {
-    const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: date, rating: rating, description: description, softwareId: softwareId });
+    const options = makeOptions('POST', { name: name, imgUrl: imgUrl, date: date, rating: rating, description: description, softwareId: softwareId });
     return fetch('http://localhost:8080/softwarezoid/api/review/add', options).then(handleHttpErrors);
   }
 

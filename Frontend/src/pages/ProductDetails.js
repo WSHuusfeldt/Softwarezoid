@@ -41,25 +41,27 @@ export default function ProductDetails() {
 
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
+        console.log(event.target.name)
     };
+
 
 
 
 
     const addToCart = () => {
         var basket = JSON.parse(localStorage.getItem("basket"));
-        if(basket !== null) {
+        if (basket !== null) {
             // eslint-disable-next-line
             let found = basket.find(i => i.id == match.params.id);
-            if(found !== undefined) {
+            if (found !== undefined) {
                 found.qty++;
             } else {
-                basket.push({id: match.params.id, qty: 1});
+                basket.push({ id: match.params.id, qty: 1 });
             }
         } else {
-            basket = [{id: match.params.id, qty: 1}];
+            basket = [{ id: match.params.id, qty: 1 }];
         }
-        
+
         localStorage.setItem("basket", JSON.stringify(basket));
     }
 
@@ -146,6 +148,8 @@ export default function ProductDetails() {
                                                         </div>
 
                                                         <div className="mt-2 row">
+                                                            <select name="rating" value={review.rating} onChange={handleChange}>
+                                                                <option default disabled>Rating</option>
                                                                 <option value="0">0</option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
@@ -168,15 +172,17 @@ export default function ProductDetails() {
                                             <div className="chat-body no-padding profile-message">
 
                                                 {reviews.map((rev, index) => <ul key={index}><li>
-                                                    <img src={rev.url} />
+                                                    <img src={rev.imgUrl} className="online" alt="avatar" />
                                                     <span className="message-text">
                                                         <a className="username" href="xx">
                                                             <span className="font-wight-bold">{rev.name}</span>
-                                                            <span className="bagde">Purchase Verified</span>
+                                                            <span className="bagde">  Purchase Verified</span>
                                                             <span className="pull-right">{rev.rating}</span>
                                                         </a>
-                                                        {rev.description}
-                                                    </span></li></ul>)};
+                                                        {console.log(rev.description)}
+                                                    </span>{reviews.description}
+                                                </li>
+                                                </ul>)}
                                                 <ul>
                                                     <li className="message mt-2">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" alt="tt" />
@@ -270,5 +276,4 @@ function setupReviews(data) {
     )
 }
 
-                                                            <select name="rating" value={review.rating} onChange={handleChange}>
-                                                                <option default disabled>Rating</option>
+
