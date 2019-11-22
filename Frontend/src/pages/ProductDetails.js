@@ -267,8 +267,6 @@ function setupReviews(data) {
 
         </li>
     );
-
-
     return (
         <div>
             {data}
