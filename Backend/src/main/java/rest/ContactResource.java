@@ -69,7 +69,25 @@ public class ContactResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary="Add contacts", 
+            tags={"Contact"},
+            responses={
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "400", description = "All fields must be filled out")})
     public ContactDTO addContact(ContactDTO dto){
+        if(dto.getFullName().isEmpty() || dto.getFullName() == null 
+                || dto.getEmail().isEmpty() || dto.getEmail() == null
+                || dto.getPhone().isEmpty() || dto.getPhone() ==null
+                || dto.getSubject().isEmpty() || dto.getSubject() == null
+                || dto.getMessage().isEmpty() || dto.getMessage() == null){
+            throw new WebApplicationException("All Fields must be filled out", 400);
+        }
        Contact contact = new Contact(dto.getFullName(), dto.getEmail(), dto.getPhone(), dto.getSubject(), dto.getMessage());
        ContactDTO contactdto = new ContactDTO(contact);
        FACADE.addContact(contactdto);
