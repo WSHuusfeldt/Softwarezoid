@@ -47,16 +47,12 @@ public class SoftwareResource {
     private static final SoftwareFacade FACADE = SoftwareFacade.getSoftwareFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String welcome() {
-        return "{\"msg\":\"Welcome to softwarezoid\"}";
-    }
-
-    //"Version: 14.0.4", "Compatability: Windows, MacOS, Linux"
+    
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get all softwares",
+            tags = {"Software"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Software> softwares = new ArrayList();
@@ -164,8 +160,22 @@ public class SoftwareResource {
     @Path("all/{categories}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get all categories or a single category by id",
+            tags = {"Category"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = SoftwareDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)),
+                        responseCode = "400", description = "Invalid Id supplied"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)),
+                        responseCode = "404", description = "Software not found")})
     public List<SoftwareDTO> getSoftwareByCategory(@PathParam("categories") String categories) {
-         return FACADE.getSoftwareByCategory(categories);
+        
+        return FACADE.getSoftwareByCategory(categories);
     }
 
 }
