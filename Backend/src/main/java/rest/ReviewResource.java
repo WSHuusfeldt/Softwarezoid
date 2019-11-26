@@ -46,7 +46,7 @@ public class ReviewResource {
         try {
             FACADE.addReview(reviewDTO);
             return "{\"msg\": \"200 ok\"}";
-        } catch (NotFoundException e) {
+        } catch (Exception e) {
             return "{\"msg\": \"404 not found exception\"}";
         }
     }

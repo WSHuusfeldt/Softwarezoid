@@ -30,25 +30,21 @@ public class ReviewFacade {
         return emf.createEntityManager();
     }
 
-    public void addReview(ReviewDTO review) throws NotFoundException {        
+    public void addReview(ReviewDTO review) throws NotFoundException {
         EntityManager em = getEntityManager();
         em.getTransaction().begin();
         Software software = em.find(Software.class, review.getSoftwareId());
         Review rev = new Review(review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
         em.persist(rev);
         software.addReview(rev);
-        em.merge(software);
         em.getTransaction().commit();
         em.close();
     }
-    
-    public List<ReviewDTO> getReviews(long id) throws NotFoundException {
-        Software software = getEntityManager().find(Software.class, id);
-        System.out.println(software.getDescription());
-        SoftwareDTO softwareDTO = new SoftwareDTO(software);
-        System.out.println(softwareDTO.getReviews().get(0).getDescription());
-        return softwareDTO.getReviews();
-    }
 
+    public List<ReviewDTO> getReviews(long id) throws NotFoundException {
+            Software software = getEntityManager().find(Software.class, id);
+            SoftwareDTO softwareDTO = new SoftwareDTO(software);
+            return softwareDTO.getReviews();
+    }
 
 }
