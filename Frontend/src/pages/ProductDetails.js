@@ -3,8 +3,6 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import ApiFacade from '../login/ApiFacade';
 import Settings from '../settings';
 
-var baseurl = "http://localhost:8080/softwarezoid/api/review/add"
-
 export default function ProductDetails() {
     const initialValue = {
         description: "",
@@ -19,22 +17,19 @@ export default function ProductDetails() {
     const [reviews, setReviews] = useState([]);
     const [review, setReview] = useState(initialValue);
 
-
-
-
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
         ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
     }, [])
 
     const handleSubmit = event => {
-        ApiFacade.createReview( review.description, review.name, review.url, review.rating, match.params.id);
+        ApiFacade.createReview(review.description, review.name, review.url, review.rating, match.params.id);
     }
 
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
     };
- 
+
     const addToCart = () => {
         var basket = JSON.parse(localStorage.getItem("basket"));
         if (basket !== null) {
@@ -157,19 +152,26 @@ export default function ProductDetails() {
 
                                             <hr />
                                             <div className="chat-body no-padding profile-message">
-
-                                                {reviews.map((rev, index) => <ul key={index}><li>
-                                                    <img src={rev.imgUrl} className="online" alt="avatar" />
-                                                    <span className="message-text">
-                                                        <a className="username" href="xx">
-                                                            <span className="font-wight-bold">{rev.name}</span>
-                                                            <span className="bagde">  Purchase Verified</span>
-                                                            <span className="pull-right">{rev.rating}</span>
-                                                        </a>
-                                                        {console.log(rev.description)}
-                                                    </span>{reviews.description}
-                                                </li>
-                                                </ul>)}
+                                                <ul>
+                                                    {reviews.map((rev, index) =>
+                                                        <li key={index}>
+                                                            {console.log(rev.description)}
+                                                            {console.log(rev.description)}
+                                                            {console.log(rev.name)}
+                                                            <img src={rev.imgUrl} className="online" alt="avatar" />
+                                                            <span className="message-text">
+                                                                <a className="username" href="xx">
+                                                                    <span className="font-weight-bold">{rev.name}Test name</span>
+                                                                    <span className="badge">Purchase Verified</span>
+                                                                    <span className="pull-right">
+                                                                        <i className="fa fa-star fa-1x text-primary" />
+                                                                    </span>
+                                                                </a>
+                                                                <span>{reviews.description}test description</span>
+                                                            </span>
+                                                        </li>
+                                                    )}
+                                                </ul>
                                                 <ul>
                                                     <li className="message mt-2">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" className="online" alt="tt" />
@@ -185,7 +187,7 @@ export default function ProductDetails() {
                                                                     <i className="fa fa-star fa-1x text-muted"></i>
                                                                 </span>
                                                             </a>
-                                                            Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness
+                                                            <span>Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness</span>
                                                         </span>
 
                                                     </li>
@@ -220,45 +222,5 @@ export default function ProductDetails() {
     )
 }
 
-function makeOptions(method, body) {
-    var opts = {
-        method: method,
-        headers: {
-            'Accept': 'application/json',
-            "Content-type": "application/json"
-        }
-    }
-    if (body) {
-        opts.body = JSON.stringify(body);
-    }
-    return opts;
-}
-
-function setupReviews(data) {
-    data.map(review =>
-        <li className="message mt-2">
-            <img src={review.url} className="online" alt="tt" />
-            <span className="message-text">
-                <a className="username" href="xx">
-                    <span className="font-weight-bold">{data.name}</span>
-                    <span className="pull-right">
-                        <i className="fa fa-star fa-1x text-primary"></i>
-                        <i className="fa fa-star fa-1x text-primary"></i>
-                        <i className="fa fa-star fa-1x text-primary"></i>
-                        <i className="fa fa-star fa-1x text-primary"></i>
-                        <i className="fa fa-star fa-1x text-muted"></i>
-                    </span>
-                </a>
-                {review.description}
-            </span>
-
-        </li>
-    );
-    return (
-        <div>
-            {data}
-        </div>
-    )
-}
 
 
