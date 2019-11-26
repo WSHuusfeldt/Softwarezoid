@@ -155,19 +155,16 @@ export default function ProductDetails() {
                                                 <ul>
                                                     {reviews.map((rev, index) =>
                                                         <li key={index}>
-                                                            {console.log(rev.description)}
-                                                            {console.log(rev.description)}
-                                                            {console.log(rev.name)}
                                                             <img src={rev.imgUrl} className="online" alt="avatar" />
                                                             <span className="message-text">
                                                                 <a className="username" href="xx">
-                                                                    <span className="font-weight-bold">{rev.name}Test name</span>
+                                                                    <span className="font-weight-bold">{rev.name}</span>
                                                                     <span className="badge">Purchase Verified</span>
                                                                     <span className="pull-right">
                                                                         <i className="fa fa-star fa-1x text-primary" />
                                                                     </span>
                                                                 </a>
-                                                                <span>{reviews.description}test description</span>
+                                                                <span>{rev.description}</span>
                                                             </span>
                                                         </li>
                                                     )}
@@ -189,8 +186,8 @@ export default function ProductDetails() {
                                                             </a>
                                                             <span>Can't divide were divide fish forth fish to. Was can't form the, living life grass darkness</span>
                                                         </span>
-
                                                     </li>
+
                                                     <li className="message mt-2">
                                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" className="online" alt="tt" />
                                                         <span className="message-text">

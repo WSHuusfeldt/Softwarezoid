@@ -22,7 +22,7 @@ public class SoftwareDTO {
     @Schema(required=true, example="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
     private List<String> specifications;
-    private List<ReviewDTO> reviews;
+    private List<ReviewDTO> reviews = new ArrayList();
 
     public SoftwareDTO() {
     }
@@ -34,7 +34,7 @@ public class SoftwareDTO {
         this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
         this.specifications = software.getSpecifications();
-        this.reviews = new ArrayList();
+        
         for (int i = 0; i < software.getReviews().size(); ++i) {
             this.reviews.add(new ReviewDTO(software.getReviews().get(i)));
         }

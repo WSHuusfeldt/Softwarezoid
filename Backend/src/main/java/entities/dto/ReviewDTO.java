@@ -36,6 +36,7 @@ public class ReviewDTO {
         this.date = review.getDate();
         this.rating = review.getRating();
         this.softwareId = review.getId();
+        this.description = review.getDescription();
     }
 
     public String getRating() {
