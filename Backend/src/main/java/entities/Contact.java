@@ -84,9 +84,4 @@ public class Contact implements Serializable {
         this.message = message;
     }
 
-    
-    
-    
-
-    
 }

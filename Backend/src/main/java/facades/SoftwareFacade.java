@@ -48,4 +48,8 @@ public class SoftwareFacade {
         }
         return new SoftwareDTO(software);
     }
+    
+    public List<SoftwareDTO> getSoftwareByCategory(String categories) {
+        return getEntityManager().createQuery("SELECT s FROM Software s WHERE s.category IN :categories", SoftwareDTO.class).setParameter("categories", categories).getResultList();
+    }
 }
