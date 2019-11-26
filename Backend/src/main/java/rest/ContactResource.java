@@ -88,10 +88,8 @@ public class ContactResource {
                 || dto.getMessage().isEmpty() || dto.getMessage() == null){
             throw new WebApplicationException("All Fields must be filled out", 400);
         }
-       Contact contact = new Contact(dto.getFullName(), dto.getEmail(), dto.getPhone(), dto.getSubject(), dto.getMessage());
-       ContactDTO contactdto = new ContactDTO(contact);
-       FACADE.addContact(contactdto);
-       return contactdto;
+       FACADE.addContact(dto);
+       return dto;
     }
     
     @Path("all")

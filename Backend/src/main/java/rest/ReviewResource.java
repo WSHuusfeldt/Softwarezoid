@@ -45,7 +45,7 @@ public class ReviewResource {
     public String add(ReviewDTO reviewDTO) {
         try {
             FACADE.addReview(reviewDTO);
-            return "{\"msg\": \"200 ok\"}";
+            return "{\"msg\": \"200 ok\"}"; 
         } catch (NotFoundException e) {
             return "{\"msg\": \"404 not found exception\"}";
         }
