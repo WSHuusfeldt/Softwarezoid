@@ -1,8 +1,10 @@
 package facades;
 
+import entities.Category;
 import entities.Software;
 import entities.dto.SoftwareDTO;
 import errorhandling.NotFoundException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -50,6 +52,11 @@ public class SoftwareFacade {
     }
     
     public List<SoftwareDTO> getSoftwareByCategory(String categories) {
-        return getEntityManager().createQuery("SELECT s FROM Software s WHERE s.category IN :categories", SoftwareDTO.class).setParameter("categories", categories).getResultList();
+        List<Category> categoriesList = new ArrayList();
+        for(String catId : categories.split(",")) {
+            categoriesList.add(getEntityManager().find(Category.class, Long.parseLong(catId)));
+        }
+        
+        return getEntityManager().createQuery("SELECT DISTINCT s FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
     }
 }

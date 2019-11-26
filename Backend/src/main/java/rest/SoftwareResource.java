@@ -106,6 +106,9 @@ public class SoftwareResource {
                         "Avaible in: 46 languages")), cat));
         //softwares.add(new Software("Not real program", "Test program for very very very very very very very very very very very very very very very very very very very very very very very very long description", 0, "https://cdn3.vectorstock.com/i/1000x1000/19/77/isolated-abstract-blue-color-thumb-up-contour-logo-vector-10861977.jpg"));
         em.getTransaction().begin();
+        for (Category c : cat) {
+            em.persist(c);
+        }
         for (Software s : softwares) {
             em.persist(s);
         }
