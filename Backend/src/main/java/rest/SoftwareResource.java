@@ -52,7 +52,7 @@ public class SoftwareResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Operation(summary = "Get all softwares",
-            tags = {"Software"})
+            tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Software> softwares = new ArrayList();
@@ -163,8 +163,8 @@ public class SoftwareResource {
     @Path("all/{categories}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get all categories or a single category by id",
-            tags = {"Category"},
+    @Operation(summary = "Get all software or a single software by category id",
+            tags = {"Software"},
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
@@ -177,8 +177,14 @@ public class SoftwareResource {
                         schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "404", description = "Software not found")})
     public List<SoftwareDTO> getSoftwareByCategory(@PathParam("categories") String categories) {
-        
-        return FACADE.getSoftwareByCategory(categories);
+        if (categories.contains("0")) {
+            throw new WebApplicationException("Invalid Id supplied", 400);
+        }
+        try {
+            return FACADE.getSoftwareByCategory(categories);
+        } catch (Exception ex) {
+            throw new WebApplicationException(ex.getMessage(), 404);
+        }
     }
 
 }

@@ -45,18 +45,22 @@ public class SoftwareFacade {
 
     public SoftwareDTO getSoftwareById(long id) throws NotFoundException {
         Software software = getEntityManager().find(Software.class, id);
-        if(software == null) {
+        if (software == null) {
             throw new NotFoundException("Software not found");
         }
         return new SoftwareDTO(software);
     }
-    
-    public List<SoftwareDTO> getSoftwareByCategory(String categories) {
+
+    public List<SoftwareDTO> getSoftwareByCategory(String categories) throws NotFoundException {
         List<Category> categoriesList = new ArrayList();
-        for(String catId : categories.split(",")) {
-            categoriesList.add(getEntityManager().find(Category.class, Long.parseLong(catId)));
+        for (String catId : categories.split(",")) {
+            Category category = getEntityManager().find(Category.class, Long.parseLong(catId));
+            if (category == null) {
+                throw new NotFoundException("Category not found");
+            }
+            categoriesList.add(category);
         }
-        
+
         return getEntityManager().createQuery("SELECT DISTINCT s FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
     }
 }

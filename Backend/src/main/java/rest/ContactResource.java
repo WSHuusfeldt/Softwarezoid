@@ -1,10 +1,7 @@
 package rest;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import entities.Contact;
 import entities.dto.ContactDTO;
-import errorhandling.GenericExceptionMapper;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,17 +35,12 @@ public class ContactResource {
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
     private static final ContactFacade FACADE =  ContactFacade.getContactFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String welcome() {
-        return "{\"msg\":\"Welcome to softwarezoid\"}";
-    }
     
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Get all contacts",
+            tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Contact> contacts = new ArrayList();
@@ -135,7 +127,4 @@ public class ContactResource {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
     }
-    
-    
-    
 }
