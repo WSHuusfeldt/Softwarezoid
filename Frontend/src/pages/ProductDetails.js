@@ -159,9 +159,9 @@ export default function ProductDetails() {
                                                             <span className="message-text">
                                                                 <a className="username" href="xx">
                                                                     <span className="font-weight-bold">{rev.name}</span>
-                                                                    <span className="badge">Purchase Verified</span>                                                                                                                                    
+                                                                    <span className="badge">Purchase Verified</span>
                                                                 </a>
-                                                                <span className="pull-right font-weight-bold">Rating: {rev.rating} / 5</span>   
+                                                                <span className="pull-right font-weight-bold">Rating: {rev.rating} / 5</span>
                                                                 <span>{rev.description}</span>
                                                             </span>
                                                         </li>)}
