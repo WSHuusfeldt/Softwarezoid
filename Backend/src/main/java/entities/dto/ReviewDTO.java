@@ -25,7 +25,6 @@ public class ReviewDTO {
     private Long softwareId;
     
     public ReviewDTO() {
-        
     }
 
    
