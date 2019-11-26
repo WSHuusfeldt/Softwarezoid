@@ -86,6 +86,9 @@ public class SoftwareResourceTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Category.deleteAllRows").executeUpdate();
+            em.persist(c1);
+            em.persist(c2);
             em.persist(s1);
             em.getTransaction().commit();
             em.getTransaction().begin();

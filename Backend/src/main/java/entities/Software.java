@@ -36,7 +36,7 @@ public class Software implements Serializable {
     @OneToMany(mappedBy = "associatedSoftware")
     private List<Review> reviews;
      
-    private List<Category> category;
+    private List<Category> categories;
 
     public Software() {
     }
@@ -48,7 +48,7 @@ public class Software implements Serializable {
         this.thumbnail = thumbnail;
         this.specifications = specifications;
         this.reviews = new ArrayList<Review>();
-        this.category = category;
+        this.categories = category;
     }
 
     public Long getId() {
@@ -111,12 +111,12 @@ public class Software implements Serializable {
         this.specifications = specifications;
     }
 
-    public List<Category> getCategory() {
-        return category;
+    public List<Category> getCategories() {
+        return categories;
     }
 
-    public void setCategory(List<Category> category) {
-        this.category = category;
+    public void setCategories(List<Category> category) {
+        this.categories = category;
     }
 
 }
