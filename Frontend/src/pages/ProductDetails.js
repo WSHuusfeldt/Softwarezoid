@@ -27,27 +27,14 @@ export default function ProductDetails() {
         ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
     }, [])
 
-    console.log(reviews);
-
-
-
-
-
     const handleSubmit = event => {
-        ApiFacade.createReview(review.name, review.imgUrl, review.date, review.rating, review.description, review.softwareId);
-
+        ApiFacade.createReview( review.description, review.name, review.url, review.rating, match.params.id);
     }
-
 
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
-        console.log(event.target.name)
     };
-
-
-
-
-
+ 
     const addToCart = () => {
         var basket = JSON.parse(localStorage.getItem("basket"));
         if (basket !== null) {

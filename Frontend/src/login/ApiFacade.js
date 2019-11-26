@@ -55,12 +55,10 @@ function ApiFacade() {
     return fetch('http://localhost:8080/softwarezoid/api/contacts/add', options).then(handleHttpErrors);
   }
 
-  const createReview = (name, imgUrl, date, rating, description, softwareId) => {
-    const options = makeOptions('POST', { name: name, imgUrl: imgUrl, date: date, rating: rating, description: description, softwareId: softwareId });
+  const createReview = (description, name, imgUrl, rating, softwareId) => {
+    const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: "2019-11-26T12:33:09.625Z", rating: rating, description: description, softwareId: softwareId });
     return fetch('http://localhost:8080/softwarezoid/api/review/add', options).then(handleHttpErrors);
   }
-
-
 
 
   const fetchUser = () => {
