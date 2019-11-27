@@ -40,7 +40,7 @@ public class ContactResource {
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Get all contacts",
+    @Operation(summary = "Setup dummy contacts in database",
             tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
@@ -62,7 +62,7 @@ public class ContactResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary="Add contacts", 
+    @Operation(summary="Add contact", 
             tags={"Contact"},
             responses={
                 @ApiResponse(
