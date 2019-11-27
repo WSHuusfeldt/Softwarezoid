@@ -15,7 +15,7 @@ export default function FAQ() {
                       type="button"
                       data-toggle="collapse"
                       data-target="#collapseOne"
-                      aria-expanded="true"
+                      aria-expanded="false"
                       aria-controls="collapseOne">
                       Q: What is Softwarezoid?
                     </button>

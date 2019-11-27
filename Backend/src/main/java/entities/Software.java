@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToMany; 
 
 /**
  *
@@ -34,17 +34,20 @@ public class Software implements Serializable {
 
     @OneToMany(mappedBy = "associatedSoftware")
     private List<Review> reviews;
+     
+    private List<Category> categories;
 
     public Software() {
     }
 
-    public Software(String title, String description, int price, String thumbnail, List<String> specifications) {
+    public Software(String title, String description, int price, String thumbnail, List<String> specifications, List<Category> category) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.thumbnail = thumbnail;
         this.specifications = specifications;
         this.reviews = new ArrayList<Review>();
+        this.categories = category;
     }
 
     public Long getId() {
@@ -105,6 +108,14 @@ public class Software implements Serializable {
 
     public void setSpecifications(List<String> specifications) {
         this.specifications = specifications;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> category) {
+        this.categories = category;
     }
 
 }

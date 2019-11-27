@@ -31,7 +31,7 @@ public class Review implements Serializable {
     private String imgUrl;
     @Temporal(TemporalType.DATE)
     private Date date;
-    private int rating;
+    private String rating;
     private String description;
     
     @ManyToOne
@@ -41,8 +41,7 @@ public class Review implements Serializable {
         
     }
 
-    public Review(Long id, String name, String imgUrl, Date date, int rating, String description, Software associatedSoftware) {
-        this.id = id;
+    public Review(String name, String imgUrl, Date date, String rating, String description, Software associatedSoftware) {
         this.name = name;
         this.imgUrl = imgUrl;
         this.date = date;
@@ -60,13 +59,15 @@ public class Review implements Serializable {
         this.id = id;
     }
 
-    public int getRating() {
+    public String getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(String rating) {
         this.rating = rating;
     }
+
+    
 
     public String getDescription() {
         return description;

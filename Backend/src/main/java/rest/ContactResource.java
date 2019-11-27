@@ -1,10 +1,7 @@
 package rest;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import entities.Contact;
 import entities.dto.ContactDTO;
-import errorhandling.GenericExceptionMapper;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,17 +35,12 @@ public class ContactResource {
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
     private static final ContactFacade FACADE =  ContactFacade.getContactFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String welcome() {
-        return "{\"msg\":\"Welcome to softwarezoid\"}";
-    }
     
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Setup dummy contacts in database",
+            tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Contact> contacts = new ArrayList();
@@ -69,11 +61,27 @@ public class ContactResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary="Add contact", 
+            tags={"Contact"},
+            responses={
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                                schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "400", description = "All fields must be filled out")})
     public ContactDTO addContact(ContactDTO dto){
-       Contact contact = new Contact(dto.getFullName(), dto.getEmail(), dto.getPhone(), dto.getSubject(), dto.getMessage());
-       ContactDTO contactdto = new ContactDTO(contact);
-       FACADE.addContact(contactdto);
-       return contactdto;
+        if(dto.getFullName().isEmpty() || dto.getFullName() == null 
+                || dto.getEmail().isEmpty() || dto.getEmail() == null
+                || dto.getPhone().isEmpty() || dto.getPhone() ==null
+                || dto.getSubject().isEmpty() || dto.getSubject() == null
+                || dto.getMessage().isEmpty() || dto.getMessage() == null){
+            throw new WebApplicationException("All Fields must be filled out", 400);
+        }
+       FACADE.addContact(dto);
+       return dto;
     }
     
     @Path("all")
@@ -117,7 +125,4 @@ public class ContactResource {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
     }
-    
-    
-    
 }
