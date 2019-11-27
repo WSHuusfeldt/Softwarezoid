@@ -15,16 +15,16 @@ export default function Products() {
   useEffect(() => {
     let cat = [];
     Object.keys(selectedCategory).map(key => {
-      if(selectedCategory[key] === true) {
+      if (selectedCategory[key] === true) {
         cat.push(key);
       }
-      return key; 
+      return key;
     })
     Facade.fetchSoftwareByCategory(cat.join(",")).then(res => setData(res));
   }, [selectedCategory])
 
   const onChange = (evt) => {
-    setSelectedCategory({...selectedCategory, [evt.target.id]: evt.target.checked})
+    setSelectedCategory({ ...selectedCategory, [evt.target.id]: evt.target.checked })
 
   }
 
@@ -61,13 +61,13 @@ export default function Products() {
                 <li className="header-menu">
                   Category
                             </li>
-                {category.map((cat, index) => 
-                <li key={index}>
-                  <div className="custom-control custom-checkbox">
-                    <input type="checkbox" className="custom-control-input" id={cat.id} name={cat.name} onChange={onChange}/>
-                    <label className="custom-control-label" htmlFor={cat.id}>{cat.name}</label>
-                  </div>
-                </li>
+                {category.map((cat, index) =>
+                  <li key={index}>
+                    <div className="custom-control custom-checkbox">
+                      <input type="checkbox" className="custom-control-input" id={cat.id} name={cat.name} onChange={onChange} />
+                      <label className="custom-control-label" htmlFor={cat.id}>{cat.name}</label>
+                    </div>
+                  </li>
                 )}
               </ul>
             </div>
@@ -94,9 +94,10 @@ export default function Products() {
         </div>
       </div >
 
+
       <hr />
       <div className="container-fluid text-center">
-        <button className="btn-zoid">Add new product</button>
+        <Link to="xxx" className="btn-zoid">Add new product</Link>
       </div>
 
     </div>
