@@ -45,12 +45,6 @@ public class ReviewResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final ReviewFacade FACADE = ReviewFacade.getReviewFacade(EMF);
 
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String welcome() {
-        return "{\"msg\":\"Welcome to softwarezoid\"}";
-    }
-
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
