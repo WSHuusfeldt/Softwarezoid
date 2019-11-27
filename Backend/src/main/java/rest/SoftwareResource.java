@@ -163,7 +163,7 @@ public class SoftwareResource {
     @Path("all/{categories}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "Get all software or a single software by category id",
+    @Operation(summary = "Get all software by category id",
             tags = {"Software"},
             responses = {
                 @ApiResponse(
