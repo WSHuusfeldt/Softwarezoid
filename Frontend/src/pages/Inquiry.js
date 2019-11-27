@@ -11,15 +11,16 @@ export default function Inquiries() {
   }, []);
 
   return (
-    <div>
-        <h1>These are all the inquiries still open.</h1>
+    <div className="mt-5  pt-5">
+        <h1 className="font-weight-bold h2 color1 text-uppercase">Inquiries</h1>
       <table className="table">
         <thead>
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Subject</th>
-            <th scope="col">Email</th>
+            <th scope="col">Date submitted</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -28,7 +29,7 @@ export default function Inquiries() {
                     <th scope="row">{inquiry.id}</th>
                     <td>{inquiry.fullName}</td>
                     <td>{inquiry.subject}</td>
-                    <td>{inquiry.email}</td>
+                    <td>{inquiry.date.substring(0, 10)}</td>
                     <td><Link to={settings.getURL("Inquiry") + "/" + (inquiry.id)} className="btn-zoid">Show details</Link></td>
                 </tr>
                 )}
