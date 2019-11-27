@@ -20,7 +20,7 @@ export default function ProductDetails() {
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
         ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
-    }, [])
+    }, [match.params.id])
 
     const handleSubmit = event => {
         ApiFacade.createReview(review.description, review.name, review.url, review.rating, match.params.id);
