@@ -57,7 +57,9 @@ public class SoftwareFacade {
         em.getTransaction().begin();
         List<Category> al = new ArrayList();
         for (CategoryDTO category : softwareDTO.getCategories()) {
-            al.add(new Category(category.getName()));
+            Category cat = new Category(category.getName());
+            em.persist(cat);
+            al.add(cat);
         }
         Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications(), al);
         em.persist(software);
