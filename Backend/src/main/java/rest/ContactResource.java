@@ -1,10 +1,7 @@
 package rest;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import entities.Contact;
 import entities.dto.ContactDTO;
-import errorhandling.GenericExceptionMapper;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -12,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -38,25 +36,20 @@ public class ContactResource {
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
     private static final ContactFacade FACADE =  ContactFacade.getContactFacade(EMF);
-    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String welcome() {
-        return "{\"msg\":\"Welcome to softwarezoid\"}";
-    }
     
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
+    @Operation(summary = "Setup dummy contacts in database",
+            tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
         List<Contact> contacts = new ArrayList();
-        contacts.add(new Contact("William Housefield", "smokeweed@420.com", "12345678", "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv"));
-        contacts.add(new Contact("Andreas Ukrudt", "ukrudtfri@påenuge.com", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud"));
-        contacts.add(new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden"));
-        contacts.add(new Contact("Martin Eli", "Whiskey@weed.com", "97897812", "Moin, vi ska' ha whiskey igå?", "Moin makker, skal vi ha noget whiskey? Har også noget gammel tør' weed et sted."));
-        contacts.add(new Contact("Emil Svense", "ungeogliderlige@damer.org", "19283746", "Jeg har nogle små unge damer du måske kunne være interreseret i", "titlen siger det hele, vend tilbage til mig ;)"));
+        contacts.add(new Contact("William Housefield", "smokeweed@420.com", "12345678", "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv", new Date(), false));
+        contacts.add(new Contact("Andreas Ukrudt", "ukrudtfri@påenuge.com", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud", new Date(), true));
+        contacts.add(new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden", new Date(), false));
+        contacts.add(new Contact("Martin Eli", "Whiskey@weed.com", "97897812", "Moin, vi ska' ha whiskey igå?", "Moin makker, skal vi ha noget whiskey? Har også noget gammel tør' weed et sted.", new Date(), true));
+        contacts.add(new Contact("Emil Svense", "ungeogliderlige@damer.org", "19283746", "Jeg har nogle små unge damer du måske kunne være interreseret i", "titlen siger det hele, vend tilbage til mig ;)", new Date(), false));
         em.getTransaction().begin();
         for(Contact c : contacts)
             em.persist(c);
@@ -69,7 +62,7 @@ public class ContactResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary="Add contacts", 
+    @Operation(summary="Add contact", 
             tags={"Contact"},
             responses={
                 @ApiResponse(
@@ -133,7 +126,4 @@ public class ContactResource {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
     }
-    
-    
-    
 }

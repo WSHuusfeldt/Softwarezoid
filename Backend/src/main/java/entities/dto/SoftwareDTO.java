@@ -1,5 +1,7 @@
 package entities.dto;
 
+import entities.Category;
+import entities.Review;
 import entities.Software;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
@@ -23,7 +25,8 @@ public class SoftwareDTO {
     @Schema(required = true, example = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
     private List<String> specifications;
-    private List<ReviewDTO> reviews = new ArrayList();
+    private List<ReviewDTO> reviews;
+    private List<CategoryDTO> categories;
 
     public SoftwareDTO() {
     }
@@ -37,9 +40,13 @@ public class SoftwareDTO {
         this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
         this.specifications = software.getSpecifications();
-
-        for (int i = 0; i < software.getReviews().size(); ++i) {
-            this.reviews.add(new ReviewDTO(software.getReviews().get(i)));
+        this.reviews = new ArrayList();
+        for(Review review : software.getReviews()) {
+            this.reviews.add(new ReviewDTO(review));
+        }
+        this.categories = new ArrayList();
+        for(Category category : software.getCategories()) {
+            this.categories.add(new CategoryDTO(category));
         }
     }
 
@@ -102,6 +109,15 @@ public class SoftwareDTO {
     public void addReview(ReviewDTO review) {
         this.reviews.add(review);
     }
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
+    }
+    
 
     @Override
     public int hashCode() {

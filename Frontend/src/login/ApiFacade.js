@@ -1,5 +1,5 @@
-//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
-const URL = 'http://localhost:8080/softwarezoid/api/';
+const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
+//const URL = 'http://localhost:8080/softwarezoid/api/';
 
 function handleHttpErrors(res) {
   if (!res.ok) {
