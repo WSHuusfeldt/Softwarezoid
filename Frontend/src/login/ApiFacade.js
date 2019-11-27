@@ -52,22 +52,22 @@ function ApiFacade() {
 
   const addContact = (fullName, email, phone, subject, message) => {
     const options = makeOptions('POST', true, { fullName: fullName, email: email, phone: phone, subject: subject, message: message });
-    return fetch(URL + '/api/contacts/add', options).then(handleHttpErrors);
+    return fetch(URL + 'contacts/add', options).then(handleHttpErrors);
   }
   
   const fetchContacts = () => {
-    return fetch(URL + '/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'contacts/all', makeOptions('GET')).then(handleHttpErrors);
   }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
     const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: "2019-11-26T12:33:09.625Z", rating: rating, description: description, softwareId: softwareId });
-    return fetch(URL + '/api/review/add', options).then(handleHttpErrors);
+    return fetch(URL + 'review/add', options).then(handleHttpErrors);
   }
 
 
   const fetchUser = () => {
     const options = makeOptions('GET', true); //True add's the token
-    return fetch(URL + '/api/info/user', options).then(handleHttpErrors);
+    return fetch(URL + 'info/user', options).then(handleHttpErrors);
   };
 
   const fetchData = () => {
@@ -75,7 +75,7 @@ function ApiFacade() {
   };
 
   const fetchReviews = (key) => {
-    return fetch(URL + '/api/review/get/' + key, makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'review/get/' + key, makeOptions('GET')).then(handleHttpErrors);
 
   };
 
@@ -83,11 +83,18 @@ function ApiFacade() {
     return fetch(URL + 'software/' + key, makeOptions('GET')).then(handleHttpErrors);
   };
 
+  const fetchCategoryAll = () => {
+    return fetch(URL + 'category/all', makeOptions('GET')).then(handleHttpErrors);
+  };
+  
   const fetchSingleContact = (key) => {
-    return fetch(URL + "/api/contacts/" + key, makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'contacts/' + key, makeOptions('GET')).then(handleHttpErrors);
   };
 
 
+  const fetchSoftwareByCategory = (ids) => {
+    return fetch(URL + 'software/all/' + ids, makeOptions('GET')).then(handleHttpErrors);
+  };
 
   return {
     login,
@@ -99,6 +106,8 @@ function ApiFacade() {
     fetchReviews,
     addContact,
     createReview,
+    fetchCategoryAll,
+    fetchSoftwareByCategory,
     fetchContacts
   };
 

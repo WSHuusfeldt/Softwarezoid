@@ -861,10 +861,9 @@ input.btn-login {
 /*----------------sidebar-wrapper----------------*/
 .sidebar-wrapper {
   width: 260px;
-  height: 100%;
-  max-height: 100%;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: -300px;
   z-index: 999; }
   .sidebar-wrapper .header-menu {
