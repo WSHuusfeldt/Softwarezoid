@@ -13,6 +13,7 @@ import Basket from './pages/Basket';
 import Products from './pages/Products';
 import Contact from "./pages/Contact";
 import Home from './pages/Home'
+import Inquiry from './pages/Inquiry'
 import ContactDetails from './pages/ContactDetails';
 
 
@@ -35,6 +36,7 @@ function App() {
             <Route path={URLSettings.getURL("Products")}> <Products /> </Route>
             <Route path={URLSettings.getURL("ProductId", "id")}> <ProductDetails /> </Route>
             <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
+            <Route path={URLSettings.getURL("Inquiry")}> <Inquiry /> </Route>
             <Route path={URLSettings.getURL("ContactSpecific", "id")}> <ContactDetails /> </Route>
             <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
           </Switch>
