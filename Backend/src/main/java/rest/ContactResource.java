@@ -61,7 +61,7 @@ public class ContactResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary="Add contacts", 
+    @Operation(summary="Add contact", 
             tags={"Contact"},
             responses={
                 @ApiResponse(
