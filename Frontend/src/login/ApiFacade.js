@@ -56,7 +56,7 @@ function ApiFacade() {
   }
   
   const fetchContacts = () => {
-    return fetch(URL + 'contacts/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch('http://localhost:8080/softwarezoid/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
   }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
