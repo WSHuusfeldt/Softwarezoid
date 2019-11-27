@@ -13,14 +13,14 @@ export default function ProductDetails() {
 
     let match = useRouteMatch();
     const [data, setData] = useState([]);
-    const [spec, setSpec] = useState([])
+    const [spec, setSpec] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [review, setReview] = useState(initialValue);
 
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
         ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
-    }, [])
+    }, [match.params.id])
 
     const handleSubmit = event => {
         ApiFacade.createReview(review.description, review.name, review.url, review.rating, match.params.id);

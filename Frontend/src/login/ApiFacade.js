@@ -55,6 +55,9 @@ function ApiFacade() {
     return fetch(URL + 'contacts/add', options).then(handleHttpErrors);
   }
   
+  const fetchContacts = () => {
+    return fetch('http://localhost:8080/softwarezoid/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
+  }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
     const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: "2019-11-26T12:33:09.625Z", rating: rating, description: description, softwareId: softwareId });
@@ -83,6 +86,11 @@ function ApiFacade() {
   const fetchCategoryAll = () => {
     return fetch(URL + 'category/all', makeOptions('GET')).then(handleHttpErrors);
   };
+  
+  const fetchSingleContact = (key) => {
+    return fetch(URL + 'contacts/' + key, makeOptions('GET')).then(handleHttpErrors);
+  };
+
 
   const fetchSoftwareByCategory = (ids) => {
     return fetch(URL + 'software/all/' + ids, makeOptions('GET')).then(handleHttpErrors);
@@ -94,11 +102,13 @@ function ApiFacade() {
     fetchUser,
     fetchData,
     fetchSingleProduct,
+    fetchSingleContact,
     fetchReviews,
     addContact,
     createReview,
     fetchCategoryAll,
-    fetchSoftwareByCategory
+    fetchSoftwareByCategory,
+    fetchContacts
   };
 
 

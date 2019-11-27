@@ -3,6 +3,7 @@ package facades;
 import entities.Contact;
 import entities.dto.ContactDTO;
 import errorhandling.NotFoundException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -42,7 +43,7 @@ public class ContactFacade {
          EntityManager em = getEntityManager();
          try{
              em.getTransaction().begin();
-             em.persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage()));
+             em.persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage(), new Date(), false));
              em.getTransaction().commit();
          }finally{
              getEntityManager().close();

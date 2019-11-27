@@ -12,16 +12,17 @@ import java.util.Objects;
  *
  * @author Martin Frederiksen
  */
-@Schema(name="Software")
+@Schema(name = "Software")
 public class SoftwareDTO {
+
     private long id;
-    @Schema(required=true, example="Netbeans")
+    @Schema(required = true, example = "Netbeans")
     private String title;
-    @Schema(required=true, example="This is a program used to develop software")
+    @Schema(required = true, example = "This is a program used to develop software")
     private String description;
-    @Schema(required=true, example="0")
+    @Schema(required = true, example = "0")
     private int price;
-    @Schema(required=true, example="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
+    @Schema(required = true, example = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
     private List<String> specifications;
     private List<ReviewDTO> reviews;
@@ -29,9 +30,11 @@ public class SoftwareDTO {
 
     public SoftwareDTO() {
     }
-    
+
     public SoftwareDTO(Software software) {
-        this.id = software.getId();
+        if (software.getId() != null) {
+            this.id = software.getId();
+        }
         this.title = software.getTitle();
         this.description = software.getDescription();
         this.price = software.getPrice();
@@ -62,7 +65,7 @@ public class SoftwareDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public int getPrice() {
         return price;
     }
@@ -95,7 +98,6 @@ public class SoftwareDTO {
         this.id = id;
     }
 
-    
     public List<ReviewDTO> getReviews() {
         return reviews;
     }
@@ -103,7 +105,7 @@ public class SoftwareDTO {
     public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
     }
-    
+
     public void addReview(ReviewDTO review) {
         this.reviews.add(review);
     }
@@ -153,5 +155,5 @@ public class SoftwareDTO {
         }
         return true;
     }
-    
+
 }
