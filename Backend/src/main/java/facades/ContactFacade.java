@@ -60,16 +60,21 @@ public class ContactFacade {
         return new ContactDTO(contact);
      }
      
-     public void edit(ContactDTO dto) {
+     public ContactDTO edit(ContactDTO dto) {
          EntityManager em = getEntityManager();
+         Contact contact = em.find(Contact.class, dto.getId());
+         contact.setResolved(true);
          try{
          em.getTransaction().begin();
-         em.merge(dto);
+         em.merge(contact);
          em.getTransaction().commit();
+         return new ContactDTO(contact);
          }finally{
              em.close();
          }
      }
+     
+     
 
      
      

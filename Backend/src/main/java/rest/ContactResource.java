@@ -33,14 +33,15 @@ import utils.EMF_Creator;
  */
 @Path("contacts")
 public class ContactResource {
+
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
-                "pu",
-                "jdbc:mysql://localhost:3307/softwarezoid",
-                "dev",
-                "ax2",
-                EMF_Creator.Strategy.CREATE);
-    private static final ContactFacade FACADE =  ContactFacade.getContactFacade(EMF);
-    
+            "pu",
+            "jdbc:mysql://localhost:3307/softwarezoid",
+            "dev",
+            "ax2",
+            EMF_Creator.Strategy.CREATE);
+    private static final ContactFacade FACADE = ContactFacade.getContactFacade(EMF);
+
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
@@ -55,54 +56,55 @@ public class ContactResource {
         contacts.add(new Contact("Martin Eli", "Whiskey@weed.com", "97897812", "Moin, vi ska' ha whiskey igå?", "Moin makker, skal vi ha noget whiskey? Har også noget gammel tør' weed et sted.", new Date(), true));
         contacts.add(new Contact("Emil Svense", "ungeogliderlige@damer.org", "19283746", "Jeg har nogle små unge damer du måske kunne være interreseret i", "titlen siger det hele, vend tilbage til mig ;)", new Date(), false));
         em.getTransaction().begin();
-        for(Contact c : contacts)
+        for (Contact c : contacts) {
             em.persist(c);
+        }
         em.getTransaction().commit();
-        
+
         return "{\"status\":\"completed\"}";
     }
-    
+
     @Path("/add")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(summary="Add contact", 
-            tags={"Contact"},
-            responses={
+    @Operation(summary = "Add contact",
+            tags = {"Contact"},
+            responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ContactDTO.class)),
+                                schema = @Schema(implementation = ContactDTO.class)),
                         responseCode = "200", description = "Succesful operation"),
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
                                 schema = @Schema(implementation = ContactDTO.class)),
                         responseCode = "400", description = "All fields must be filled out")})
-    public ContactDTO addContact(ContactDTO dto){
-        if(dto.getFullName().isEmpty() || dto.getFullName() == null 
+    public ContactDTO addContact(ContactDTO dto) {
+        if (dto.getFullName().isEmpty() || dto.getFullName() == null
                 || dto.getEmail().isEmpty() || dto.getEmail() == null
-                || dto.getPhone().isEmpty() || dto.getPhone() ==null
+                || dto.getPhone().isEmpty() || dto.getPhone() == null
                 || dto.getSubject().isEmpty() || dto.getSubject() == null
-                || dto.getMessage().isEmpty() || dto.getMessage() == null){
+                || dto.getMessage().isEmpty() || dto.getMessage() == null) {
             throw new WebApplicationException("All Fields must be filled out", 400);
         }
-       FACADE.addContact(dto);
-       return dto;
+        FACADE.addContact(dto);
+        return dto;
     }
-    
+
     @Path("all")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary="Get all contacts", 
-            tags={"Contact"},
-            responses={
+    @Operation(summary = "Get all contacts",
+            tags = {"Contact"},
+            responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ContactDTO.class)),
+                                schema = @Schema(implementation = ContactDTO.class)),
                         responseCode = "200", description = "Succesful operation")})
-    public List<ContactDTO> getAllContacts(){
+    public List<ContactDTO> getAllContacts() {
         return FACADE.getAll();
     }
-    
+
     @Path("{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -111,37 +113,34 @@ public class ContactResource {
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ContactDTO.class)),
+                                schema = @Schema(implementation = ContactDTO.class)),
                         responseCode = "200", description = "Succesful operation"),
                 @ApiResponse(content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "400", description = "Invalid Id supplied"),
                 @ApiResponse(content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "404", description = "Contact not found")})
-    public ContactDTO getContactById(@PathParam("id") long id){
-        if(id <= 0){
+    public ContactDTO getContactById(@PathParam("id") long id) {
+        if (id <= 0) {
             throw new WebApplicationException("Invalid Id", 404);
         }
-        try{
-        return FACADE.getById(id);
-            
-        }catch(Exception ex){
+        try {
+            return FACADE.getById(id);
+
+        } catch (Exception ex) {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
     }
-    
+
     @Path("edit/{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ContactDTO editContact(@PathParam("id") long id){
+    public ContactDTO editContact(@PathParam("id") long id) {
         ContactDTO contact = FACADE.getById(id);
-        contact.setResolved(true);
-        FACADE.edit(contact); 
-        return contact;
-        
-        
+        return FACADE.edit(contact);
+
     }
-    
+
 }
