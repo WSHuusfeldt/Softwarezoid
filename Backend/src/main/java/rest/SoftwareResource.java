@@ -51,7 +51,7 @@ public class SoftwareResource {
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Get all softwares",
+    @Operation(summary = "Setup dummy softwares in database",
             tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
