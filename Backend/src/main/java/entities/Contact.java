@@ -1,11 +1,14 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,17 +27,24 @@ public class Contact implements Serializable {
     private String phone;
     private String subject;
     private String message;
+    @Temporal(TemporalType.DATE)
+    private Date date;
+    private boolean resolved;
 
     public Contact() {
     }
 
-    public Contact(String fullName, String email, String phone, String subject, String message) {
+    public Contact(String fullName, String email, String phone, String subject, String message, Date date, boolean resolved) {
         this.fullName = fullName;
         this.email = email;
         this.phone = phone;
         this.subject = subject;
         this.message = message;
+        this.date = new Date();
+        this.resolved = resolved;
     }
+
+   
 
     public Long getId() {
         return id;
@@ -83,5 +93,23 @@ public class Contact implements Serializable {
     public void setMessage(String message) {
         this.message = message;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public boolean isResolved() {
+        return resolved;
+    }
+
+    public void setResolved(boolean resolved) {
+        this.resolved = resolved;
+    }
+    
+    
 
 }
