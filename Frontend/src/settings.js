@@ -9,6 +9,7 @@ const URLs = {
     "FAQ": "/faq",
     "Basket": "/cart",
     "Checkout": "/checkout",
+    "Inquiry": "/inquiry",
     "NoMatch": "*"
 }
 
