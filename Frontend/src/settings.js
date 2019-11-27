@@ -5,6 +5,7 @@ const URLs = {
     "ProductId": "/product",
     "Data": "/data",
     "Contact": "/contact",
+    "ContactSpecific": "/contacted",
     "About": "/about",
     "FAQ": "/faq",
     "Basket": "/cart",
