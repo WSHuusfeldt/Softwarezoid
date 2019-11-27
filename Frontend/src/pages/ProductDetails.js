@@ -13,7 +13,7 @@ export default function ProductDetails() {
 
     let match = useRouteMatch();
     const [data, setData] = useState([]);
-    const [spec, setSpec] = useState([])
+    const [spec, setSpec] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [review, setReview] = useState(initialValue);
 

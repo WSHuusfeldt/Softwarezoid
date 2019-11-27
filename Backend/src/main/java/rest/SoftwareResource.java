@@ -75,7 +75,7 @@ public class SoftwareResource {
                         "Type: Source code editor, debugger",
                         "Written in: TypeScript, JavaScript, CSS",
                         "Platform: IA-32, x86-64",
-                        "Avaible in: English (US), Simplified Chinese, Traditional Chinese, French, German, Italian, Portuguese (Brazil), Japanese, Korean, Russian, Spanish")), Arrays.asList(cat.get(0), cat.get(2), cat.get(3))));
+                        "Avaible in: English (US), Simplified Chinese, Traditional Chinese, French, German, Italian, Portuguese (Brazil), Japanese, Korean, Russian, Spanish")), Arrays.asList(cat.get(0), cat.get(1), cat.get(2))));
 
         softwares.add(new Software("Notepad++", "Notepad++ is a text editor and source code editor for use with Microsoft Windows. It supports tabbed editing, which allows working with multiple open files in a single window. The project's name comes from the C increment operator.", 1000, "https://www.slashcoding.com/wp-content/uploads/2013/08/Notepad_plus_plus.png",
                 (Arrays.asList("Version: 7.8.1",
@@ -133,7 +133,6 @@ public class SoftwareResource {
             em.persist(sk);
         }
 
-        em.getTransaction().begin();
         for (Category c : cat) {
             em.persist(c);
         }
