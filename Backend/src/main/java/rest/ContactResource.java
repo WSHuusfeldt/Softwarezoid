@@ -39,7 +39,7 @@ public class ContactResource {
     @Path("setup")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Operation(summary = "Get all contacts",
+    @Operation(summary = "Setup dummy contacts in database",
             tags = {"Setup"})
     public String setupDatabase() {
         EntityManager em = EMF.createEntityManager();
