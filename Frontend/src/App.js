@@ -37,7 +37,7 @@ function App() {
             <Route path={URLSettings.getURL("ProductId", "id")}> <ProductDetails /> </Route>
             <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
             <Route path={URLSettings.getURL("Inquiry")}> <Inquiry /> </Route>
-            <Route path={URLSettings.getURL("ContactSpecific", "id")}> <ContactDetails /> </Route>
+            <Route path={URLSettings.getURL("InquiryDetails", "id")}> <ContactDetails /> </Route>
             <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
           </Switch>
         </div>

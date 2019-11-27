@@ -2,6 +2,7 @@ package rest;
 
 import entities.Contact;
 import entities.dto.ContactDTO;
+import errorhandling.NotFoundException;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -11,11 +12,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -126,4 +130,18 @@ public class ContactResource {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
     }
+    
+    @Path("edit/{id}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public ContactDTO editContact(@PathParam("id") long id){
+        ContactDTO contact = FACADE.getById(id);
+        contact.setResolved(true);
+        FACADE.edit(contact); 
+        return contact;
+        
+        
+    }
+    
 }

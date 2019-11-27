@@ -54,13 +54,23 @@ public class ContactFacade {
          return getEntityManager().createQuery("SELECT new entities.dto.ContactDTO(contact) FROM Contact contact", ContactDTO.class).getResultList();
      }
      
-     public ContactDTO getById(long id) throws NotFoundException{
+     public ContactDTO getById(long id){
          Contact contact = getEntityManager().find(Contact.class, id);
-        if(contact == null) {
-            throw new NotFoundException("Contact not found");
-        }
+        
         return new ContactDTO(contact);
      }
+     
+     public void edit(ContactDTO dto) {
+         EntityManager em = getEntityManager();
+         try{
+         em.getTransaction().begin();
+         em.merge(dto);
+         em.getTransaction().commit();
+         }finally{
+             em.close();
+         }
+     }
+
      
      
      
