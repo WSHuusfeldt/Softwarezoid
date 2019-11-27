@@ -821,6 +821,7 @@ input.btn-login {
   -o-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
+
 /*----------------page-wrapper----------------*/
 .page-wrapper .theme {
   width: 40px;
@@ -831,6 +832,11 @@ input.btn-login {
 
 .page-wrapper .theme.chiller-theme {
   background: #333; }
+
+  .page-wrapper {
+    position: relative;
+    left: -15px;
+  }
 
 /*----------------toggeled sidebar----------------*/
 .page-wrapper.toggled .sidebar-wrapper {
@@ -861,9 +867,9 @@ input.btn-login {
 /*----------------sidebar-wrapper----------------*/
 .sidebar-wrapper {
   width: 260px;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
-  bottom: 0;
+  bottom: -2rem;
   left: -300px;
   z-index: 999; }
   .sidebar-wrapper .header-menu {
@@ -894,7 +900,7 @@ input.btn-login {
   display: flex;
   align-items: center; }
 
-.sidebar-wrapper .sidebar-brand > a {
+.sidebar-wrapper .sidebar-brand > p {
   color: #fff;
   text-transform: uppercase;
   font-weight: bold;
