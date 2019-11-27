@@ -29,6 +29,10 @@ export default function Products() {
           </div>
         )}
       </div>
+      <hr />
+      <div className="container-fluid text-center">
+        <button className="btn-zoid">Add new product</button>
+      </div>
     </div >
   )
 }

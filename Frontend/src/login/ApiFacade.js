@@ -1,5 +1,5 @@
-const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
-//const URL = 'http://localhost:8080/softwarezoid/api/';
+//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
+const URL = 'http://localhost:8080/softwarezoid/api/';
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -52,16 +52,16 @@ function ApiFacade() {
 
   const addContact = (fullName, email, phone, subject, message) => {
     const options = makeOptions('POST', true, { fullName: fullName, email: email, phone: phone, subject: subject, message: message });
-    return fetch('http://localhost:8080/softwarezoid/api/contacts/add', options).then(handleHttpErrors);
+    return fetch(URL + '/api/contacts/add', options).then(handleHttpErrors);
   }
   
   const fetchContacts = () => {
-    return fetch('http://localhost:8080/softwarezoid/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + '/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
   }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
     const options = makeOptions('POST', true, { name: name, imgUrl: imgUrl, date: "2019-11-26T12:33:09.625Z", rating: rating, description: description, softwareId: softwareId });
-    return fetch('http://localhost:8080/softwarezoid/api/review/add', options).then(handleHttpErrors);
+    return fetch(URL + '/api/review/add', options).then(handleHttpErrors);
   }
 
 
@@ -75,7 +75,7 @@ function ApiFacade() {
   };
 
   const fetchReviews = (key) => {
-    return fetch('http://localhost:8080/softwarezoid/api/review/get/' + key, makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + '/api/review/get/' + key, makeOptions('GET')).then(handleHttpErrors);
 
   };
 
@@ -84,7 +84,7 @@ function ApiFacade() {
   };
 
   const fetchSingleContact = (key) => {
-    return fetch("http://localhost:8080/softwarezoid/api/contacts/" + key, makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + "/api/contacts/" + key, makeOptions('GET')).then(handleHttpErrors);
   };
 
 
