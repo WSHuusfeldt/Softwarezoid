@@ -2,6 +2,7 @@ package facades;
 
 import entities.Category;
 import entities.Software;
+import entities.dto.CategoryDTO;
 import entities.dto.SoftwareDTO;
 import errorhandling.NotFoundException;
 import java.util.ArrayList;
@@ -51,6 +52,20 @@ public class SoftwareFacade {
         return new SoftwareDTO(software);
     }
 
+    public void addSoftware(SoftwareDTO softwareDTO) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        List<Category> al = new ArrayList();
+        for (CategoryDTO category : softwareDTO.getCategories()) {
+            al.add(new Category(category.getName()));
+        }
+        Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications(), al);
+        em.persist(software);
+        em.getTransaction().commit();
+        em.close();
+    }
+    
+    
     public List<SoftwareDTO> getSoftwareByCategory(String categories) throws NotFoundException {
         List<Category> categoriesList = new ArrayList();
         for (String catId : categories.split(",")) {

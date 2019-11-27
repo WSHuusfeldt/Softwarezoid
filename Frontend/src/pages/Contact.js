@@ -95,7 +95,7 @@ export default function Contact() {
                                 </h2>
                                 <div className="contactForm contactPage">
                                     <form className="row">
-                                        <label for="inp" className="inp col-md-6">
+                                        <label className="inp col-md-6">
                                             <input
                                                 type="text"
                                                 name="fullName"
@@ -105,7 +105,7 @@ export default function Contact() {
                                             <span className="label">Full Name</span>
                                             <span className="border"></span>
                                         </label>
-                                        <label for="inp" className="inp col-md-6">
+                                        <label className="inp col-md-6">
                                             <input
                                                 type="text"
                                                 name="email"
@@ -116,7 +116,7 @@ export default function Contact() {
                                             <span className="label">Email</span>
                                             <span className="border"></span>
                                         </label>
-                                        <label for="inp" className="inp col-md-6">
+                                        <label className="inp col-md-6">
                                             <input
                                                 type="text"
                                                 name="phone"
@@ -127,7 +127,7 @@ export default function Contact() {
                                             <span className="label">Phone</span>
                                             <span className="border"></span>
                                         </label>
-                                        <label for="inp" className="inp col-md-6">
+                                        <label className="inp col-md-6">
                                             <input
                                                 type="text"
                                                 name="subject"
@@ -139,7 +139,7 @@ export default function Contact() {
                                             <span className="border"></span>
                                         </label>
 
-                                        <label for="inp" className="inp col-md-12">
+                                        <label className="inp col-md-12">
                                             <textarea
                                                 type="text"
                                                 name="message"
