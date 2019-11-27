@@ -137,10 +137,9 @@ public class ContactResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public ContactDTO editContact(@PathParam("id") long id) {
+    public ContactDTO editContact(@PathParam("id") long id) throws NotFoundException{
         ContactDTO contact = FACADE.getById(id);
-        return FACADE.edit(contact);
-
+        return FACADE.edit(contact); 
     }
 
 }

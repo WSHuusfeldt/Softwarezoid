@@ -2,6 +2,7 @@ package facades;
 
 import entities.Contact;
 import entities.dto.ContactDTO;
+import facades.ContactFacade;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
