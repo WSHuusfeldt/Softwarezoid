@@ -43,9 +43,20 @@ public class SoftwareFacade {
 
     public SoftwareDTO getSoftwareById(long id) throws NotFoundException {
         Software software = getEntityManager().find(Software.class, id);
-        if(software == null) {
+        if (software == null) {
             throw new NotFoundException("Software not found");
         }
         return new SoftwareDTO(software);
     }
+
+    public void addSoftware(SoftwareDTO softwareDTO) {
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications());
+        em.persist(software);
+        em.getTransaction().commit();
+        em.close();
+    }
+    
+    
 }

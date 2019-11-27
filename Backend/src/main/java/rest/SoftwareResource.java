@@ -20,8 +20,10 @@ import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
@@ -97,15 +99,35 @@ public class SoftwareResource {
                         "Type: Spreadsheet",
                         "Avaible in: 106 languages"))));
         
-        softwares.add(new Software("WinRar", "WinRAR is a trialware file archiver utility for Windows, developed by Eugene Roshal of win.rar GmbH. It can create and view archives in RAR or ZIP file formats, and unpack numerous archive file formats. To enable the user to test the integrity of archives, WinRAR embeds CRC32 or BLAKE2 checksums for each file in each archive. WinRAR supports creating encrypted, multi-part and self-extracting archives. WinRAR is a Windows-only program. ", 0, "https://cdn.worldvectorlogo.com/logos/winrar-1.svg", 
+        softwares.add(new Software("WinRar", "WinRAR is a trialware file archiver utility for Windows, "
+                + "developed by Eugene Roshal of win.rar GmbH. It can create and view archives in RAR or ZIP file formats, "
+                + "and unpack numerous archive file formats. To enable the user to test the integrity of archives, "
+                + "WinRAR embeds CRC32 or BLAKE2 checksums for each file in each archive. WinRAR supports creating encrypted, "
+                + "multi-part and self-extracting archives. WinRAR is a Windows-only program. ", 
+                0, 
+                "https://cdn.worldvectorlogo.com/logos/winrar-1.svg", 
                 (Arrays.asList("Version: 5.71",
                         "Compatability: Windows XP and later",
                         "Written in: C++", "Platform: IA-32, x64",
                         "Avaible in: 46 languages"))));
+        SoftwareFacade sf = SoftwareFacade.getSoftwareFacade(EMF);
+        Software s = new Software(
+                "Spotify", 
+                "Spotify is an international media services provider based in Stockholm, Sweden."
+                + "founded in 2006 the compnay's primary busines is providing an audio streaming platform.",
+                    10000,
+                    "https://developer.spotify.com/assets/branding-guidelines/icon1@2x.png",
+                    (Arrays.asList("Version: 5.71",
+                        "Compatability: Windows, Linux, Android and iOS / MacOS",
+                        "Written in: Python", "Platform: IA-32, x64",
+                        "Avaible in: 46 languages")));
+        SoftwareDTO sdto = new SoftwareDTO(s);
+        sf.addSoftware(sdto);
+        
         //softwares.add(new Software("Not real program", "Test program for very very very very very very very very very very very very very very very very very very very very very very very very long description", 0, "https://cdn3.vectorstock.com/i/1000x1000/19/77/isolated-abstract-blue-color-thumb-up-contour-logo-vector-10861977.jpg"));
         em.getTransaction().begin();
-        for(Software s : softwares)
-            em.persist(s);
+        for(Software sk : softwares)
+            em.persist(sk);
         em.getTransaction().commit();
         
         return "{\"status\":\"completed\"}";
@@ -151,5 +173,23 @@ public class SoftwareResource {
         } catch(Exception ex) {
             throw new WebApplicationException(ex.getMessage(), 404);
         }
+    }
+    
+    @POST
+    @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Get software by id",
+            tags = {"Software"},
+            responses = {
+                @ApiResponse(
+                        content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = SoftwareDTO.class)),
+                        responseCode = "200", description = "Succesful operation"),
+                @ApiResponse(content = @Content(mediaType = "application/json",
+                        schema = @Schema(implementation = ExceptionDTO.class)), 
+                        responseCode = "500", description = "Internal Server Error, sorry for the inconvenience.")})
+    public void addSoftware(SoftwareDTO softwareDTO) {
+        SoftwareFacade sf = SoftwareFacade.getSoftwareFacade(EMF);
+        sf.addSoftware(softwareDTO);
     }
 }
