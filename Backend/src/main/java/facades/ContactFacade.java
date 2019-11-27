@@ -20,8 +20,8 @@ public class ContactFacade {
     //Private Constructor to ensure Singleton
     private ContactFacade() {
     }
-    
-       /**
+
+    /**
      *
      * @param _emf
      * @return an instance of this facade class.
@@ -33,45 +33,46 @@ public class ContactFacade {
         }
         return instance;
     }
-    
-     private EntityManager getEntityManager() {
+
+    private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-     
-    
-     public void addContact(ContactDTO contactDTO){
-         EntityManager em = getEntityManager();
-         try{
-             em.getTransaction().begin();
-             em.persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage(), new Date(), false));
-             em.getTransaction().commit();
-         }finally{
-             getEntityManager().close();
-         }
-     }
-     
-     public List<ContactDTO> getAll(){
-         return getEntityManager().createQuery("SELECT new entities.dto.ContactDTO(contact) FROM Contact contact", ContactDTO.class).getResultList();
-     }
-     
-     public ContactDTO getById(long id){
-         Contact contact = getEntityManager().find(Contact.class, id);
-        
-        return new ContactDTO(contact);
-     }
-     
-     public void edit(ContactDTO dto) {
-         EntityManager em = getEntityManager();
-         try{
-         em.getTransaction().begin();
-         em.merge(dto);
-         em.getTransaction().commit();
-         }finally{
-             em.close();
-         }
-     }
 
-     
-     
-     
+    public void addContact(ContactDTO contactDTO) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(new Contact(contactDTO.getFullName(), contactDTO.getEmail(), contactDTO.getPhone(), contactDTO.getSubject(), contactDTO.getMessage(), new Date(), false));
+            em.getTransaction().commit();
+        } finally {
+            getEntityManager().close();
+        }
+    }
+
+    public List<ContactDTO> getAll() {
+        return getEntityManager().createQuery("SELECT new entities.dto.ContactDTO(contact) FROM Contact contact", ContactDTO.class).getResultList();
+    }
+
+    public ContactDTO getById(long id) throws NotFoundException {
+        Contact contact = getEntityManager().find(Contact.class, id);
+        if (contact == null) {
+            throw new NotFoundException("Contact not found");
+        }
+        return new ContactDTO(contact);
+    }
+
+    public ContactDTO edit(ContactDTO dto) {
+        EntityManager em = getEntityManager();
+        Contact contact = em.find(Contact.class, dto.getId());
+        contact.setResolved(true);
+        try {
+            em.getTransaction().begin();
+            em.merge(contact);
+            em.getTransaction().commit();
+            return new ContactDTO(contact);
+        } finally {
+            em.close();
+        }
+    }
+
 }
