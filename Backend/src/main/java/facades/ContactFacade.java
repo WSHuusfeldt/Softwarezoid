@@ -50,7 +50,7 @@ public class ContactFacade {
     }
 
     public List<ContactDTO> getAll() {
-        return getEntityManager().createQuery("SELECT new entities.dto.ContactDTO(contact) FROM Contact contact", ContactDTO.class).getResultList();
+        return getEntityManager().createQuery("SELECT new entities.dto.ContactDTO(contact) FROM Contact contact WHERE contact.resolved = :false", ContactDTO.class).setParameter("false", false).getResultList();
     }
 
     public ContactDTO getById(long id) throws NotFoundException {
