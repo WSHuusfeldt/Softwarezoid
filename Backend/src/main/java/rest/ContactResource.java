@@ -74,7 +74,7 @@ public class ContactResource {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
                                 schema = @Schema(implementation = ContactDTO.class)),
-                        responseCode = "200", description = "Succesful operation"),
+                        responseCode = "200", description = "Successful operation"),
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
                                 schema = @Schema(implementation = ContactDTO.class)),
@@ -100,7 +100,7 @@ public class ContactResource {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
                                 schema = @Schema(implementation = ContactDTO.class)),
-                        responseCode = "200", description = "Succesful operation")})
+                        responseCode = "200", description = "Successful operation")})
     public List<ContactDTO> getAllContacts() {
         return FACADE.getAll();
     }
@@ -114,7 +114,7 @@ public class ContactResource {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
                                 schema = @Schema(implementation = ContactDTO.class)),
-                        responseCode = "200", description = "Succesful operation"),
+                        responseCode = "200", description = "Successful operation"),
                 @ApiResponse(content = @Content(mediaType = "application/json",
                         schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "400", description = "Invalid Id supplied"),
@@ -137,6 +137,21 @@ public class ContactResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary="Edit a contact to be resolved",
+            tags={"Contacts"},
+            responses = {
+                @ApiResponse(
+                content = @Content(mediaType="application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "200", description = "Successfull Operation"),
+                @ApiResponse(
+                content = @Content(mediaType="application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "400", description = "Invalid Id"),
+                @ApiResponse(
+                content = @Content(mediaType="application/json",
+                        schema = @Schema(implementation = ContactDTO.class)),
+                        responseCode = "404", description = "Contact not found")})
     public ContactDTO editContact(@PathParam("id") long id) throws NotFoundException{
         ContactDTO contact = FACADE.getById(id);
         return FACADE.edit(contact); 
