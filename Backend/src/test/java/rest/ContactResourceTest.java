@@ -5,15 +5,13 @@
  */
 package rest;
 
-import entities.Category;
-import entities.Software;
+import entities.Contact;
+import entities.dto.ContactDTO;
 import io.restassured.RestAssured;
 import static io.restassured.RestAssured.given;
 import io.restassured.parsing.Parser;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -24,28 +22,24 @@ import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import static org.hamcrest.Matchers.equalTo;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import utils.EMF_Creator;
 
 /**
  *
- * @author Martin Frederiksen
+ * @author William Huusfeldt
  */
-@Disabled
-public class SoftwareResourceTest {
+public class ContactResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
-    private static Software s1, s2;
+    private static Contact c1, c2;
 
     static final URI BASE_URI = UriBuilder.fromUri(SERVER_URL).port(SERVER_PORT).build();
     private static HttpServer httpServer;
     private static EntityManagerFactory emf;
     
-    private static List<Category> cat;
-    private static Category c1, c2;
 
     static HttpServer startServer() {
         ResourceConfig rc = ResourceConfig.forApplication(new ApplicationConfig());
@@ -73,29 +67,15 @@ public class SoftwareResourceTest {
     }
     
     @BeforeEach
-    public void setUp() throws MalformedURLException {
+    public void setUp() {
         EntityManager em = emf.createEntityManager();
-        c1 = new Category("Programming");
-        c2 = new Category("Images");
-        cat = new ArrayList();
-        cat.add(c1);
-        cat.add(c2);
-        s1 = new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png",
-                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), cat);
-        s2 = new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
-                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), cat);
+        c1 = new Contact("William Huusfeldt", "william@test.dk", "12345678", "Testing", "Please be green", new Date(), false);
+        c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud", new Date(), false);
         try {
             em.getTransaction().begin();
-            em.createNamedQuery("SoftwareOrderLine.deleteAllRows").executeUpdate();
-            em.createNamedQuery("SoftwareOrder.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Software.deleteAllRows").executeUpdate();
-            em.createNamedQuery("Category.deleteAllRows").executeUpdate();
+            em.createNamedQuery("Contact.deleteAllRows").executeUpdate();
             em.persist(c1);
             em.persist(c2);
-            em.persist(s1);
-            em.getTransaction().commit();
-            em.getTransaction().begin();
-            em.persist(s2);
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -103,68 +83,56 @@ public class SoftwareResourceTest {
     }
     
     @Test
-    public void testSoftwareAll200() throws Exception {
+    public void testContactAll200() throws Exception {
         given()
                 .contentType("application/json")
-                .get("/software/all").then()
+                .get("/contacts/all").then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
                 .body("size()", equalTo(2));
     }
     
     @Test
-    public void testSoftwareById200() throws Exception {
+    public void testContactById200() throws Exception {
         given()
                 .contentType("application/json")
-                .get("/software/" + s1.getId()).then()
+                .get("/contacts/" + c1.getId()).then()
                 .assertThat()
                 .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("description", equalTo(s1.getDescription()));
+                .body("subject", equalTo(c1.getSubject()));
     }
-
+    
     @Test
-    public void testSoftwareById400() throws Exception {
+    public void testContactById400() throws Exception {
         given()
                 .contentType("application/json")
-                .get("/software/0").then()
+                .get("/contacts/0").then()
                 .assertThat()
                 .statusCode(HttpStatus.BAD_REQUEST_400.getStatusCode());
     }
-
+    
     @Test
-    public void testSoftwareById404() throws Exception {
+    public void testContactById404() throws Exception {
         given()
                 .contentType("application/json")
-                .get("/software/3").then()
+                .get("/contacts/73").then()
                 .assertThat()
                 .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode());
     }
     
-    @Test
-    public void testCategoryById200() throws Exception {
-        given()
-                .contentType("application/json")
-                .get("/software/all/" + c1.getId() + "," + c2.getId()).then()
-                .assertThat()
-                .statusCode(HttpStatus.OK_200.getStatusCode())
-                .body("size()", equalTo(2));
-    }
-
-    @Test
-    public void testCategoryById400() throws Exception {
-        given()
-                .contentType("application/json")
-                .get("/software/all/0").then()
-                .assertThat()
-                .statusCode(HttpStatus.BAD_REQUEST_400.getStatusCode());
-    }
-
-    @Test
-    public void testCategoryById404() throws Exception {
-        given()
-                .contentType("application/json")
-                .get("/software/all/999999999").then()
-                .assertThat()
-                .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode());
-    }
+//    @Test
+//    public void testContactAdd200() throws Exception {
+//        System.out.println("-----------------");
+//        Date d = new Date();
+//        ContactDTO c = new ContactDTO(new Contact("William Huusfeldt", "william@test.dk", "12345678", "Testing", "Please be green", d, false));
+//        
+//        given()
+//                .contentType("application/json")
+//                .body(c)
+//                .post("/contacts/add").then()
+//                .assertThat()
+//                .statusCode(HttpStatus.OK_200.getStatusCode())
+//                .body("phone", equalTo("12345678"));
+//    }
+    
 }
