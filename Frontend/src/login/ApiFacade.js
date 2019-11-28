@@ -55,8 +55,13 @@ function ApiFacade() {
     return fetch(URL + 'contacts/add', options).then(handleHttpErrors);
   }
 
+  const addProduct = (title, description, price, thumbnail, spec, category) => {
+    const options = makeOptions('POST', true, { title: title, description: description, price: price, thumbnail: thumbnail, specifications: [spec], categories: [{name: category}] });
+    return fetch(URL + 'software/add', options).then(handleHttpErrors);
+  }
+
   const fetchContacts = () => {
-    return fetch(URL + 'contacts/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'cont  acts/all', makeOptions('GET')).then(handleHttpErrors);
   }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
@@ -113,7 +118,8 @@ function ApiFacade() {
     createReview,
     fetchCategoryAll,
     fetchSoftwareByCategory,
-    fetchContacts
+    fetchContacts,
+    addProduct
   };
 
 

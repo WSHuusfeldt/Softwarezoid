@@ -44,14 +44,7 @@ public class ReviewResourceTest {
      */
     @Test
     public void testAdd() {
-        System.out.println("add");
-        ReviewDTO reviewDTO = null;
-        ReviewResource instance = new ReviewResource();
-        String expResult = "";
-        String result = instance.add(reviewDTO);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -59,14 +52,7 @@ public class ReviewResourceTest {
      */
     @Test
     public void testGetJson() throws Exception {
-        System.out.println("getJson");
-        long id = 0L;
-        ReviewResource instance = new ReviewResource();
-        List<ReviewDTO> expResult = null;
-        List<ReviewDTO> result = instance.getJson(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
     
 }

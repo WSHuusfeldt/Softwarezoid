@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Home from './pages/Home'
 import Inquiry from './pages/Inquiry'
 import ContactDetails from './pages/ContactDetails';
+import New from './pages/NewProduct';
 
 
 function App() {
@@ -38,7 +39,8 @@ function App() {
             <Route path={URLSettings.getURL("Contact")}> <Contact /> </Route>
             <Route path={URLSettings.getURL("Inquiry")}> <Inquiry /> </Route>
             <Route path={URLSettings.getURL("InquiryDetails", "id")}> <ContactDetails /> </Route>
-            <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>
+            <Route path={URLSettings.getURL("New")}> <New /> </Route>
+            <Route path={URLSettings.getURL("NoMatch")}> <NoMatch /> </Route>            
           </Switch>
         </div>
       </main>

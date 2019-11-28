@@ -22,6 +22,7 @@ import utils.EMF_Creator;
  *
  * @author Martin Frederiksen
  */
+@Disabled
 public class SoftwareFacadeTest {
     private static EntityManagerFactory emf;
     private static SoftwareFacade facade;

@@ -11,6 +11,7 @@ const URLs = {
     "Basket": "/cart",
     "Checkout": "/checkout",
     "Inquiry": "/inquiries",
+    "New": "/new",
     "NoMatch": "*"
 }
 
