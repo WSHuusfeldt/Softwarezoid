@@ -1,6 +1,5 @@
 package entities.dto;
 
-import entities.Software;
 import entities.SoftwareOrderLine;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
@@ -21,7 +20,9 @@ public class SoftwareOrderLineDTO {
     }
 
     public SoftwareOrderLineDTO(SoftwareOrderLine softwareOrderLine) {
-        this.id = softwareOrderLine.getId();
+        if (softwareOrderLine.getId() != null) {
+            this.id = softwareOrderLine.getId();
+        }
         this.software = new SoftwareDTO(softwareOrderLine.getSoftware());
         this.price = softwareOrderLine.getPrice();
         this.qty = softwareOrderLine.getQty();
@@ -62,10 +63,10 @@ public class SoftwareOrderLineDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.software);
-        hash = 47 * hash + this.price;
-        hash = 47 * hash + this.qty;
+        hash = 23 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 23 * hash + Objects.hashCode(this.software);
+        hash = 23 * hash + this.price;
+        hash = 23 * hash + this.qty;
         return hash;
     }
 
@@ -95,4 +96,5 @@ public class SoftwareOrderLineDTO {
         }
         return true;
     }
+
 }

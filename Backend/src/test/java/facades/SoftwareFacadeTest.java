@@ -62,6 +62,8 @@ public class SoftwareFacadeTest {
         cat = new ArrayList();
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("SoftwareOrderLine.deleteAllRows").executeUpdate();
+            em.createNamedQuery("SoftwareOrder.deleteAllRows").executeUpdate();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
             em.createNamedQuery("Category.deleteAllRows").executeUpdate();
             c1 = new Category("Programming");
@@ -72,11 +74,14 @@ public class SoftwareFacadeTest {
                 (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), Arrays.asList(c1));
             s2 = new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
                 (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), Arrays.asList(c2));
+            
             em.persist(s1);
             em.getTransaction().commit();
             em.getTransaction().begin();
             em.persist(s2);
             em.getTransaction().commit();
+            
+            
             softwares.add(new SoftwareDTO(s1));
             softwares.add(new SoftwareDTO(s2));
             softwareSingle.add(s1);
@@ -111,14 +116,14 @@ public class SoftwareFacadeTest {
     @Test 
     public void testGetSoftwareById() throws NotFoundException {
         SoftwareDTO expResult = softwares.get(1);
-        assertEquals(expResult, facade.getSoftwareById(s2.getId()));
+        assertEquals(expResult, facade.getSoftwareById(softwares.get(1).getId()));
         
     }
     
     @Test
     public void getSoftwareByCategory() throws NotFoundException {
         List<SoftwareDTO> expResult = softwares;
-        List<SoftwareDTO> result = facade.getSoftwareByCategory("1,2");
+        List<SoftwareDTO> result = facade.getSoftwareByCategory(c1.getId() + "," + c2.getId());
         assertEquals(expResult, result);
     }
     

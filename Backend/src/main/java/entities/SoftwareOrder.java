@@ -7,22 +7,24 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import static javax.persistence.TemporalType.DATE;
 
 /**
  *
  * @author Andreas Vikke
  */
 @Entity
+@NamedQuery(name = "SoftwareOrder.deleteAllRows", query = "DELETE from SoftwareOrder")
 public class SoftwareOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Temporal(TemporalType.DATE)
+    @Temporal(DATE)
     private Date created;
     @OneToMany(mappedBy = "associatedSoftwareOrder")
     private List<SoftwareOrderLine> orderLines;
@@ -30,8 +32,7 @@ public class SoftwareOrder implements Serializable {
     public SoftwareOrder() {
     }
 
-    public SoftwareOrder(Long id, Date created, List<SoftwareOrderLine> orderLines) {
-        this.id = id;
+    public SoftwareOrder(Date created, List<SoftwareOrderLine> orderLines) {
         this.created = created;
         this.orderLines = orderLines;
     }    

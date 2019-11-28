@@ -8,20 +8,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Andreas Vikke
  */
 @Entity
+@NamedQuery(name = "SoftwareOrderLine.deleteAllRows", query = "DELETE from SoftwareOrderLine")
 public class SoftwareOrderLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "software_id")
     private Software software;
     private int price;
@@ -33,11 +35,10 @@ public class SoftwareOrderLine implements Serializable {
     public SoftwareOrderLine() {
     }
 
-    public SoftwareOrderLine(Software software, int price, int qty, SoftwareOrder associatedSoftwareOrder) {
+    public SoftwareOrderLine(Software software, int price, int qty) {
         this.software = software;
         this.price = price;
         this.qty = qty;
-        this.associatedSoftwareOrder = associatedSoftwareOrder;
     }
 
     public Long getId() {

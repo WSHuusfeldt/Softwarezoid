@@ -48,6 +48,7 @@ public class ApplicationConfig extends Application {
         resources.add(rest.CategoryResource.class);
         resources.add(rest.ContactResource.class);
         resources.add(rest.ReviewResource.class);
+        resources.add(rest.SoftwareOrderResource.class);
         resources.add(rest.SoftwareResource.class);
         resources.add(rest.UserInfoRessource.class);
         resources.add(rest.cors.CorsRequestFilter.class);

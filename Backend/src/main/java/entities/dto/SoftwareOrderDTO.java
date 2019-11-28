@@ -24,6 +24,9 @@ public class SoftwareOrderDTO {
     }
 
     public SoftwareOrderDTO(SoftwareOrder softwareOrder) {
+        if (softwareOrder.getId() != null) {
+            this.id = softwareOrder.getId();
+        }
         this.date = softwareOrder.getCreated();
         this.orderLines = new ArrayList();
         for(SoftwareOrderLine orderLine : softwareOrder.getOrderLines())
@@ -57,9 +60,7 @@ public class SoftwareOrderDTO {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 47 * hash + (int) (this.id ^ (this.id >>> 32));
-        hash = 47 * hash + Objects.hashCode(this.date);
-        hash = 47 * hash + Objects.hashCode(this.orderLines);
+        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
         return hash;
     }
 
@@ -76,12 +77,6 @@ public class SoftwareOrderDTO {
         }
         final SoftwareOrderDTO other = (SoftwareOrderDTO) obj;
         if (this.id != other.id) {
-            return false;
-        }
-        if (!Objects.equals(this.date, other.date)) {
-            return false;
-        }
-        if (!Objects.equals(this.orderLines, other.orderLines)) {
             return false;
         }
         return true;
