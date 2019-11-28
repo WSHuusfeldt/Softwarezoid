@@ -65,7 +65,7 @@ function ApiFacade() {
   }
 
   const resolveContact = (key) => {
-    return fetch('http://localhost:8080/softwarezoid/api/contacts/edit/' + key, makeOptions('PUT')).then(handleHttpErrors);
+    return fetch(URL + 'contacts/edit/' + key, makeOptions('PUT', true)).then(handleHttpErrors);
   }
 
 
@@ -90,7 +90,7 @@ function ApiFacade() {
   const fetchCategoryAll = () => {
     return fetch(URL + 'category/all', makeOptions('GET')).then(handleHttpErrors);
   };
-  
+
   const fetchSingleContact = (key) => {
     return fetch(URL + 'contacts/' + key, makeOptions('GET')).then(handleHttpErrors);
   };

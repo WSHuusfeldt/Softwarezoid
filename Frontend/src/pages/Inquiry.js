@@ -30,7 +30,7 @@ export default function Inquiries() {
                     <td>{inquiry.fullName}</td>
                     <td>{inquiry.subject}</td>
                     <td>{inquiry.date.substring(0, 10)}</td>
-                    <td><Link to={settings.getURL("Inquiry") + "/" + (inquiry.id)} className="btn-zoid">Show details</Link></td>
+                    <td><Link to={settings.getURL("InquiryDetails") + "/" + (inquiry.id)} className="btn-zoid">Show details</Link></td>
                 </tr>
                 )}
         </tbody>
