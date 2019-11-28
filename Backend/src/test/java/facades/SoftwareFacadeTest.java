@@ -15,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Disabled;
 import utils.EMF_Creator;
 
 /**
@@ -67,12 +68,10 @@ public class SoftwareFacadeTest {
             c2 = new Category("Images");
             em.persist(c1);
             em.persist(c2);
-            cat.add(c1);
-            cat.add(c2);
             s1 = new Software("Netbeans", "Programmers dream", 280000, "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png", 
-                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), cat);
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), Arrays.asList(c1));
             s2 = new Software("Visual Studio Code", "Programmers dream", 280000, "https://mospaw.com/wp-content/uploads/2018/07/Visual_Studio_code_logo.png", 
-                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), cat);
+                (Arrays.asList("Version: 14.0.4", "Compatability: Windows, MacOS, Linux")), Arrays.asList(c2));
             em.persist(s1);
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -114,6 +113,13 @@ public class SoftwareFacadeTest {
         SoftwareDTO expResult = softwares.get(1);
         assertEquals(expResult, facade.getSoftwareById(s2.getId()));
         
+    }
+    
+    @Test
+    public void getSoftwareByCategory() throws NotFoundException {
+        List<SoftwareDTO> expResult = softwares;
+        List<SoftwareDTO> result = facade.getSoftwareByCategory("1,2");
+        assertEquals(expResult, result);
     }
     
 }

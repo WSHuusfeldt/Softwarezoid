@@ -55,7 +55,7 @@ public class SoftwareResourceTest {
     public static void setUpClass() {
         //This method must be called before you request the EntityManagerFactory
         EMF_Creator.startREST_TestWithDB();
-        emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.CREATE);
+        emf = EMF_Creator.createEntityManagerFactory(EMF_Creator.DbSelector.TEST, EMF_Creator.Strategy.DROP_AND_CREATE);
 
         httpServer = startServer();
         //Setup RestAssured
@@ -129,11 +129,38 @@ public class SoftwareResourceTest {
     }
 
     @Test
-    @Disabled
     public void testSoftwareById404() throws Exception {
         given()
                 .contentType("application/json")
                 .get("/software/3").then()
+                .assertThat()
+                .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode());
+    }
+    
+    @Test
+    public void testCategoryById200() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/software/all/1,2").then()
+                .assertThat()
+                .statusCode(HttpStatus.OK_200.getStatusCode())
+                .body("size()", equalTo(2));
+    }
+
+    @Test
+    public void testCategoryById400() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/software/all/0").then()
+                .assertThat()
+                .statusCode(HttpStatus.BAD_REQUEST_400.getStatusCode());
+    }
+
+    @Test
+    public void testCategoryById404() throws Exception {
+        given()
+                .contentType("application/json")
+                .get("/software/all/3").then()
                 .assertThat()
                 .statusCode(HttpStatus.NOT_FOUND_404.getStatusCode());
     }

@@ -80,6 +80,6 @@ public class SoftwareFacade {
             categoriesList.add(category);
         }
 
-        return getEntityManager().createQuery("SELECT DISTINCT s FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
+        return getEntityManager().createQuery("SELECT DISTINCT new entities.dto.SoftwareDTO(s) FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
     }
 }

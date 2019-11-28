@@ -117,15 +117,18 @@ public class SoftwareDTO {
     public void setCategories(List<CategoryDTO> categories) {
         this.categories = categories;
     }
-    
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.title);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + this.price;
-        hash = 71 * hash + Objects.hashCode(this.thumbnail);
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.title);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + this.price;
+        hash = 37 * hash + Objects.hashCode(this.thumbnail);
+        hash = 37 * hash + Objects.hashCode(this.specifications);
+        hash = 37 * hash + Objects.hashCode(this.reviews);
+        hash = 37 * hash + Objects.hashCode(this.categories);
         return hash;
     }
 
@@ -141,6 +144,9 @@ public class SoftwareDTO {
             return false;
         }
         final SoftwareDTO other = (SoftwareDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.price != other.price) {
             return false;
         }
@@ -151,6 +157,12 @@ public class SoftwareDTO {
             return false;
         }
         if (!Objects.equals(this.thumbnail, other.thumbnail)) {
+            return false;
+        }
+        if (!Objects.equals(this.specifications, other.specifications)) {
+            return false;
+        }
+        if (!Objects.equals(this.reviews, other.reviews)) {
             return false;
         }
         return true;
