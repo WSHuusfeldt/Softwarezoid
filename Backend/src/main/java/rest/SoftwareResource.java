@@ -11,6 +11,7 @@ import entities.Category;
 import entities.Software;
 
 import entities.dto.SoftwareDTO;
+import errorhandling.NotFoundException;
 import errorhandling.dto.ExceptionDTO;
 import facades.SoftwareFacade;
 import io.swagger.v3.oas.annotations.Operation;
@@ -112,7 +113,7 @@ public class SoftwareResource {
                         "Compatability: Windows XP and later",
                         "Written in: C++", "Platform: IA-32, x64",
                         "Avaible in: 46 languages")), Arrays.asList(cat.get(0), cat.get(1), cat.get(2))));
-        
+
 //        SoftwareFacade sf = SoftwareFacade.getSoftwareFacade(EMF);
 //        Software s = new Software(
 //                "Spotify",
@@ -126,7 +127,6 @@ public class SoftwareResource {
 //                        "Avaible in: 46 languages")),cat);
 //        SoftwareDTO sdto = new SoftwareDTO(s);
 //        sf.addSoftware(sdto);
-
         //softwares.add(new Software("Not real program", "Test program for very very very very very very very very very very very very very very very very very very very very very very very very long description", 0, "https://cdn3.vectorstock.com/i/1000x1000/19/77/isolated-abstract-blue-color-thumb-up-contour-logo-vector-10861977.jpg"));
         em.getTransaction().begin();
         for (Software sk : softwares) {
@@ -188,8 +188,8 @@ public class SoftwareResource {
 
     }
 
-    @POST
     @Path("/add")
+    @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Add a new software",
             tags = {"Software"},
@@ -201,9 +201,13 @@ public class SoftwareResource {
                 @ApiResponse(content = @Content(mediaType = "application/json",
                         schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "500", description = "Internal Server Error")})
-    public void addSoftware(SoftwareDTO softwareDTO) {
-        SoftwareFacade sf = SoftwareFacade.getSoftwareFacade(EMF);
-        sf.addSoftware(softwareDTO);
+    public String addSoftware(SoftwareDTO softwareDTO) {
+        try {
+            FACADE.addSoftware(softwareDTO);
+            return "{\"msg\": \"200 ok\"}";
+        } catch (Exception e) {
+            return "{\"msg\": \"404 not found exception\"}";
+        }
     }
 
     @Path("all/{categories}")

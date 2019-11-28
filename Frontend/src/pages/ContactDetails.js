@@ -11,18 +11,24 @@ export default function ContactDetails() {
         ApiFacade.fetchSingleContact(match.params.id).then(res => { setData(res) });
     }, [match.params.id])
 
-    console.log(data);
-    console.log(setData);
+    const handleResolve = () => {
+        ApiFacade.resolveContact(match.params.id);
+
+    }
+
+
 
     return (
         <div>
             <ul>
+                <li>h</li>
                 <li>{data.fullName}</li>
                 <li>{data.email}</li>
                 <li>{data.phone}</li>
                 <li>{data.subject}</li>
                 <li>{data.message}</li>
             </ul>
+            <button onClick={handleResolve}>Resolved</button>
             <Link to={Settings.getURL("Contacts")}>Back to All Contacts</Link>
         </div>
     );

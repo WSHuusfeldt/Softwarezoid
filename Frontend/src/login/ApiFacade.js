@@ -1,5 +1,5 @@
-const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
-//const URL = 'http://localhost:8080/softwarezoid/api/';
+//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
+const URL = 'http://localhost:8080/softwarezoid/api/';
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -54,9 +54,9 @@ function ApiFacade() {
     const options = makeOptions('POST', true, { fullName: fullName, email: email, phone: phone, subject: subject, message: message });
     return fetch(URL + 'contacts/add', options).then(handleHttpErrors);
   }
-  
+
   const fetchContacts = () => {
-    return fetch('http://localhost:8080/softwarezoid/api/contacts/all', makeOptions('GET')).then(handleHttpErrors);
+    return fetch(URL + 'contacts/all', makeOptions('GET')).then(handleHttpErrors);
   }
 
   const createReview = (description, name, imgUrl, rating, softwareId) => {
@@ -64,10 +64,14 @@ function ApiFacade() {
     return fetch(URL + 'review/add', options).then(handleHttpErrors);
   }
 
+  const resolveContact = (key) => {
+    return fetch(URL + 'contacts/edit/' + key, makeOptions('PUT', true)).then(handleHttpErrors);
+  }
+
 
   const fetchUser = () => {
     const options = makeOptions('GET', true); //True add's the token
-    return fetch(URL + '/api/info/user', options).then(handleHttpErrors);
+    return fetch(URL + 'info/user', options).then(handleHttpErrors);
   };
 
   const fetchData = () => {
@@ -86,7 +90,7 @@ function ApiFacade() {
   const fetchCategoryAll = () => {
     return fetch(URL + 'category/all', makeOptions('GET')).then(handleHttpErrors);
   };
-  
+
   const fetchSingleContact = (key) => {
     return fetch(URL + 'contacts/' + key, makeOptions('GET')).then(handleHttpErrors);
   };
@@ -103,6 +107,7 @@ function ApiFacade() {
     fetchData,
     fetchSingleProduct,
     fetchSingleContact,
+    resolveContact,
     fetchReviews,
     addContact,
     createReview,

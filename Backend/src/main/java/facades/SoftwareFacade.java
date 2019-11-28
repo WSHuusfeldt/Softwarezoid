@@ -53,19 +53,23 @@ public class SoftwareFacade {
     }
 
     public void addSoftware(SoftwareDTO softwareDTO) {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        List<Category> al = new ArrayList();
-        for (CategoryDTO category : softwareDTO.getCategories()) {
-            al.add(new Category(category.getName()));
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            List<Category> al = new ArrayList();
+            for (CategoryDTO category : softwareDTO.getCategories()) {
+                Category cat = new Category(category.getName());
+                em.persist(cat);
+                al.add(cat);
+            }
+            Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications(), al);
+            em.persist(software);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
         }
-        Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications(), al);
-        em.persist(software);
-        em.getTransaction().commit();
-        em.close();
     }
-    
-    
+
     public List<SoftwareDTO> getSoftwareByCategory(String categories) throws NotFoundException {
         List<Category> categoriesList = new ArrayList();
         for (String catId : categories.split(",")) {
@@ -76,6 +80,6 @@ public class SoftwareFacade {
             categoriesList.add(category);
         }
 
-        return getEntityManager().createQuery("SELECT DISTINCT s FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
+        return getEntityManager().createQuery("SELECT DISTINCT new entities.dto.SoftwareDTO(s) FROM Software s WHERE s.categories IN :categories", SoftwareDTO.class).setParameter("categories", categoriesList).getResultList();
     }
 }

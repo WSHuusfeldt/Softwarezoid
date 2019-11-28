@@ -1,8 +1,29 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import settings from '../settings';
 
 export default function FAQ() {
   return (
-    <main>
+    <main className="mt-5  pt-5">
+      <div className="whoweare">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xl-12 text-center">
+                            <h1 className="font-weight-bold h2 color1 text-uppercase">
+                                If you have any questions
+                            </h1>
+                            <p className="h4 ">This page contains frequently asked questions we get from our customers.</p>
+                            <br/>
+                            <p className="h4 ">If you don't find the answer you were looking for, feel free to contact us by sending us a message.</p>
+                            <br/>
+                            <Link to={settings.getURL("Contact")} className="btn-zoid">Contact us</Link>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
       <div class="container-fluid py-3 mt-5 pt-5 pb-5">
         <div class="row">
           <div class="col-10 mx-auto">
@@ -22,7 +43,7 @@ export default function FAQ() {
                   </h5>
                 </div>
 
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqExample">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#faqExample">
                   <div class="card-body">
                     Softwarezoid is a platform, which sells software at a fair price to buyers from all over the world.
                     We cut all the hassle of searching through different websites and sellers to get the best price - we
