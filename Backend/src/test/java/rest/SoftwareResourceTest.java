@@ -34,6 +34,7 @@ import utils.EMF_Creator;
  *
  * @author Martin Frederiksen
  */
+@Disabled
 public class SoftwareResourceTest {
     private static final int SERVER_PORT = 7777;
     private static final String SERVER_URL = "http://localhost/api";
