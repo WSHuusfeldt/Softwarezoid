@@ -52,6 +52,8 @@ public class CategoryFacadeTest {
         cat = new ArrayList();
         try {
             em.getTransaction().begin();
+            em.createNamedQuery("SoftwareOrderLine.deleteAllRows").executeUpdate();
+            em.createNamedQuery("SoftwareOrder.deleteAllRows").executeUpdate();
             em.createNamedQuery("Software.deleteAllRows").executeUpdate();
             em.createNamedQuery("Category.deleteAllRows").executeUpdate();
             c1 = new Category("Programming");
