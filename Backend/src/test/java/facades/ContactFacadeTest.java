@@ -119,5 +119,12 @@ public class ContactFacadeTest {
      ContactDTO expected = contacts.get(1); 
         assertEquals(expected, facade.getById(c2.getId()));
     }
+    
+    @Test
+    public void testEdit() throws Exception {
+        boolean expected = true;
+        boolean result = facade.edit(contacts.get(0)).isResolved();
+        assertEquals(expected, result);
+    }
 
 }
