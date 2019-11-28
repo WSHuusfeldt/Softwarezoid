@@ -123,7 +123,7 @@ public class ContactResource {
                         responseCode = "404", description = "Contact not found")})
     public ContactDTO getContactById(@PathParam("id") long id) {
         if (id <= 0) {
-            throw new WebApplicationException("Invalid Id", 404);
+            throw new WebApplicationException("Invalid Id supplied", 400);
         }
         try {
             return FACADE.getById(id);

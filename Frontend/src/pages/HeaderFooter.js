@@ -31,6 +31,7 @@ const Header = () => {
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Products")}>Products</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Contact")}>Contact</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("FAQ")}>FAQ</NavLink></li>
+                        <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("New")}>Add new product</NavLink></li>
                         <li className="nav-item">
                             <Link className="nav-link" to={URLSettings.getURL("Basket")}>
                                 <i className="fa fa-shopping-basket" aria-hidden="true"></i>

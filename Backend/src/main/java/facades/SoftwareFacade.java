@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -58,9 +59,17 @@ public class SoftwareFacade {
             em.getTransaction().begin();
             List<Category> al = new ArrayList();
             for (CategoryDTO category : softwareDTO.getCategories()) {
-                Category cat = new Category(category.getName());
-                em.persist(cat);
-                al.add(cat);
+                TypedQuery<Category> query = getEntityManager().createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class);
+                Category catCheck = query.setParameter("name", category.getName()).getResultList().get(0);
+                
+                if (catCheck != null) {
+                    em.merge(catCheck);
+                    al.add(catCheck);
+                } else {
+                    Category cat = new Category(category.getName());
+                    em.persist(cat);
+                    al.add(cat);
+                }
             }
             Software software = new Software(softwareDTO.getTitle(), softwareDTO.getDescription(), softwareDTO.getPrice(), softwareDTO.getThumbnail(), softwareDTO.getSpecifications(), al);
             em.persist(software);
