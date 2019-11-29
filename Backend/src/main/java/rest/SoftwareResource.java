@@ -149,11 +149,7 @@ public class SoftwareResource {
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
-<<<<<<< HEAD
                         array = @ArraySchema(schema = @Schema(implementation = SoftwareDTO.class))),
-=======
-                                schema = @Schema(implementation = SoftwareDTO.class)),
->>>>>>> 7a8a4a182945b17a9a1884de9f3e22fac7631842
                         responseCode = "200", description = "Succesful operation")})
     public List<SoftwareDTO> getJson() {
         return FACADE.getSoftwareAll();
