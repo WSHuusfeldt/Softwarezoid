@@ -138,7 +138,7 @@ public class ContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary="Edit a contact to be resolved",
-            tags={"Contacts"},
+            tags={"Contact"},
             responses = {
                 @ApiResponse(
                 content = @Content(mediaType="application/json",
