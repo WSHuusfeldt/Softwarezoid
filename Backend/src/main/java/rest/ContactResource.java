@@ -2,10 +2,14 @@ package rest;
 
 import entities.Contact;
 import entities.dto.ContactDTO;
+<<<<<<< HEAD
+=======
 import errorhandling.NotFoundException;
+>>>>>>> 7a8a4a182945b17a9a1884de9f3e22fac7631842
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -99,9 +103,15 @@ public class ContactResource {
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
+<<<<<<< HEAD
+                        array = @ArraySchema(schema = @Schema(implementation = ContactDTO.class))),
+                        responseCode = "200", description = "Succesful operation")})
+    public List<ContactDTO> getAllContacts(){
+=======
                                 schema = @Schema(implementation = ContactDTO.class)),
                         responseCode = "200", description = "Successful operation")})
     public List<ContactDTO> getAllContacts() {
+>>>>>>> 7a8a4a182945b17a9a1884de9f3e22fac7631842
         return FACADE.getAll();
     }
 
