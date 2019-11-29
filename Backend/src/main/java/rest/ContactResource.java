@@ -4,10 +4,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import entities.Contact;
 import entities.dto.ContactDTO;
-import errorhandling.GenericExceptionMapper;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -84,7 +84,7 @@ public class ContactResource {
             responses={
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
-                        schema = @Schema(implementation = ContactDTO.class)),
+                        array = @ArraySchema(schema = @Schema(implementation = ContactDTO.class))),
                         responseCode = "200", description = "Succesful operation")})
     public List<ContactDTO> getAllContacts(){
         return FACADE.getAll();
