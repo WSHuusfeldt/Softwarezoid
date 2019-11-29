@@ -60,8 +60,7 @@ public class SoftwareFacade {
             List<Category> al = new ArrayList();
             for (CategoryDTO category : softwareDTO.getCategories()) {
                 TypedQuery<Category> query = getEntityManager().createQuery("SELECT c FROM Category c WHERE c.name = :name", Category.class);
-                Category catCheck = query.setParameter("name", category.getName()).getResultList().get(0);
-                
+                Category catCheck = query.setParameter("name", category.getName()).getResultList().get(0);                
                 if (catCheck != null) {
                     em.merge(catCheck);
                     al.add(catCheck);
