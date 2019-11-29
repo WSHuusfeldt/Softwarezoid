@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package rest;
 
 import com.google.gson.Gson;
@@ -15,6 +10,7 @@ import errorhandling.NotFoundException;
 import errorhandling.dto.ExceptionDTO;
 import facades.SoftwareFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -153,7 +149,11 @@ public class SoftwareResource {
             responses = {
                 @ApiResponse(
                         content = @Content(mediaType = "application/json",
+<<<<<<< HEAD
+                        array = @ArraySchema(schema = @Schema(implementation = SoftwareDTO.class))),
+=======
                                 schema = @Schema(implementation = SoftwareDTO.class)),
+>>>>>>> 7a8a4a182945b17a9a1884de9f3e22fac7631842
                         responseCode = "200", description = "Succesful operation")})
     public List<SoftwareDTO> getJson() {
         return FACADE.getSoftwareAll();
