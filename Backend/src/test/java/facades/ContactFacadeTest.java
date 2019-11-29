@@ -2,7 +2,9 @@ package facades;
 
 import entities.Contact;
 import entities.dto.ContactDTO;
+import facades.ContactFacade;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -55,9 +57,9 @@ public class ContactFacadeTest {
         try {
             em.getTransaction().begin();
             em.createNamedQuery("Contact.deleteAllRows").executeUpdate();
-            c1 = new Contact("William Housefield", "smokeweed@420.com", "12345678", "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv");
-            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud");
-            c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden");
+            c1 = new Contact("William Housefield", "smokeweed@420.com", "12345678", "Jeg er for skæv, kan i hjælpe?", "Jeg er bare skæv", new Date(), false);
+            c2 = new Contact("Andreas Ukrudt", "ukrudtfri@påenuge", "87654321", "Skal jeg fjerne jeres ukrudt?", "I kan få et godt tilbud", new Date(), false);
+            c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden", new Date(), false);
             em.persist(c1);
             em.getTransaction().commit();
             em.getTransaction().begin();
@@ -96,7 +98,7 @@ public class ContactFacadeTest {
         int expectedRes;
         int res;
         try{
-        c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden");
+        c3 = new Contact("Asger Sørensen", "billig@bajere.com", "12312312", "Billi baj?", "Jeg pisse fuld hele tiden", new Date(), false);
         expectedRes = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();
         facade.addContact(new ContactDTO(c3));
         res = em.createQuery("SELECT Contact from Contact contact", Contact.class).getResultList().size();
@@ -116,6 +118,13 @@ public class ContactFacadeTest {
     public void testGetById() throws Exception {
      ContactDTO expected = contacts.get(1); 
         assertEquals(expected, facade.getById(c2.getId()));
+    }
+    
+    @Test
+    public void testEdit() throws Exception {
+        boolean expected = true;
+        boolean result = facade.edit(contacts.get(0)).isResolved();
+        assertEquals(expected, result);
     }
 
 }

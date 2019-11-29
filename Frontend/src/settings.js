@@ -5,10 +5,13 @@ const URLs = {
     "ProductId": "/product",
     "Data": "/data",
     "Contact": "/contact",
+    "InquiryDetails": "/inquiry",
     "About": "/about",
     "FAQ": "/faq",
     "Basket": "/cart",
     "Checkout": "/checkout",
+    "Inquiry": "/inquiries",
+    "New": "/new",
     "NoMatch": "*"
 }
 

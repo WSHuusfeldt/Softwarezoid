@@ -25,17 +25,15 @@ public class ReviewDTO {
     private Long softwareId;
     
     public ReviewDTO() {
-        
     }
 
-   
-    
     public ReviewDTO(Review review) {
         this.name = review.getName();
         this.imgUrl = review.getImgUrl();
         this.date = review.getDate();
         this.rating = review.getRating();
-        this.softwareId = review.getId();
+        this.softwareId = review.getAssociatedSoftware().getId();
+        this.description = review.getDescription();
     }
 
     public String getRating() {

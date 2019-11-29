@@ -3,8 +3,8 @@ package facades;
 import entities.Review;
 import entities.Software;
 import entities.dto.ReviewDTO;
-import entities.dto.SoftwareDTO;
 import errorhandling.NotFoundException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -30,25 +30,32 @@ public class ReviewFacade {
         return emf.createEntityManager();
     }
 
-    public void addReview(ReviewDTO review) throws NotFoundException {        
+    public void addReview(ReviewDTO review) throws NotFoundException {
         EntityManager em = getEntityManager();
-        em.getTransaction().begin();
-        Software software = em.find(Software.class, review.getSoftwareId());
-        Review rev = new Review(review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
-        em.persist(rev);
-        software.addReview(rev);
-        em.merge(software);
-        em.getTransaction().commit();
-        em.close();
-    }
-    
-    public List<ReviewDTO> getReviews(long id) throws NotFoundException {
-        Software software = getEntityManager().find(Software.class, id);
-        System.out.println(software.getDescription());
-        SoftwareDTO softwareDTO = new SoftwareDTO(software);
-        System.out.println(softwareDTO.getReviews().get(0).getDescription());
-        return softwareDTO.getReviews();
+        try {            
+            Software software = em.find(Software.class, review.getSoftwareId());
+            if (software == null) {
+                throw new NotFoundException("Software not found");
+            }
+            Review rev = new Review(review.getName(), review.getImgUrl(), new Date(), review.getRating(), review.getDescription(), software);
+            em.getTransaction().begin();
+            em.persist(rev);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
     }
 
+    public List<ReviewDTO> getReviews(long id) throws NotFoundException {
+        Software software = getEntityManager().find(Software.class, id);
+        List<Review> l = software.getReviews();
+        List<ReviewDTO> ldto = new ArrayList();
+        
+        for(Review rev : l){
+            ldto.add(new ReviewDTO(rev));
+        }
+        
+        return ldto;
+    }
 
 }

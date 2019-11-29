@@ -1,5 +1,7 @@
 package entities.dto;
 
+import entities.Category;
+import entities.Review;
 import entities.Software;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.ArrayList;
@@ -10,33 +12,41 @@ import java.util.Objects;
  *
  * @author Martin Frederiksen
  */
-@Schema(name="Software")
+@Schema(name = "Software")
 public class SoftwareDTO {
+
     private long id;
-    @Schema(required=true, example="Netbeans")
+    @Schema(required = true, example = "Netbeans")
     private String title;
-    @Schema(required=true, example="This is a program used to develop software")
+    @Schema(required = true, example = "This is a program used to develop software")
     private String description;
-    @Schema(required=true, example="0")
+    @Schema(required = true, example = "0")
     private int price;
-    @Schema(required=true, example="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
+    @Schema(required = true, example = "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Apache_NetBeans_Logo.svg/1200px-Apache_NetBeans_Logo.svg.png")
     private String thumbnail;
     private List<String> specifications;
     private List<ReviewDTO> reviews;
+    private List<CategoryDTO> categories;
 
     public SoftwareDTO() {
     }
-    
+
     public SoftwareDTO(Software software) {
-        this.id = software.getId();
+        if (software.getId() != null) {
+            this.id = software.getId();
+        }
         this.title = software.getTitle();
         this.description = software.getDescription();
         this.price = software.getPrice();
         this.thumbnail = software.getThumbnail();
         this.specifications = software.getSpecifications();
         this.reviews = new ArrayList();
-        for (int i = 0; i < software.getReviews().size(); ++i) {
-            this.reviews.add(new ReviewDTO(software.getReviews().get(i)));
+        for(Review review : software.getReviews()) {
+            this.reviews.add(new ReviewDTO(review));
+        }
+        this.categories = new ArrayList();
+        for(Category category : software.getCategories()) {
+            this.categories.add(new CategoryDTO(category));
         }
     }
 
@@ -55,7 +65,7 @@ public class SoftwareDTO {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public int getPrice() {
         return price;
     }
@@ -88,7 +98,6 @@ public class SoftwareDTO {
         this.id = id;
     }
 
-    
     public List<ReviewDTO> getReviews() {
         return reviews;
     }
@@ -96,19 +105,30 @@ public class SoftwareDTO {
     public void setReviews(List<ReviewDTO> reviews) {
         this.reviews = reviews;
     }
-    
+
     public void addReview(ReviewDTO review) {
         this.reviews.add(review);
     }
-    
+
+    public List<CategoryDTO> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<CategoryDTO> categories) {
+        this.categories = categories;
+    }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.title);
-        hash = 71 * hash + Objects.hashCode(this.description);
-        hash = 71 * hash + this.price;
-        hash = 71 * hash + Objects.hashCode(this.thumbnail);
+        hash = 37 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 37 * hash + Objects.hashCode(this.title);
+        hash = 37 * hash + Objects.hashCode(this.description);
+        hash = 37 * hash + this.price;
+        hash = 37 * hash + Objects.hashCode(this.thumbnail);
+        hash = 37 * hash + Objects.hashCode(this.specifications);
+        hash = 37 * hash + Objects.hashCode(this.reviews);
+        hash = 37 * hash + Objects.hashCode(this.categories);
         return hash;
     }
 
@@ -124,6 +144,9 @@ public class SoftwareDTO {
             return false;
         }
         final SoftwareDTO other = (SoftwareDTO) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (this.price != other.price) {
             return false;
         }
@@ -136,7 +159,13 @@ public class SoftwareDTO {
         if (!Objects.equals(this.thumbnail, other.thumbnail)) {
             return false;
         }
+        if (!Objects.equals(this.specifications, other.specifications)) {
+            return false;
+        }
+        if (!Objects.equals(this.reviews, other.reviews)) {
+            return false;
+        }
         return true;
     }
-    
+
 }
