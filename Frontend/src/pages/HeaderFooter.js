@@ -31,7 +31,13 @@ const Header = () => {
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Products")}>Products</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Contact")}>Contact</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("FAQ")}>FAQ</NavLink></li>
-                        <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("New")}>Add new product</NavLink></li>
+                        <li className="nav-link dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <NavLink className="dropdown-item" activeClassName="active" to={URLSettings.getURL("Inquiry")}>All Contacts</NavLink>
+                                <NavLink className="dropdown-item" activeClassName="active" to={URLSettings.getURL("New")}>Add product</NavLink>
+                            </div>
+                        </li>
                         <li className="nav-item">
                             <Link className="nav-link" to={URLSettings.getURL("Basket")}>
                                 <i className="fa fa-shopping-basket" aria-hidden="true"></i>
@@ -48,32 +54,32 @@ export default Header;
 
 export const HomeHeader = () => {
     return (
-      <header id="home">
-        <div className="overlay"></div>
-  
-        <Header />
-  
-        <div className="tophead">
-          <div className="container-fluid">
-            <div className="row">
-              <div className="col-md-12">
-                <ScrollAnimation animateIn="fadeInLeft"><h1 className="title-main">Software <span>Zoid</span></h1></ScrollAnimation>
-  
-                <ScrollAnimation animateIn="fadeInUp"><h3 className="subtitle-main">Lorem ipsum dolor sit amet
+        <header id="home">
+            <div className="overlay"></div>
+
+            <Header />
+
+            <div className="tophead">
+                <div className="container-fluid">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <ScrollAnimation animateIn="fadeInLeft"><h1 className="title-main">Software <span>Zoid</span></h1></ScrollAnimation>
+
+                            <ScrollAnimation animateIn="fadeInUp"><h3 className="subtitle-main">Lorem ipsum dolor sit amet
                               consectetur adipiscing elit <br /> proin leo leo ornare nec vulputate tempus velit nam id purus
                               tellus hendrerit mi dapibus.</h3></ScrollAnimation>
-  
-                <a href="#bestSeller" className="arrowDown">
-                  <Bounce><i className="fa fa-angle-down justify-content-center"></i></Bounce>
-                </a>
-              </div>
+
+                            <a href="#bestSeller" className="arrowDown">
+                                <Bounce><i className="fa fa-angle-down justify-content-center"></i></Bounce>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div className="sesgoabajo"></div>
-      </header>
+            <div className="sesgoabajo"></div>
+        </header>
     )
-  }
+}
 
 export const Footer = () => {
     return (
