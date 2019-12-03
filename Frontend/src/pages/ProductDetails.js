@@ -25,7 +25,7 @@ export default function ProductDetails() {
     const handleSubmit = event => {
         ApiFacade.createReview(review.description, review.name, review.url, review.rating, match.params.id);
     }
-
+    
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
     };

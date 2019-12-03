@@ -1,7 +1,5 @@
 import ApiFacade from '../facade/ApiFacade';
 
-//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
-
 function BasketFacade() {
 
     const getData = () => {
