@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import URLSettings from '../settings';
 import ApiFacade from '../login/ApiFacade';
 
-const Basket = () => {
+const Basket = ({ checkout }) => {
     const [update, setUpdate] = useState(false);
     const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
@@ -21,7 +21,7 @@ const Basket = () => {
             basket.forEach(e => {
                 // eslint-disable-next-line
                 let product = data.find(p => p.id == e.id);
-                if(product !== undefined) {
+                if (product !== undefined) {
                     items.push({ product: product, qty: e.qty });
                     tprice = tprice + (product.price * e.qty);
                 }
@@ -119,19 +119,24 @@ const Basket = () => {
                                     <div className="col">
                                         <h6>Quantity</h6>
                                     </div>
+                                    {
+                                        checkout ? product.qty :
+                                            <div className="col">
+                                                <div className="col">
+                                                    <div className="quantity">
+                                                        <input type="number" product={product.product.id} min="1" max="9" step="1" value={product.qty} onChange={onQuantityChange} />
+                                                        <div className="quantity-nav" product={product.product.id}><div className="quantity-button quantity-up" modi="+" onClick={onBtnClick}>+</div><div className="quantity-button quantity-down" modi="-" onClick={onBtnClick}>-</div></div>
+                                                    </div>
+                                                </div>
+                                                <div className="col">
+                                                    <button type="button" className="btn btn-outline-danger btn-xs" product={product.product.id} onClick={onDelete}>
+                                                        <i className="fa fa-trash" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                    }
                                     <div className="col">
-                                        <div className="quantity">
-                                            <input type="number" product={product.product.id} min="1" max="9" step="1" value={product.qty} onChange={onQuantityChange} />
-                                            <div className="quantity-nav" product={product.product.id}><div className="quantity-button quantity-up" modi="+" onClick={onBtnClick}>+</div><div className="quantity-button quantity-down" modi="-" onClick={onBtnClick}>-</div></div>
-                                        </div>
-                                    </div>
-                                    <div className="col">
-                                        <button type="button" className="btn btn-outline-danger btn-xs" product={product.product.id} onClick={onDelete}>
-                                            <i className="fa fa-trash" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                    <div className="col">
-                                        <h6><span className="text-muted">x</span><strong> {(product.product.price/100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
+                                        <h6><span className="text-muted">x</span><strong> {(product.product.price / 100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
                                     </div>
                                 </div>
                             </div>
@@ -152,9 +157,9 @@ const Basket = () => {
                         </div>
                     </div>
                     <div className="pull-right" >
-                        <Link className="btn btn-zoid pull-right" to={URLSettings.getURL("Checkout")}>Checkout</Link>
+                        {checkout ? "" : <Link className="btn btn-zoid pull-right" to={URLSettings.getURL("Checkout")}>Checkout</Link> }
                         <div className="pull-right p-2">
-                            Total price: <b>{(totalPrice/100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
+                            Total price: <b>{(totalPrice / 100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
                         </div>
                     </div>
                 </div>

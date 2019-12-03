@@ -1099,7 +1099,11 @@ input[type=number] {
   height: 50%; }
 
 .shopping-cart {
-  margin-top: 20px; }
+  margin-top: 20px;
+  width: 80%;
+  margin: 5rem auto;
+
+}
   .shopping-cart h6 {
     line-height: 3; }
 
