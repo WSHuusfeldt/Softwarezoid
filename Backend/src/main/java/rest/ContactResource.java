@@ -6,6 +6,7 @@ import errorhandling.NotFoundException;
 import errorhandling.dto.ExceptionDTO;
 import facades.ContactFacade;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -123,7 +124,7 @@ public class ContactResource {
                         responseCode = "404", description = "Contact not found")})
     public ContactDTO getContactById(@PathParam("id") long id) {
         if (id <= 0) {
-            throw new WebApplicationException("Invalid Id", 404);
+            throw new WebApplicationException("Invalid Id supplied", 400);
         }
         try {
             return FACADE.getById(id);
@@ -138,7 +139,7 @@ public class ContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary="Edit a contact to be resolved",
-            tags={"Contacts"},
+            tags={"Contact"},
             responses = {
                 @ApiResponse(
                 content = @Content(mediaType="application/json",

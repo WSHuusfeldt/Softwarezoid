@@ -12,24 +12,40 @@ export default function ContactDetails() {
     }, [match.params.id])
 
     const handleResolve = () => {
-        ApiFacade.resolveContact(match.params.id);
+        const confirm = window.confirm("Are you sure this issue is resolved?\nThis action cannot be undone ")
 
+        if (confirm == true) {
+            ApiFacade.resolveContact(match.params.id)
+
+        }
     }
 
 
 
+
+
     return (
-        <div>
+        <div className="text-center">
+            <br /><br />
+            <h2>Contact from {data.fullName}</h2>
+            <br />
             <ul>
-                <li>h</li>
-                <li>{data.fullName}</li>
+                <h4>Email</h4>
                 <li>{data.email}</li>
+                <hr />
+                <h4>Phone</h4>
                 <li>{data.phone}</li>
+                <hr />
+                <h4>Subject</h4>
                 <li>{data.subject}</li>
+                <hr />
+                <h4>Message</h4>
                 <li>{data.message}</li>
             </ul>
-            <button onClick={handleResolve}>Resolved</button>
-            <Link to={Settings.getURL("Contacts")}>Back to All Contacts</Link>
-        </div>
+            <button className="btn btn-outline-danger mt-3" onClick={handleResolve}>Resolved</button> <br /> <br />
+
+            <Link className="btn btn-zoid" to={Settings.getURL("Inquiry")}>Back to All Contacts</Link>
+            <br /> <br />
+        </div >
     );
 }
