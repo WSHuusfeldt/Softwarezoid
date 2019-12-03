@@ -83,7 +83,7 @@ public class SoftwareOrderResource {
 
     }
 
-    @Path("/add")
+    @Path("add")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Add a new order",
@@ -97,11 +97,7 @@ public class SoftwareOrderResource {
                         schema = @Schema(implementation = ExceptionDTO.class)),
                         responseCode = "500", description = "Internal Server Error")})
     public String addSoftware(SoftwareOrderDTO softwareOrderDTO) {
-        try {
-            FACADE.addSoftwareOrder(softwareOrderDTO);
-            return "{\"msg\": \"200 ok\"}";
-        } catch (Exception e) {
-            return "{\"msg\": \"404 not found exception\"}";
-        }
+        long id = FACADE.addSoftwareOrder(softwareOrderDTO);
+        return "{\"msg\": \"" + id + "\"}";
     }
 }

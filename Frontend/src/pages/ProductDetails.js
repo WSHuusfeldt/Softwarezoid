@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
-import ApiFacade from '../login/ApiFacade';
+import ApiFacade from '../facade/ApiFacade';
 import Settings from '../settings';
 
 export default function ProductDetails() {

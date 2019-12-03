@@ -1,5 +1,5 @@
-const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
-//const URL = 'http://localhost:8080/softwarezoid/api/';
+//const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
+const URL = 'http://localhost:8080/softwarezoid/api/';
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -105,6 +105,38 @@ function ApiFacade() {
     return fetch(URL + 'software/all/' + ids, makeOptions('GET')).then(handleHttpErrors);
   };
 
+  const createOrder = (basket) => {
+    var order = {
+      id: 0,
+      date: "2019-12-03T09:56:48.681Z",
+      orderLines: []
+    }
+
+    basket.forEach(e => {
+      order.orderLines.push({
+        id: 0,
+        software: {
+          id: e.product.id,
+          title: "",
+          description: "",
+          price: 0,
+          thumbnail: "",
+          specifications: [],
+          reviews: [],
+          categories: []
+        },
+        price: 0,
+        qty: e.qty
+      });
+    });
+
+    return fetch(URL + 'order/add/', makeOptions('POST', null, order)).then(handleHttpErrors);
+  };
+
+  const getOrder = (id) => {
+    return fetch(URL + 'order/' + id, makeOptions('GET')).then(handleHttpErrors);
+  }
+
   return {
     login,
     logout,
@@ -119,7 +151,9 @@ function ApiFacade() {
     fetchCategoryAll,
     fetchSoftwareByCategory,
     fetchContacts,
-    addProduct
+    addProduct,
+    createOrder,
+    getOrder
   };
 
 

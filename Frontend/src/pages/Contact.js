@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ApiFacade from '../login/ApiFacade';
+import ApiFacade from '../facade/ApiFacade';
 
 export default function Contact() {
     const initialValue = {

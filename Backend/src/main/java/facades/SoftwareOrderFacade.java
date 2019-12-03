@@ -53,7 +53,7 @@ public class SoftwareOrderFacade {
         return new SoftwareOrderDTO(softwareOrder);
     }
     
-    public void addSoftwareOrder(SoftwareOrderDTO softwareOrderDTO) {
+    public long addSoftwareOrder(SoftwareOrderDTO softwareOrderDTO) {
         EntityManager em = getEntityManager();
         try {
             SoftwareOrder softwareOrder = EntityFromDTOMappers.mapSoftwareOrderFromDTO(softwareOrderDTO);
@@ -69,6 +69,7 @@ public class SoftwareOrderFacade {
             softwareOrder.setCreated(new Date());
             em.persist(softwareOrder);
             em.getTransaction().commit();
+            return softwareOrder.getId();
         } finally {
             em.close();
         }

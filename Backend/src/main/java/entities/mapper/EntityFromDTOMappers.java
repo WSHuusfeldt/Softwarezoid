@@ -10,6 +10,7 @@ import entities.dto.SoftwareDTO;
 import entities.dto.SoftwareOrderDTO;
 import entities.dto.SoftwareOrderLineDTO;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,10 +37,10 @@ public class EntityFromDTOMappers {
         for(SoftwareOrderLineDTO softwareOrderLine : softwareOrderDTO.getOrderLines())
             softwareOrderLines.add(mapSoftwareOrderLineFromDTO(softwareOrderLine));
         
-        return new SoftwareOrder(softwareOrderDTO.getDate(), softwareOrderLines);
+        return new SoftwareOrder(new Date(), softwareOrderLines);
     }
     
     public static SoftwareOrderLine mapSoftwareOrderLineFromDTO(SoftwareOrderLineDTO softwareOrderLineDTO) {
-        return new SoftwareOrderLine(mapSoftwareFromDTO(softwareOrderLineDTO.getSoftware()), softwareOrderLineDTO.getPrice(), softwareOrderLineDTO.getQty());
+        return new SoftwareOrderLine(mapSoftwareFromDTO(softwareOrderLineDTO.getSoftware()), 0, softwareOrderLineDTO.getQty());
     }
 }

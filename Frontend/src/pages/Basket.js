@@ -1,37 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import URLSettings from '../settings';
-import ApiFacade from '../login/ApiFacade';
+import BasketFacade from '../facade/BasketFacade'
 
-const Basket = ({ checkout }) => {
+const Basket = ({ checkout, invoiceData }) => {
     const [update, setUpdate] = useState(false);
-    const [data, setData] = useState([]);
     const [products, setProducts] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
-        ApiFacade.fetchData().then(res => setData(res));
-    }, [])
-
-    useEffect(() => {
-        if (localStorage.getItem("basket") != null) {
-            const basket = JSON.parse(localStorage.getItem("basket"));
-            var items = [];
-            var tprice = 0;
-            basket.forEach(e => {
-                // eslint-disable-next-line
-                let product = data.find(p => p.id == e.id);
-                if (product !== undefined) {
-                    items.push({ product: product, qty: e.qty });
-                    tprice = tprice + (product.price * e.qty);
-                }
-            });
-            setTotalPrice(tprice);
-            setProducts(items);
-        }
-
-        //localStorage.setItem("basket", JSON.stringify([{id: 1, qty: 4}, {id: 3, qty: 2}, {id: 4, qty: 7}]));
-    }, [data, update])
+        BasketFacade.getBasket(JSON.stringify(invoiceData)).then(res => setProducts(res));
+        BasketFacade.getTotalPrice(JSON.stringify(invoiceData)).then(res => setTotalPrice(res));
+    }, [invoiceData, update])
 
     const onQuantityChange = (evt) => {
         let id = evt.target.getAttribute("product");
@@ -121,19 +101,20 @@ const Basket = ({ checkout }) => {
                                     </div>
                                     {
                                         checkout ? product.qty :
-                                            <div className="col">
-                                                <div className="col">
-                                                    <div className="quantity">
-                                                        <input type="number" product={product.product.id} min="1" max="9" step="1" value={product.qty} onChange={onQuantityChange} />
-                                                        <div className="quantity-nav" product={product.product.id}><div className="quantity-button quantity-up" modi="+" onClick={onBtnClick}>+</div><div className="quantity-button quantity-down" modi="-" onClick={onBtnClick}>-</div></div>
-                                                    </div>
-                                                </div>
-                                                <div className="col">
-                                                    <button type="button" className="btn btn-outline-danger btn-xs" product={product.product.id} onClick={onDelete}>
-                                                        <i className="fa fa-trash" aria-hidden="true"></i>
-                                                    </button>
-                                                </div>
+                                        <div className="col">
+                                            <div className="quantity">
+                                                <input type="number" product={product.product.id} min="1" max="9" step="1" value={product.qty} onChange={onQuantityChange} />
+                                                <div className="quantity-nav" product={product.product.id}><div className="quantity-button quantity-up" modi="+" onClick={onBtnClick}>+</div><div className="quantity-button quantity-down" modi="-" onClick={onBtnClick}>-</div></div>
                                             </div>
+                                        </div>
+                                    }
+                                    {
+                                        checkout ? "" :
+                                        <div className="col">
+                                            <button type="button" className="btn btn-outline-danger btn-xs" product={product.product.id} onClick={onDelete}>
+                                                <i className="fa fa-trash" aria-hidden="true"></i>
+                                            </button>
+                                        </div>
                                     }
                                     <div className="col">
                                         <h6><span className="text-muted">x</span><strong> {(product.product.price / 100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</strong></h6>
@@ -159,7 +140,7 @@ const Basket = ({ checkout }) => {
                     <div className="pull-right" >
                         {checkout ? "" : <Link className="btn btn-zoid pull-right" to={URLSettings.getURL("Checkout")}>Checkout</Link> }
                         <div className="pull-right p-2">
-                            Total price: <b>{(totalPrice / 100).toLocaleString(navigator.language, { minimumFractionDigits: 2 })},-</b>
+                            Total price: <b>{totalPrice},-</b>
                         </div>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ const URLs = {
     "Checkout": "/checkout",
     "Inquiry": "/inquiries",
     "New": "/new",
+    "Invoice": "/invoice",
     "NoMatch": "*"
 }
 

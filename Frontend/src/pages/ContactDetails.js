@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
-import ApiFacade from '../login/ApiFacade';
+import ApiFacade from '../facade/ApiFacade';
 import Settings from '../settings';
 
 export default function ContactDetails() {
@@ -14,7 +14,7 @@ export default function ContactDetails() {
     const handleResolve = () => {
         const confirm = window.confirm("Are you sure this issue is resolved?\nThis action cannot be undone ")
 
-        if (confirm == true) {
+        if (confirm === true) {
             ApiFacade.resolveContact(match.params.id)
 
         }
