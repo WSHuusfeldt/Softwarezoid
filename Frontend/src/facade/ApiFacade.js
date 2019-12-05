@@ -130,6 +130,7 @@ function ApiFacade() {
       });
     });
 
+    localStorage.removeItem("basket");
     return fetch(URL + 'order/add/', makeOptions('POST', null, order)).then(handleHttpErrors);
   };
 
