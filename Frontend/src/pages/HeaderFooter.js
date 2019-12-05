@@ -31,9 +31,9 @@ const Header = () => {
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Products")}>Products</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("Contact")}>Contact</NavLink></li>
                         <li className="nav-item"><NavLink className="nav-link" activeClassName="active" to={URLSettings.getURL("FAQ")}>FAQ</NavLink></li>
-                        <li className="nav-link dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li className="nav-item dropdown">
+                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <NavLink className="dropdown-item" activeClassName="active" to={URLSettings.getURL("Inquiry")}>All Contacts</NavLink>
                                 <NavLink className="dropdown-item" activeClassName="active" to={URLSettings.getURL("New")}>Add product</NavLink>
                             </div>

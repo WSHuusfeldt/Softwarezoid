@@ -16,16 +16,21 @@ export default function ProductDetails() {
     const [spec, setSpec] = useState([]);
     const [reviews, setReviews] = useState([]);
     const [review, setReview] = useState(initialValue);
+    const [comp, setComp] = useState([]);
 
     useEffect(() => {
         ApiFacade.fetchSingleProduct(match.params.id).then(res => { setData(res); setSpec(res.specifications) });
         ApiFacade.fetchReviews(match.params.id).then(res => { setReviews(res) });
+        ApiFacade.fetchComputers().then(res => { setComp(res) });
     }, [match.params.id])
+
+    console.log(comp.map(x => x.gpuList.description));
+    console.log(comp);
 
     const handleSubmit = event => {
         ApiFacade.createReview(review.description, review.name, review.url, review.rating, match.params.id);
     }
-    
+
     const handleChange = event => {
         setReview({ ...review, [event.target.name]: event.target.value });
     };
@@ -96,9 +101,14 @@ export default function ProductDetails() {
                                             <a className="nav-link active" href="#more-information" data-toggle="tab">Description </a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#specifications" data-toggle="tab">Specifications</a></li>
+                                            <a className="nav-link" href="#specifications" data-toggle="tab">Specifications</a>
+                                        </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#reviews" data-toggle="tab">Reviews</a></li>
+                                            <a className="nav-link" href="#recommended-with" data-toggle="tab">Recommended With</a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" href="#reviews" data-toggle="tab">Reviews</a>
+                                        </li>
                                     </ul>
                                     <div id="myTabContent" className="tab-content">
                                         <div className="tab-pane container active in" id="more-information">
@@ -112,6 +122,28 @@ export default function ProductDetails() {
                                             {spec.map((item, index) => <dl key={index}><dd>{item}</dd></dl>)}
 
 
+                                        </div>
+                                        <div className="tab-pane container fade" id="recommended-with">
+                                            <br /><ul>
+                                                {comp.map(x => <div>
+                                                    <li>Computer Name: {x.modelName}</li><br />
+                                                    <li><strong>CPU</strong>
+                                                    </li><li>Name: {x.cpu.manufacturer} {x.cpu.modelName}</li>
+                                                    <br /><li><strong>GPU</strong></li>
+                                                    {x.gpuList.map(y => <div><li>Name: {y.manufacturer} {y.modelName}</li>
+                                                        <li>Description: {y.description}</li></div>)}
+                                                    <br /><li><strong>PSU</strong></li>
+                                                    <li>Name: {x.psu.modelName}</li>
+                                                    <li>Description: {x.psu.description}</li>
+                                                    <br /><li><strong>RAM</strong></li>
+                                                    {x.ramList.map(x => <div>
+                                                        <li>Name: {x.manufacturer} {x.modelName}</li>
+                                                        <li>{x.description}</li>
+                                                    </div>)}
+                                                    <br />
+                                                    <button className="btn btn-zoid">Buy Here</button>
+                                                </div>)}
+                                            </ul>
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
