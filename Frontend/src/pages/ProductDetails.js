@@ -124,26 +124,28 @@ export default function ProductDetails() {
 
                                         </div>
                                         <div className="tab-pane container fade" id="recommended-with">
-                                            <br /><ul>
-                                                {comp.map(x => <div>
-                                                    <li>Computer Name: {x.modelName}</li><br />
-                                                    <li><strong>CPU</strong>
-                                                    </li><li>Name: {x.cpu.manufacturer} {x.cpu.modelName}</li>
-                                                    <br /><li><strong>GPU</strong></li>
-                                                    {x.gpuList.map(y => <div><li>Name: {y.manufacturer} {y.modelName}</li>
-                                                        <li>Description: {y.description}</li></div>)}
-                                                    <br /><li><strong>PSU</strong></li>
-                                                    <li>Name: {x.psu.modelName}</li>
-                                                    <li>Description: {x.psu.description}</li>
-                                                    <br /><li><strong>RAM</strong></li>
-                                                    {x.ramList.map(x => <div>
-                                                        <li>Name: {x.manufacturer} {x.modelName}</li>
-                                                        <li>{x.description}</li>
-                                                    </div>)}
-                                                    <br />
-                                                    <button className="btn btn-zoid">Buy Here</button>
+                                            <br />
+                                            {comp.map((x, index) => <div><ul>
+                                                <li>Computer Name: {x.modelName}</li><br />
+                                                <li><strong>CPU</strong>
+                                                </li><li>Name: {x.cpu.manufacturer} {x.cpu.modelName}</li>
+                                                <br /><li><strong>GPU</strong></li>
+                                                {x.gpuList.map(y => <div><li>Name: {y.manufacturer} {y.modelName}</li>
+                                                    <li>Description: {y.description}</li></div>)}
+                                                <br /><li><strong>PSU</strong></li>
+                                                <li>Name: {x.psu.modelName}</li>
+                                                <li>Description: {x.psu.description}</li>
+                                                <br /><li><strong>RAM</strong></li>
+                                                {x.ramList.map(x => <div>
+                                                    <li>Name: {x.manufacturer} {x.modelName}</li>
+                                                    <li>{x.description}</li>
+
                                                 </div>)}
+                                                <br />
+                                                <button className="btn btn-zoid">Buy Here</button>
                                             </ul>
+                                            </div>)}
+
                                         </div>
                                         <div className="tab-pane container fade" id="reviews">
                                             <br />
