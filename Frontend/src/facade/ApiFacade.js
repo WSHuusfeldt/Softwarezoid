@@ -1,5 +1,6 @@
 const URL = 'https://williamhuusfeldt.dk/softwarezoid/api/';
 //const URL = 'http://localhost:8080/softwarezoid/api/';
+const APIURL = "https://helvedesmaskine.dk/Sem3-Project/api/";
 
 function handleHttpErrors(res) {
   if (!res.ok) {
@@ -56,7 +57,7 @@ function ApiFacade() {
   }
 
   const addProduct = (title, description, price, thumbnail, spec, category) => {
-    const options = makeOptions('POST', true, { title: title, description: description, price: price, thumbnail: thumbnail, specifications: [spec], categories: [{name: category}] });
+    const options = makeOptions('POST', true, { title: title, description: description, price: price, thumbnail: thumbnail, specifications: [spec], categories: [{ name: category }] });
     return fetch(URL + 'software/add', options).then(handleHttpErrors);
   }
 
@@ -130,11 +131,20 @@ function ApiFacade() {
       });
     });
 
+    localStorage.removeItem("basket");
     return fetch(URL + 'order/add/', makeOptions('POST', null, order)).then(handleHttpErrors);
   };
 
   const getOrder = (id) => {
     return fetch(URL + 'order/' + id, makeOptions('GET')).then(handleHttpErrors);
+  }
+
+  const fetchComputers = () => {
+    return fetch(APIURL + 'computer/all', makeOptions('GET')).then(handleHttpErrors);
+  }
+
+  const fetchComputer = (id) => {
+    return fetch(APIURL + 'computer/' + id, makeOptions('GET')).then(handleHttpErrors);
   }
 
   return {
@@ -153,7 +163,9 @@ function ApiFacade() {
     fetchContacts,
     addProduct,
     createOrder,
-    getOrder
+    getOrder,
+    fetchComputers,
+    fetchComputer
   };
 
 
