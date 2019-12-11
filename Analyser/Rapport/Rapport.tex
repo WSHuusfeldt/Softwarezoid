@@ -1,0 +1,154 @@
+\documentclass[11pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[danish]{babel}
+\usepackage [T1]{fontenc}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{graphicx}
+\graphicspath{{figures/}{Billeder/}}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{adjustbox}
+\usepackage{tocloft}
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{turqusnumbers}{rgb}{0.17,0.57,0.69}
+\definecolor{redstrings}{rgb}{0.5,0,0}
+
+\lstdefinelanguage{FSharp}
+                {morekeywords={let, new, match, with, rec, open, module, namespace, type, of, member, and, for, in, do, begin, end, fun, function, try, mutable, if, then, else},
+    keywordstyle=\color{bluekeywords},
+    sensitive=false,
+    morecomment=[l][\color{greencomments}]{///},
+    morecomment=[l][\color{greencomments}]{//},
+    morecomment=[s][\color{greencomments}]{{(*}{*)}},
+    morestring=[b]",
+    stringstyle=\color{redstrings}
+    }
+\usepackage{amsmath}
+\title{FogProjekt}
+
+
+\author{
+  Martin, Frederiksen\\
+  \texttt{cph-mf237@cphbusiness.dk}\\
+  A klassen
+  \and
+  Andreas, Vikke\\
+  \texttt{cph-mf237@cphbusiness.dk}\\
+  A klassen
+  \and
+  Asger, Sørensen\\
+  \texttt{cph-mf237@cphbusiness.dk}\\
+  A klassen
+  \and
+  William, Huusfeldt\\
+  \texttt{cph-mf237@cphbusiness.dk}\\
+  A klassen
+  \and
+  Emil, Svensmark\\
+  \texttt{cph-mf237@cphbusiness.dk}\\
+  A klassen
+}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\tableofcontents
+\newpage
+
+\chapter*{1. Indledning}
+\addcontentsline{toc}{chapter}{1. Indledning}
+
+\chapter*{2. Systemudviklingsmodel og metode}
+\addcontentsline{toc}{chapter}{2. Systemudviklingsmodel og metode}
+\section*{2.2. Virksomhedens krav}
+\addcontentsline{toc}{section}{2.2. Virksomhedens krav}
+\section*{2.3. Virksomhedens vision}
+\addcontentsline{toc}{section}{2.3. Virksomhedens vision}
+
+\chapter*{3. Use Case Diagram}
+\addcontentsline{toc}{chapter}{3. Use Case Diagram}
+
+\chapter*{4. 1 udvalgt Use Case}
+\addcontentsline{toc}{chapter}{4. 1 udvalgt Use Case}
+
+\chapter*{5. Outsorcing proces}
+\addcontentsline{toc}{chapter}{5. Outsorcing proces}
+
+\chapter*{6. Scrum plan}
+\addcontentsline{toc}{chapter}{6. Scrum plan}
+
+\chapter*{7. XP plan}
+\addcontentsline{toc}{chapter}{7. XP plan}
+
+\chapter*{8. Scrum-proces}
+\addcontentsline{toc}{chapter}{8. Scrum-proces}
+\section*{8.1. Roles}
+\addcontentsline{toc}{section}{8.1. Roles}
+\section*{8.1. Ceremonies}
+\addcontentsline{toc}{section}{8.1. Ceremonies}
+\section*{8.1. Artifacts}
+\addcontentsline{toc}{section}{8.1. Artifacts}
+
+
+\chapter*{9. XP-proces}
+\addcontentsline{toc}{chapter}{9. XP-proces}
+
+
+\chapter*{10. Reflektion over processen}
+\addcontentsline{toc}{chapter}{10. Reflektion over processen}
+
+
+\chapter*{11. Bilag}
+\addcontentsline{toc}{chapter}{11. Bilag}
+\section*{11.1 Bilag 1}
+\addcontentsline{toc}{section}{11.1 Bilag 1}
+
+Første Sprint\\
+\textbf{\#12 Som sælger, vil jeg gerne generer styklister for en carport med faste mål uden hældning og uden skur.}\\
+Størrelse: XXLarge\\
+Acceptance kriterium: Skal beregne 100\% korrekt for mål uden hældning og skur.\\
+Subtasks:
+\begin{itemize}
+\item \#18 Beregn stykliste for taget (12 timer).
+\item \#19 Beregn stykliste for mål (12 timer).
+\item \#20 Indsæt data i List (1 time).
+\item \#28 Opret database/Opret lager tabel (1 time).
+\item \#30 Indsæt dummy data (2 timer).
+\item \#31 Datamappers (2 timer).
+\item \#32 Database Connector (2 timer).
+\item \#37 Print stykliste til terminal (1 time).
+\end{itemize}
+\leavevmode
+
+\end{document}
+
