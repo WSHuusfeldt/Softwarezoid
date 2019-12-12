@@ -11,6 +11,7 @@
 \usepackage{adjustbox}
 \usepackage{tocloft}
 \usepackage{listings}
+\usepackage{enumitem}
 
 \setlength{\parskip}{12pt}
 
@@ -132,6 +133,53 @@
 
 \chapter*{11. Bilag}
 \addcontentsline{toc}{chapter}{11. Bilag}
+
+\section*{11.1 Bilag 1) Fully dressed use case}
+\addcontentsline{toc}{section}{11.1 Bilag 1) Fully dressed use case }
+\includegraphics[width=8cm, height=5cm]{FullyDressedUseCase.png}
+
+\noindent \textbf{Use case:} rediger kurv
+
+\noindent \textbf{Primary Actor:} Bruger
+
+\noindent \textbf{Goal:} At redigere produkter i brugerens kurv. 
+
+\noindent \textbf{Scope:} Et produkt salgssystem. Baseret udelukkende på software salg, med en anbefaling til hvilken computer kunne tilkøbes til det software der bliver vist.
+
+\noindent \textbf{Level:} ! (user goal) 
+
+
+\noindent \textbf{interests:}
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item[--] Bruger, som gerne vil ændre antallet af et specifikt produkt i kurven.
+  \item[--] Bruger, som gerne vil slette et produkt i kurven. 
+\end{itemize}
+
+\noindent \textbf{Preconditions:}
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item[--] Der skal være mindst et produkt i kurven.
+\end{itemize}
+
+\newpage
+\noindent \textbf{Success Guarantees: }
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item[--] Databasen er oppe med alle produkterne, således at der kan tilføjes til kurven.
+\end{itemize}
+
+\noindent \textbf{Triggers:}
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item[--] Bruger trykker på slet produkt.
+  \item[--] Bruger tilføjer eller fjerne antallet af produkter.
+\end{itemize}
+
+\noindent \textbf{Triggers:}
+\begin{enumerate}[topsep=0pt, partopsep=0pt]
+  \item Brugeren har to produkter i kurven.
+  \item Brugeren tilføjer til mængden af et produkt x antal gange.
+  \item Brugeren fjerner det andet produkt.
+\end{enumerate}
+
+
 
 \newpage
 \section*{11.2 Bilag 2) Prototype af webdesign}
