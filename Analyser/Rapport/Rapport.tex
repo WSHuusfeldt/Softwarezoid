@@ -206,7 +206,7 @@
 
 \noindent \textbf{Footer:}\\
 \noindent Has 3 columns:
-\begin{enumerate}
+\begin{enumerate}[topsep=0pt, partopsep=0pt]
   \item Contact information text.
   \item Logo along with copyright information.
   \item Other info about the company or page.
@@ -216,7 +216,7 @@
 \includegraphics[height=17cm]{page1}
 \end{center}
 \noindent This page consists of 3 sections:
-\begin{itemize}
+\begin{itemize}[topsep=0pt, partopsep=0pt]
   \item Header image: The width scales with the page, the height is fixed, though it doesn’t have to be “650”
   \item Best Sellers: Shows the best selling products, where P is the product with an image, title and price.
   \item Reviews: Must show 4 reviews per page in the slider. Contains stars, title, info and name.
@@ -602,25 +602,237 @@ Be as creative as you like, however, we'd like it that the page reflects that we
 
 \noindent -- Godkendt
 
+
 \newpage
-\section*{11.22 Bilag 22}
-\addcontentsline{toc}{section}{11.22 Bilag 22}
-Første Sprint\\
-\textbf{\#12 Som sælger, vil jeg gerne generer styklister for en carport med faste mål uden hældning og uden skur.}\\
-Størrelse: XXLarge\\
-Acceptance kriterium: Skal beregne 100\% korrekt for mål uden hældning og skur.\\
-Subtasks:
-\begin{itemize}
-\item \#18 Beregn stykliste for taget (12 timer).
-\item \#19 Beregn stykliste for mål (12 timer).
-\item \#20 Indsæt data i List (1 time).
-\item \#28 Opret database/Opret lager tabel (1 time).
-\item \#30 Indsæt dummy data (2 timer).
-\item \#31 Datamappers (2 timer).
-\item \#32 Database Connector (2 timer).
-\item \#37 Print stykliste til terminal (1 time).
+\section*{11.6 Bilag 6) Retrospective Meetings}
+\addcontentsline{toc}{section}{11.6 Bilag 6) Retrospective Meetings}
+\noindent\textbf{Retrospektiv møde - Spint 1, Fredag d. 22/11}\\
+\noindent Gruppen som helhed, mente der var positiv feedback. Sprintets udvalgte user stories var alle på nær en enkelt blevet færdigudviklet, men holdes “åbne” for eventuelle fremtidige modificeringer. Internt i gruppen er der blevet reflekteret over det første sprint. Her er stemningen, at arbejdsfordelingen har været velfungerende og passende, hvorfor det også menes at første sprint har været effektivt; vi har udviklet meget og sat os i en fin position i forhold til de fremtidige sprint. Det menes også at selvstændigheden har fremmet det positive arbejde. Dog ønsker vi i gruppen at øge indsatsen for pair programming til næste sprint, så vi forhåbentlig kan udbedre nogle af de kommunikationsproblemer, der har præget arbejdet i dette sprint. Ydermere var den eneste konklusion at drage vedr. Estimering af tid på user stories: dette skal forbedres. Estimeringerne var konsekvent forkerte. På baggrund af det har vi diskuteret og ændret estimeringer på alle andre user stories, for at imødekomme fejlene og forhåbentlig give en mere præcis estimering.
+
+\noindent\textbf{Retrospektiv møde - Spint 2, Mandag d. 2/1}\\
+\noindent Godt med pair programming - fungerede godt på zoom. Det var både effektivt og hyggeligt. De velfungerende elementer fra sidste sprint er blevet taget med videre til dette. Ydermere har vi taget kritikken fra sidste sprint og forsøgt at udbedre disse, hovedsageligt har gruppen fokuseret på at inkorporere pair programming mere, hvilket var et ønske blandt medlemmerne fra sidst. Arbejdet var effektivt, men en user story i dette sprint blev ikke udviklet -- arbejdet blev ikke påbegyndt. Dette er på baggrund af, at datasættet vi skulle bruge, ikke var blevet leveret i en tilstand, hvor gruppen kunne arbejde på det hvor der var tilstrækkelig tid til det. Arbejdsfordelingen har fortsat været god og fungeret godt med pair programming. Der er kommet øget ønske blandt medlemmerne på at påbegynde dokumentationen, rapporten.
+
+\noindent\textbf{Retrospektiv møde - Spint 3, Fredag d. 6/1}\\
+\noindent Der var fin tilfredshed i gruppen over, at arbejdet på projektet har været så langt henne, så der kunne fokuseres på de sidste detaljer. De velfungerende aspekter fra sidste sprint var blevet taget med i dette, dog mener nogle medlemmer, er deres egen arbejdsindsats ikke har været på et tilstrækkeligt niveau. I sprintet blev vi også udsat for en mindre ubekvemhed; gruppen vi arbejder sammen havde undladt at informere os om, at de havde gået væk fra deres oprindelige idé om at sælge hardware. Et ønske fra flere medlemmer var at bruge tid på rapporten, som fik muligheden grundet den relativt lille mængde programmering som manglede. Alle user stories blev lavet færdig og en unødvendig blev skrottet, eftersom denne ikke ville give mening at lave.
+
+\newpage
+\section*{11.7 Bilag 7) User stories}
+\addcontentsline{toc}{section}{11.7 Bilag 7) User stories}
+\noindent\textbf{Sprint-1}
+
+\noindent\textbf{\#1 Som bruger vil jeg gerne kunne se en liste af software.}\\
+\noindent En bruger skal kunne se en liste af softwares, hvor de herefter kan klikke ind og få mere information omkring det enkelte software.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Alle produkter skal have billede, titel og pris.
+  \item Billeder, titel og pris skal hænge sammen med produktet.
+  \item Listevisning skal fremvises på en præsentabel måde.
 \end{itemize}
-\leavevmode
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#14 Sidens liste skal kunne vise en titel for hvert software.
+  \item \#15 Sidens liste skal kunne vise pris for hvert software.
+  \item \#16 Sidens liste skal kunne vise en thumbnail.
+  \item \#89 Listen skal bruge en DTO klasse til fremvisning af en software givet fra databasen (Titel, thumbnail, description).
+  \item \#90 Listen skal hente software gennem et rest-endpoint, som returnere en DTO klasse.
+  \item \#91 Opret en entitet til software, med de forskellige fields der skal gemmes i database. (Titel, thumbnail, description).
+  \item \#92 Opret facade som fetcher software fra databasen og omdanner den til DTO’en.
+\end{itemize}
+
+\noindent\textbf{\#17 Som bruger vil jeg gerne kunne se information om et enkelt software.}\\
+\noindent Som bruger vil jeg gerne have at jeg kan tilgå softwares fra en database, således at de tilgængelige software hele tiden er opdateret.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Informationen om softwaren skal kunne vises på en hjemmeside.
+  \item Hvert software skal være på hver sin side.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#93 Siden skal kunne vise en titel for hvert software.
+  \item \#95 Siden skal kunne vise pris for hvert software.
+  \item \#97 Siden skal kunne vise en thumbnail.
+  \item \#98 Siden skal kunne vise en description.
+  \item \#99 Listen skal hente software gennem et rest-endpoint, som returnere en DTO klasse(getSingle).
+  \item \#100 Opret facade som fetcher software fra databasen og omdanner den til DTO’en(getSingle).
+  \item \#112 Siden skal kunne vise specifikationer.
+\end{itemize}
+
+\noindent\textbf{\#4 Som bruger vil jeg gerne kunne se et softwares indhold ved at navigere gennem listen.}\\
+\noindent Der skal kunne fremvises en liste af softwares, hvor der kan fremvises detaljer om hvert software.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Der skal kunne være en knap der navigere til det valgte produkt.
+  \item Der skal være en knap fra produktsiden der navigerer tilbage til listen over produkter.
+  \item Sammenhæng mellem produkt og liste.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#94 Opret links til softwaren.
+  \item \#96 Opret routing til softwaren.
+\end{itemize}
+
+\noindent\textbf{\#64 Som bruger vil jeg kunne se ofte stillede spørgsmål.}\\
+\noindent En FAQ side, som beskrevet er ofte stillede spørgsmål med deres besvarelser.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Skal være relevante spørgsmål ift. brugeren.
+  \item Svaret skal hænge sammen med spørgsmålet.
+  \item Spørgsmålene skal være enkle.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#83 Opret FAQ side.
+  \item \#84 Opret liste visning af spørgsmål og svar.
+  \item \#85 Skriv spørgsmål og deres tilhørende svar.
+\end{itemize}
+
+\noindent\textbf{\#66 Som bruger vil jeg kunne se min indkøbskurv, hvor jeg kan tilføje og fjerne produkter.}\\
+\noindent Indkøbskurven har alle de produkter man har valgt. Hertil skal produkter tilføjes, men hvis kunden skifter mening skal kunden kunne slette produktet. Ønsker kunnen flere eller færre af samme produkt, skal kunnen også kunne ændre på dette fra deres indkøbskurv.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Alle produkter skal gemmes i en session.
+  \item Visning af alle produkter skal være overskueligt.
+  \item Når et produkt rammer en quantity på 0 skal varen slettes.
+  \item Samlet pris skal være korrekt ift. de produkter der er valgt.
+  \item Prisen på produkterne skal være samme priser som produkterne viste på produkt siden.
+\end{itemize}
+\newpage
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#74 Vis software i liste fra cookie.
+  \item \#76 Tilføj quantity funktion.
+  \item \#78 Lav knap til at fjerne software fra liste.
+\end{itemize}
+
+\noindent\textbf{\#87 Spike: Læse op på React billede håndtering.}
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#73 Vis en liste a valgte produkter. (Pris, titel og billede). 
+  \item \#75 Vis samlet pris for alle software.
+  \item \#77 Tilføj knap til checkout.
+\end{itemize}
+
+\noindent\textbf{Sprint-2}
+
+\noindent\textbf{\#67 Som bruger vil jeg kunne skrive og se en anmeldelse af et produkt.}\\
+\noindent Når en bruger har købt et produkt, skal brugeren have mulighed for at anmelde det, således at andre brugere kan se hvad andre synes om produktet.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Review skal have en titel og der skal være givet 1-5 stjerner.
+  \item Det er valgfrit at komme med en beskrivelse til anmeldelse.
+  \item Anmeldelsen skal have en dato på hvornår den var indgivet.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#72 Anmeldelsen skal gemmes til produktet og vises på produktet.
+\end{itemize}
+
+\noindent\textbf{\#105 Som kunde, vil jeg gerne kunne komme i kontakt med firmaet.}\\
+\noindent Som kunde skal jeg kunne kontakte firmaet hvis jeg har et problem eller har spørgsmål til noget.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item En kontakt formular skal kunne oprettes og vises.
+  \item Kontakt formularer som er færdigbehandlet skal ikke vises.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#106 Siden skal indeholde en formular, således at kunden kan kontaktes (navn, nummer, mail, emne og besked).
+  \item \#107 Siden skal indeholde information om kontakten (nummer, lokation, mail).
+  \item \#108 Formularen skal gemmes i en databasen.
+  \item \#109 Man skal kunne hente alle formularer igennem et rest endpoint.
+  \item \#110 Opret facade metode der fetcher formularer og omdanner dem til DTO'er, således at der ikke er dato eller behandlings status.
+\end{itemize}
+
+\noindent\textbf{\#116 Som bruger vil jeg gerne kunne filtrere produkt siden.}\\
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Filtrere produkt efter titel.
+  \item Filtrere produkt efter pris.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#129 Endpoint, getall med en parameter for kategorier.
+  \item \#130 Endpoint, der kan get all kategorier.
+  \item \#131 Frontend, Filter bar, med kategorier fra databasen.
+  \item \#132 Frontend, når en kategori bliver valgt skal den fetche nye produkter.
+\end{itemize}
+
+\noindent\textbf{\#115 Som sælger vil jeg gerne se en liste af brugerhenvendelser.}\\
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item En liste over brugerhenvendelser
+  \item Mulighed for afslutte og slette henvendelser
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#122 Opret facade som fetcher data fra databasen og omdanner det til DTO.
+  \item \#123 Listen skal bruge en DTO klasse til at vise data fra databasen.
+  \item \#124 Listen skal hente en DTO klasse gennem et rest-endpoint.
+  \item \#125 Listen skal vise titel på henvisning.
+  \item \#126 Listen skal vise navn på afsenderen af henvisningen.
+  \item \#127 Listen skal vise dato for henvisningen.
+  \item \#128 Listen skal vise ID på henvisningen.
+\end{itemize}
+
+\noindent\textbf{Sprint-3}
+
+\noindent\textbf{\#34 Som bruger vil jeg gerne kunne se en computer ud fra en anden sides API.}\\
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Skal være på produkt siden.
+  \item Skal kunne vise en computer ud fra en fane. 
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#144 Fetch metode der henter fra eksternt API.
+  \item \#145 Liste visning af computer.
+  \item \#146 Fane til computeren.
+\end{itemize}
+
+\noindent\textbf{\#35 Som sælger vil jeg kunne tilgå en side hvor man kan tilføje software.}\\
+\noindent Der skal kunne tilføjes software til databasen gennem webapplikationen, fra en side lavet til dette formål.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Oprette en side til tilføjelse af software.
+  \item Siden skal kunne tage imod alle informationer fra en software som input.
+  \item Siden skal kunne tage imod et billede (url f.eks.).
+  \item Siden skal have en knap der tilføjer softwaren baseret på input informationen.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#133 Nødvendige facade metoder.
+  \item \#134 Rest API med POST.
+  \item \#135 Javascript der håndtere eventet når man trykker på knappen.
+  \item \#136 Javascript der fetcher med POST.
+  \item \#137 Tilkobling af javascriptet på HTML.
+  \item \#138 Tilføje HTML side.
+  \item \#139 Lave tests.
+\end{itemize}
+
+\noindent\textbf{\#113 Som bruger vil jeg gerne kunne checke mine varer i indkøbskurven ud og få en faktura.}\\
+\noindent Som bruger vil jeg gerne kunne checke de varer, som jeg har tilføjet til indkøbskurven, ud.
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item En kunde skal kunne se en liste over valgte produkter (indkøbskurven).
+  \item En kunde skal kunne trykke på en knap når de varerne er blevet valgt.
+  \item En kunde skal kunne se datoen for købet.
+  \item En kunde skal kunne se prisen for købet.
+\end{itemize}
+\noindent Subtasks:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item \#117 Tilføj javascript med fetch til checkout-knappen.
+  \item \#118 Oprette entity klasse til en kvittering.
+  \item \#119 Oprette REST API til entity klassen.
+  \item \#120 Oprette facade klasse til entity klassen med metoder til at kunne gemme og læse entiteter fra databasen.
+\end{itemize}
+
+\noindent\textbf{\#121 Som sælger vil jeg gerne se en enkelt brugerhenvendelser ud fra listen.}\\
+\noindent Acceptens krav:
+\begin{itemize}[topsep=0pt, partopsep=0pt]
+  \item Der skal vises en enkelt bruger henvendelse ud fra listeform ved tryk.
+  \item En bruger henvendelse skal indeholde navn, dato og description.
+\end{itemize}
+
+\noindent\textbf{\#88 Spike: Læse op på Hardware API.}
 
 \end{document}
 
